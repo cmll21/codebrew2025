@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      <h2>Farmers Market</h2>
+      <h2>Farmers' Market</h2>
       <div id="django-background">
         If you are seeing the green Jacob logo on a white background and this
         text color is #092e20, frontend static files serving is working:
