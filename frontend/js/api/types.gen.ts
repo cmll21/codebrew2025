@@ -29,6 +29,7 @@ export type PatchedUser = {
   readonly created?: string;
   readonly modified?: string;
   last_login?: string | null;
+  user_type?: UserTypeEnum;
 };
 
 export type User = {
@@ -49,7 +50,14 @@ export type User = {
   readonly created: string;
   readonly modified: string;
   last_login?: string | null;
+  user_type?: UserTypeEnum;
 };
+
+/**
+ * * `CONSUMER` - Consumer
+ * * `SUPPLIER` - Supplier
+ */
+export type UserTypeEnum = "CONSUMER" | "SUPPLIER";
 
 export type RestRestCheckRetrieveResponse = Message;
 

@@ -245,6 +245,8 @@ components:
           type: string
           format: date-time
           nullable: true
+        user_type:
+          $ref: '#/components/schemas/UserTypeEnum'
     User:
       type: object
       properties:
@@ -279,11 +281,21 @@ components:
           type: string
           format: date-time
           nullable: true
+        user_type:
+          $ref: '#/components/schemas/UserTypeEnum'
       required:
       - created
       - email
       - id
       - modified
+    UserTypeEnum:
+      enum:
+      - CONSUMER
+      - SUPPLIER
+      type: string
+      description: |-
+        * `CONSUMER` - Consumer
+        * `SUPPLIER` - Supplier
   securitySchemes:
     cookieAuth:
       type: apiKey
