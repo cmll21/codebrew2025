@@ -9,7 +9,7 @@ const LandingPageHeader = () => {
       <h1 className="landing-page-title">Farmers' Market</h1>
 
       <div className="nav-right">
-        <a href="#dummy">Log In/Sign Up</a>
+        <a href="#auth">Log In/Sign Up</a>
         <div className="cart-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
