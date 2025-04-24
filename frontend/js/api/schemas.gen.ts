@@ -81,6 +81,9 @@ export const $PatchedUser = {
       format: "date-time",
       nullable: true,
     },
+    user_type: {
+      $ref: "#/components/schemas/UserTypeEnum",
+    },
   },
 } as const;
 
@@ -126,6 +129,16 @@ export const $User = {
       format: "date-time",
       nullable: true,
     },
+    user_type: {
+      $ref: "#/components/schemas/UserTypeEnum",
+    },
   },
   required: ["created", "email", "id", "modified"],
+} as const;
+
+export const $UserTypeEnum = {
+  enum: ["CONSUMER", "SUPPLIER"],
+  type: "string",
+  description: `* \`CONSUMER\` - Consumer
+* \`SUPPLIER\` - Supplier`,
 } as const;
