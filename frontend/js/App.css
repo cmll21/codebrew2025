@@ -1,0 +1,34 @@
+@font-face {
+    font-family: "CrimsonPro";
+    src: url("../assets/fonts/CrimsonPro-ExtraLight.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: "CrimsonPro Italic";
+    src: url("../assets/fonts/CrimsonPro-ExtraLightItalic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Milky Vintage';
+    src: url('/frontend/assets/fonts/MilkyVintage-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+body {
+    font-family: 'CrimsonPro';
+}
+
+:root {
+    font-family: 'CrimsonPro';
+}
+
+h1, h2, header {
+    font-family: 'Milky Vintage', sans-serif;
+  }
+
+  /* filter: drop-shadow(30px 10px 4px #4444dd); */

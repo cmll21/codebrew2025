@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-
-import DjangoImgSrc from "../../assets/images/django-logo-negative.png";
 import { RestService } from "../api";
 
 const Home = () => {
@@ -19,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      <h2>Static assets</h2>
+      <h2>Farmers Market</h2>
       <div id="django-background">
         If you are seeing the green Jacob logo on a white background and this
         text color is #092e20, frontend static files serving is working:
@@ -29,7 +27,6 @@ const Home = () => {
           Below this text, you should see an img tag with the white Django logo
           on a green background:
         </div>
-        <img alt="Django Negative Logo" src={DjangoImgSrc} />
       </div>
       <h2>Rest API</h2>
       <p>{restCheck?.message}</p>
