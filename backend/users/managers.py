@@ -15,3 +15,11 @@ class UserManager(BaseUserManager):
         user.is_staff = True
         user.save(using=self._db)
         return user
+    
+    def create_consumer(self, **kwargs):
+        kwargs["user_type"] = User.UserType.CONSUMER
+        return self.create_user(**kwargs)
+    
+    def create_supplier(self, **kwargs):
+        kwargs["user_type"] = User.UserType.SUPPLIER
+        return self.create_user(**kwargs)

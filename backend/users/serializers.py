@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from .models import User
 
 
@@ -15,4 +14,5 @@ class UserSerializer(serializers.ModelSerializer):
             "created",
             "modified",
             "last_login",
+            "user_type",
         ]
