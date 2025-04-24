@@ -15,9 +15,9 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     # Optional: use IsAuthenticated instead of AllowAny for protected actions
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
-    @action(detail=False, methods=['GETgi'], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def me(self, request):
         serializer = self.get_serializer(request.user)
         return Response(serializer.data)
