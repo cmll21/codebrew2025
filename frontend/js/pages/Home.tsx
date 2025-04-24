@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { RestService } from "../api";
+import '../Home.css';
+import LandingPageHeader from "../LandingPageHeader";
+import Carousel from "../Carousel";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -17,7 +20,8 @@ const Home = () => {
 
   return (
     <>
-      <h2>Farmers Market</h2>
+      <LandingPageHeader/>
+      <Carousel/>
       <div id="django-background">
         If you are seeing the green Jacob logo on a white background and this
         text color is #092e20, frontend static files serving is working:
@@ -30,10 +34,10 @@ const Home = () => {
       </div>
       <h2>Rest API</h2>
       <p>{restCheck?.message}</p>
-      <Button variant="outline-dark" onClick={() => setShowBugComponent(true)}>
+      <button onClick={() => setShowBugComponent(true)}>
         Click to test if Sentry is capturing frontend errors! (Should only work
         in Production)
-      </Button>
+      </button>
       <button>
         <Link to="/dummy" className="play-again-link">
           This button should bring you to the next page

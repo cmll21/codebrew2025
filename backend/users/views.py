@@ -1,9 +1,48 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
 
 from .models import User
 from .serializers import UserSerializer
 
 
+# Main user CRUD
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    # Optional: use IsAuthenticated instead of AllowAny for protected actions
+    permission_classes = [IsAuthenticated]
+
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def me(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)
+
+
+# Auth endpoints
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["email"] = user.email
+        token["user_type"] = user.user_type
+        return token
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data["user"] = UserSerializer(self.user).data
+        return data
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]

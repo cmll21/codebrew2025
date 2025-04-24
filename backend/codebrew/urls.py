@@ -12,6 +12,8 @@ from rest_framework.routers import DefaultRouter
 from users.routes import routes as users_routes
 from produce.routes import routes as produce_routes
 
+from users.views import CustomTokenObtainPairView, RegisterView, UserViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()
 
@@ -37,4 +39,8 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
+    path("api/token/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/register/", RegisterView.as_view(), name="register"),
+
 ]
