@@ -1,12 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-type SliderType = {
-  slickNext: () => void;
-  slickPrev: () => void;
-};
+import React from "react";
 
 const Carousel = () => {
   const seasonalItems = [
@@ -25,61 +17,26 @@ const Carousel = () => {
     "TURNIPS",
   ];
 
-  // Double the array for better looping
+  // Double or triple the array for seamless looping
   const doubledItems = [...seasonalItems, ...seasonalItems, ...seasonalItems];
 
-  const sliderRef = useRef<SliderType | null>(null); 
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (sliderRef.current) {
-        sliderRef.current.slickNext();
-      }
-    }, 150); 
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 500, 
-    cssEase: "linear",
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: false,
-    pauseOnHover: false,
-    variableWidth: true,
-    swipe: false,
-    touchMove: false,
-    draggable: false,
-  };
-
   return (
-    <div className="seasonal-specials" style={{ overflow: "hidden" }}>
-      <Slider ref={sliderRef} {...settings}>
+    <div className="carousel-container" style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
+      <div className="carousel-track">
         {doubledItems.map((item, index) => (
-          <div
+          <span
             key={index}
-            className="special-item"
+            className="carousel-item"
             style={{
-              margin: "0 15px",
-              whiteSpace: "nowrap",
+              display: "inline-block",
+              padding: "0 15px",
+              fontSize: "1.2rem",
             }}
           >
-            <h3
-              style={{
-                display: "inline-block",
-                padding: "0 10px",
-                fontSize: "1.2rem",
-              }}
-            >
-              {item}
-            </h3>
-          </div>
+            {item}
+          </span>
         ))}
-      </Slider>
+      </div>
     </div>
   );
 };
