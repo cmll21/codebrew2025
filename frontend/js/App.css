@@ -1,34 +1,48 @@
 @font-face {
-    font-family: "CrimsonPro";
-    src: url("../assets/fonts/CrimsonPro-ExtraLight.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
-  
-@font-face {
-    font-family: "CrimsonPro Italic";
-    src: url("../assets/fonts/CrimsonPro-ExtraLightItalic.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "CrimsonPro";
+  src: url("../assets/fonts/CrimsonPro-ExtraLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Milky Vintage';
-    src: url('/frontend/assets/fonts/MilkyVintage-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
+  font-family: "CrimsonPro Italic";
+  src: url("../assets/fonts/CrimsonPro-ExtraLightItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Milky Vintage";
+  src: url("/frontend/assets/fonts/MilkyVintage-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
-    font-family: 'CrimsonPro';
+  font-family: "CrimsonPro";
 }
 
 :root {
-    font-family: 'CrimsonPro';
+  font-family: "CrimsonPro";
 }
 
-h1, h2, header {
-    font-family: 'Milky Vintage', sans-serif;
-  }
+h1,
+h2,
+header {
+  font-family: "Milky Vintage", sans-serif;
+}
 
-  /* filter: drop-shadow(30px 10px 4px #4444dd); */
+.button {
+  font-family: "Milky Vintage", sans-serif;
+  color: #f4f1e6;
+  padding: 5px 10px 7px 10px;
+  border: none;
+  border-radius: 10px;
+  -webkit-text-stroke: 1px #3c3c3b;
+  font-size: 24px;
+  font-weight: 200;
+  text-shadow: 1px 2px 0px var(--Forest-Green, #2d5948);
+}
+
+/* filter: drop-shadow(30px 10px 4px #4444dd); */
