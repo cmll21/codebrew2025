@@ -26,6 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [  # noqa: RUF012
             "id",
+            "firstname",
+            "lastname",
             "email",
             "password",
             "is_active",

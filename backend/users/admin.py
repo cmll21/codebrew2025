@@ -7,9 +7,9 @@ from .models import User
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    list_display = ("id", "email", "created", "modified")
+    list_display = ("id", "email", "firstname", "lastname", "created", "modified")
     list_filter = ("is_active", "is_staff", "groups")
-    search_fields = ("email",)
+    search_fields = ("email", "firstname", "lastname")
     ordering = ("email",)
     filter_horizontal = (
         "groups",
@@ -18,9 +18,15 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
+        (_("Personal info"), {"fields": ("firstname", "lastname")}),
         (
             _("Permissions"),
             {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")},
         ),
     )
-    add_fieldsets = ((None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),)
+    add_fieldsets = (
+        (None, {
+            "classes": ("wide",),
+            "fields": ("email", "firstname", "lastname", "password1", "password2"),
+        }),
+    )
