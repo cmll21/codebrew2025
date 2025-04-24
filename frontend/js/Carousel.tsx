@@ -18,7 +18,7 @@ const Carousel = () => {
   ];
 
   // Double or triple the array for seamless looping
-  const doubledItems = [...seasonalItems, ...seasonalItems, ...seasonalItems];
+  const doubledItems = [...seasonalItems, ...seasonalItems];
 
   return (
     <div className="carousel-container" style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
