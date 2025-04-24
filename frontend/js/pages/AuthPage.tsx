@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "react-bootstrap/Button";
 
-function DummyPage() {
+function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "", userType: "" });
   // const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -16,7 +16,7 @@ function DummyPage() {
 
   const toggleMode = () => {
     setIsLogin(!isLogin);
-    setForm({ email: "", password: "" });
+    setForm({ email: "", password: "", userType: "" });
   };
 
   return (
@@ -47,7 +47,26 @@ function DummyPage() {
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
-            <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
+            {!isLogin && (
+              <div>
+                <label className="block text-sm font-medium">User Type</label>
+                <select
+                  value={form.userType || ""}
+                  onChange={(e) =>
+                    setForm({ ...form, userType: e.target.value })
+                  }
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
+                  <option value="" disabled>
+                    Select User Type
+                  </option>
+                  <option value="Farmer">Farmer</option>
+                  <option value="Customer">Customer</option>
+                </select>
+              </div>
+            )}
+            <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
           </form>
           <p className="text-sm text-center mt-4">
             {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
@@ -60,13 +79,8 @@ function DummyPage() {
       <button>
         <Link to="/">Go back</Link>
       </button>
-      <Button text={"Button"} handleClick={handleClick} />
     </>
   );
 }
 
-const handleClick = () => {
-  console.log("Clicked!");
-};
-
-export default DummyPage;
+export default AuthPage;
