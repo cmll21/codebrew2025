@@ -10,11 +10,12 @@ from drf_spectacular.views import (
 )
 from rest_framework.routers import DefaultRouter
 from users.routes import routes as users_routes
+from produce.routes import routes as produce_routes
 
 
 router = DefaultRouter()
 
-routes = common_routes + users_routes
+routes = common_routes + users_routes + produce_routes
 for route in routes:
     router.register(route["regex"], route["viewset"], basename=route["basename"])
 
