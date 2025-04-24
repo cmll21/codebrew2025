@@ -27,6 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [  # noqa: RUF012
             "id",
             "email",
+            "password",
             "is_active",
             "is_staff",
             "is_superuser",
@@ -37,3 +38,11 @@ class UserSerializer(serializers.ModelSerializer):
             "consumer_profile",
             "supplier_profile",
         ]
+        extra_kwargs = {
+            "password": {"write_only": True},
+        }
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+  

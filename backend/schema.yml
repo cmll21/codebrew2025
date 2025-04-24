@@ -181,6 +181,18 @@ paths:
           description: No response body
 components:
   schemas:
+    ConsumerProfile:
+      type: object
+      properties:
+        user_info:
+          type: string
+          readOnly: true
+        delivery_address:
+          type: string
+          maxLength: 255
+      required:
+      - delivery_address
+      - user_info
     Message:
       type: object
       properties:
@@ -247,6 +259,26 @@ components:
           nullable: true
         user_type:
           $ref: '#/components/schemas/UserTypeEnum'
+        consumer_profile:
+          allOf:
+          - $ref: '#/components/schemas/ConsumerProfile'
+          readOnly: true
+        supplier_profile:
+          allOf:
+          - $ref: '#/components/schemas/SupplierProfile'
+          readOnly: true
+    SupplierProfile:
+      type: object
+      properties:
+        user_info:
+          type: string
+          readOnly: true
+        location_address:
+          type: string
+          maxLength: 255
+      required:
+      - location_address
+      - user_info
     User:
       type: object
       properties:
@@ -283,11 +315,21 @@ components:
           nullable: true
         user_type:
           $ref: '#/components/schemas/UserTypeEnum'
+        consumer_profile:
+          allOf:
+          - $ref: '#/components/schemas/ConsumerProfile'
+          readOnly: true
+        supplier_profile:
+          allOf:
+          - $ref: '#/components/schemas/SupplierProfile'
+          readOnly: true
       required:
+      - consumer_profile
       - created
       - email
       - id
       - modified
+      - supplier_profile
     UserTypeEnum:
       enum:
       - CONSUMER
