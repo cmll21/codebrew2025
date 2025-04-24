@@ -20,7 +20,7 @@ const Home = () => {
     <>
       <h2>Static assets</h2>
       <div id="django-background">
-        If you are seeing the green Django logo on a white background and this
+        If you are seeing the green Jacob logo on a white background and this
         text color is #092e20, frontend static files serving is working:
       </div>
       <div id="django-logo-wrapper">
