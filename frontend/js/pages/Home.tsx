@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 import DjangoImgSrc from "../../assets/images/django-logo-negative.png";
 import { RestService } from "../api";
@@ -36,6 +37,11 @@ const Home = () => {
         Click to test if Sentry is capturing frontend errors! (Should only work
         in Production)
       </Button>
+      <button>
+        <Link to="/dummy" className="play-again-link">
+          This button should bring you to the next page
+        </Link>
+      </button>
       {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {showBugComponent && (showBugComponent as any).field.notexist}
