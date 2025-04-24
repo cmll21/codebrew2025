@@ -14,8 +14,8 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
         SUPPLIER = "SUPPLIER", _("Supplier")
         
     email = models.EmailField(max_length=255, unique=True)
-    firstname = models.CharField(max_length=255, null=True, blank=True)
-    lastname = models.CharField(max_length=255, null=True, blank=True)
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
     password = models.CharField(max_length=255)
     is_staff = models.BooleanField(
         default=False, help_text=_("Designates whether the user can log into this admin site.")
@@ -37,10 +37,10 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
     USERNAME_FIELD = "email"
 
     def get_full_name(self):
-        return self.firstname + " " + self.lastname
+        return self.first_name + " " + self.last_name
 
     def get_short_name(self):
-        return self.firstname
+        return self.first_name
 
     def __str__(self):
         return self.email
