@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 
 function AboutPage() {
     return (
-        <button>
-                <Link to="/">Go back</Link>
-        </button>
+        <>
+        Help us defeat food waste!
+      <button>
+        <Link to="/">Go back</Link>
+      </button>
+    </>
     )
 }
 
