@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const LandingPageHeader = () => {
   return (
     <header className="header-container">
@@ -10,10 +12,10 @@ const LandingPageHeader = () => {
 
       <div className="nav-right">
         <a href="#auth">Log In/Sign Up</a>
-        <div className="cart-button">
+        <Link to="/checkout" className="cart-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="31"
+            width="30"
             height="30"
             viewBox="0 0 31 30"
             fill="none"
@@ -23,7 +25,7 @@ const LandingPageHeader = () => {
               fill="#3C3C3B"
             />
           </svg>
-        </div>
+        </Link>
       </div>
     </header>
   );

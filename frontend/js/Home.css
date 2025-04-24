@@ -47,11 +47,20 @@ body {
 }
 
 .cart-button {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-  aspect-ratio: 1/1;
-}
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none; 
+    background: transparent;
+  }
+  
+  .cart-button svg {
+    width: 30px;
+    height: 30px;
+  }
 
 /* Carousel styling*/
 
