@@ -13,7 +13,7 @@ OpenAPI.interceptors.request.use((request) => {
 });
 
 const App = () => (
-  <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}>
+  <Sentry.ErrorBoundary fallback={<p>An error has occurred.</p>}>
     <Home />
   </Sentry.ErrorBoundary>
 );
