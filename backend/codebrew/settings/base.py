@@ -15,7 +15,11 @@ SITE_ID = 1
 
 DEBUG = True
 
-ADMINS = (("Jacob", "ngjacob1@gmail.com"),)
+ADMINS = (("Jacob", "ngjacob1@gmail.com"),
+          ("Aaron", "aaronlai185@gmail.com"),
+          ("Rebecca", "becchao@gmail.com"),
+          ("Angela", "chenangela364@gmail.com"),
+          ("Amy", "amyymanguyen@gmail.com"),)
 
 AUTH_USER_MODEL = "users.User"
 

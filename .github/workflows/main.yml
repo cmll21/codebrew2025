@@ -1,5 +1,11 @@
 name: main
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - development
+  pull_request:
+    branches:
+      - development
 
 jobs:
   build:
@@ -9,25 +15,29 @@ jobs:
         python: [3.12]
         node: [20.13]
     env:
-      DATABASE_URL: "sqlite:///"
-      REDIS_URL: "redis://"
+      DATABASE_URL: sqlite:///
+      REDIS_URL: redis://
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Store branch and latest SHA
+        id: git
         run: |
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-        id: git
+
       - name: Setup Python ${{ matrix.python }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+
       - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+
       - name: Cache node modules
         uses: actions/cache@v4
         env:
@@ -39,6 +49,7 @@ jobs:
             build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
             build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}
             build-${{ env.cache_name }}
+
       - name: Cache pip
         uses: actions/cache@v4
         env:
@@ -50,6 +61,7 @@ jobs:
             build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
             build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}
             build-${{ env.cache_name }}
+
       - run: python -m pip install --upgrade pip
       - run: python -m pip install poetry==2.0.1
       - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
@@ -58,45 +70,64 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run lint
+
       - name: Generate secret key
-        run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
         id: secret_id_generator
+        run: |
+          SECRET=$(python - << 'PYCODE'
+import uuid
+print(uuid.uuid4().hex + uuid.uuid4().hex)
+PYCODE
+          )
+          echo "SECRET_KEY=$SECRET" >> $GITHUB_ENV
+          echo "SECRET_KEY=$SECRET" >> $GITHUB_OUTPUT
+
       - name: Linting
         run: poetry run ruff check ./backend/
         env:
-          DJANGO_SETTINGS_MODULE: "codebrew.settings.local_base"
-          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
-          DATABASE_URL: "sqlite:///"
-          ALLOWED_HOSTS: ".example.org"
-          SENDGRID_USERNAME: "test"
-          SENDGRID_PASSWORD: "test"
-          REDIS_URL: "redis://"
-      - run: poetry run pre-commit run --all-files
+          DJANGO_SETTINGS_MODULE: codebrew.settings.local_base
+          SECRET_KEY: $SECRET_KEY
+          DATABASE_URL: sqlite:///
+          ALLOWED_HOSTS: .example.org
+          SENDGRID_USERNAME: test
+          SENDGRID_PASSWORD: test
+          REDIS_URL: redis://
+
+      - name: Pre-commit
+        run: poetry run pre-commit run --all-files
         env:
           SKIP: ruff,eslint,missing-migrations,backend-schema
-      - run: poetry run python manage.py makemigrations --check --dry-run
-        env:
-          DJANGO_SETTINGS_MODULE: "codebrew.settings.production"
-          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
-          DATABASE_URL: "sqlite:///"
-          ALLOWED_HOSTS: ".example.org"
-          SENDGRID_USERNAME: "test"
-          SENDGRID_PASSWORD: "test"
-          REDIS_URL: "redis://"
+
+      - name: Check migrations
+        run: poetry run python manage.py makemigrations --check --dry-run
         working-directory: backend
-      - run: poetry run python manage.py check --deploy
         env:
-          DJANGO_SETTINGS_MODULE: "codebrew.settings.production"
-          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
-          DATABASE_URL: "sqlite:///"
-          ALLOWED_HOSTS: ".example.org"
-          SENDGRID_USERNAME: "test"
-          SENDGRID_PASSWORD: "test"
-          REDIS_URL: "redis://"
+          DJANGO_SETTINGS_MODULE: codebrew.settings.production
+          SECRET_KEY: $SECRET_KEY
+          DATABASE_URL: sqlite:///
+          ALLOWED_HOSTS: .example.org
+          SENDGRID_USERNAME: test
+          SENDGRID_PASSWORD: test
+          REDIS_URL: redis://
+
+      - name: Django deploy check
+        run: poetry run python manage.py check --deploy
         working-directory: backend
-      - run: |
+        env:
+          DJANGO_SETTINGS_MODULE: codebrew.settings.production
+          SECRET_KEY: $SECRET_KEY
+          DATABASE_URL: sqlite:///
+          ALLOWED_HOSTS: .example.org
+          SENDGRID_USERNAME: test
+          SENDGRID_PASSWORD: test
+          REDIS_URL: redis://
+
+      - name: Test and coverage
+        run: |
           poetry run coverage run manage.py test
           mkdir -p junit
           poetry run coverage xml -o junit/test-results.xml
         working-directory: backend
-      - run: npm run test
+
+      - name: Frontend tests
+        run: npm run test

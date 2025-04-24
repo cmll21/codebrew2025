@@ -9,7 +9,6 @@
 /mediafiles/*
 __pycache__/
 /.vscode/
-poetry.lock
 
 # coverage result
 .coverage

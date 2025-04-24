@@ -11,7 +11,7 @@ class ConsumerProfileSerializer(serializers.ModelSerializer):
 
 
 class SupplierProfileSerializer(serializers.ModelSerializer):
-   # user_info = serializers.PrimaryKeyRelatedField(read_only=True)
+    # user_info = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = SupplierProfile
