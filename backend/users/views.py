@@ -17,7 +17,7 @@ class UserViewSet(viewsets.ModelViewSet):
     # Optional: use IsAuthenticated instead of AllowAny for protected actions
     permission_classes = [AllowAny]
 
-    @action(detail=False, methods=['GET'], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=['GETgi'], permission_classes=[IsAuthenticated])
     def me(self, request):
         serializer = self.get_serializer(request.user)
         return Response(serializer.data)
