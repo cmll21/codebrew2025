@@ -1,3 +1,5 @@
+// todo: add this and Carousel.tsx into the components file
+
 const LandingPageHeader = () => {
   return (
     <header className="header-container">
