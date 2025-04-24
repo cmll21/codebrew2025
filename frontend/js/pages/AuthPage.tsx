@@ -15,13 +15,14 @@ function AuthPage() {
     console.log(isLogin ? "Logging in..." : "Signing up...", form);
     // setTimeout(() => navigate("/nextPage"), 500);
     try {
+
       const url = isLogin ? "/api/token/" : "/api/register/";
       const data = isLogin 
         ? { email: form.email, password: form.password }
         : { 
             email: form.email, 
             password: form.password,
-            user_type: form.userType
+            user_type: form.userType,
           };
 
       const res = await axios.post(url, data);
