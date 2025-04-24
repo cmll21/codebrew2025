@@ -4,7 +4,15 @@ import Button from "react-bootstrap/Button";
 
 function DummyPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [form, setForm] = useState({ email: "", password: "", userType: "" });
+  const [form, setForm] = useState<{
+    email: string;
+    password: string;
+    userType: string;
+  }>({ 
+    email: "", 
+    password: "", 
+    userType: "" 
+  });
   // const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -50,15 +58,15 @@ function DummyPage() {
             {!isLogin && (
               <div>
                 <label className="block text-sm font-medium">User Type</label>
-                <input
-                  type="text"
-                  value={form.userType || ""}
-                  onChange={(e) =>
-                    setForm({ ...form, userType: e.target.value })
-                  }
-                  required
+                <select
+                  value={form.userType}
+                  onChange={(e) => setForm({ ...form, userType: e.target.value })}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
+                >
+                  <option value="">Select User Type</option>
+                  <option value="Farmer">Farmer</option>
+                  <option value="Customer">Customer</option>
+                </select>
               </div>
             )}
             <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
