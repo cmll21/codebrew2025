@@ -1,10 +1,14 @@
 type ButtonProps = {
-    text: string;
-    backgroundColor: string;
+  text: string;
+  handleClick: () => void;
 };
 
 const Button = (props: ButtonProps) => {
-    return <button className="button" style={{ backgroundColor: props.backgroundColor}}>{props.text}</button>
-}
+  return (
+    <button className="button" onClick={props.handleClick}>
+      {props.text}
+    </button>
+  );
+};
 
 export default Button;
