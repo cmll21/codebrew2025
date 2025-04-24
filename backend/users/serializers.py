@@ -3,19 +3,19 @@ from .models import User, ConsumerProfile, SupplierProfile
 
 
 class ConsumerProfileSerializer(serializers.ModelSerializer):
-    user_info = serializers.PrimaryKeyRelatedField(read_only=True)
+    # user_info = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = ConsumerProfile
-        fields = ["user_info", "delivery_address"]
+        fields = ["delivery_address"]
 
 
 class SupplierProfileSerializer(serializers.ModelSerializer):
-    user_info = serializers.PrimaryKeyRelatedField(read_only=True)
+    # user_info = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = SupplierProfile
-        fields = ["user_info", "location_address"]
+        fields = ["location_address"]
 
 
 class UserSerializer(serializers.ModelSerializer):
