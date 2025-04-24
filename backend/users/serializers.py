@@ -1,8 +1,27 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, ConsumerProfile, SupplierProfile
+
+
+class ConsumerProfileSerializer(serializers.ModelSerializer):
+    user_info = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = ConsumerProfile
+        fields = ["user_info", "delivery_address"]
+
+
+class SupplierProfileSerializer(serializers.ModelSerializer):
+    user_info = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = SupplierProfile
+        fields = ["user_info", "location_address"]
 
 
 class UserSerializer(serializers.ModelSerializer):
+    consumer_profile = ConsumerProfileSerializer(read_only=True)
+    supplier_profile = SupplierProfileSerializer(read_only=True)
+
     class Meta:
         model = User
         fields = [  # noqa: RUF012
@@ -15,4 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
             "modified",
             "last_login",
             "user_type",
+            "consumer_profile",
+            "supplier_profile",
         ]
