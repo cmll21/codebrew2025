@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { RestService } from "../api";
 
@@ -30,10 +30,10 @@ const Home = () => {
       </div>
       <h2>Rest API</h2>
       <p>{restCheck?.message}</p>
-      <Button variant="outline-dark" onClick={() => setShowBugComponent(true)}>
+      <button onClick={() => setShowBugComponent(true)}>
         Click to test if Sentry is capturing frontend errors! (Should only work
         in Production)
-      </Button>
+      </button>
       <button>
         <Link to="/dummy" className="play-again-link">
           This button should bring you to the next page
