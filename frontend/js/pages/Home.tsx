@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { RestService } from "../api";
+
+import Button from "../components/Button";
+import ProductCard from "../components/ProductCard";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -39,6 +41,7 @@ const Home = () => {
           This button should bring you to the next page
         </Link>
       </button>
+      <ProductCard />
       {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {showBugComponent && (showBugComponent as any).field.notexist}

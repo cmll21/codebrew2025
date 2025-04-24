@@ -1,7 +1,7 @@
+import "../styles/ProductCard.css";
+
 const ProductImageWrapper = () => {
-  return (
-    <div className="product-image" style={{ backgroundColor: "blue" }}></div>
-  );
+  return <div className="productImage"></div>;
 };
 
 export default ProductImageWrapper;

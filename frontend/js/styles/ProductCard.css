@@ -1,0 +1,32 @@
+.productImage {
+  width: 265px;
+  height: 271px;
+  background-color: #e2d7c3;
+}
+
+.priceDropdownContainer {
+  font-family: "CrimsonPro";
+  background-color: #2d5948;
+  padding: 5px 10px 7px 10px;
+  border: none;
+  border-radius: 10px;
+  width: 245px;
+  position: absolute;
+  margin-top: 20px;
+}
+
+.priceDropdown {
+  font-family: "CrimsonPro";
+  font-size: 24px;
+  background-color: transparent;
+  color: #f4f1e6;
+  border: none;
+  font-weight: 200;
+  font-size: 24px;
+  appearance: none;
+  padding-right: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 1rem;
+  cursor: pointer;
+}
