@@ -1,6 +1,7 @@
 // import pages
 import * as Sentry from "@sentry/browser";
 import { createRoot } from "react-dom/client";
+import { HashRouter as Router } from "react-router-dom";
 
 import App from "./App";
 
@@ -12,4 +13,8 @@ Sentry.init({
 });
 
 const root = createRoot(document.getElementById("react-app") as HTMLElement);
-root.render(<App />);
+root.render(
+  <Router>
+    <App />
+  </Router>
+);
