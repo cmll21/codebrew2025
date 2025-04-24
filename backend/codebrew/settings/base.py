@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django_guid",
     "common",
     "users",
+    "produce",
     #"rest_framework_simplejwt",
 ]
 
