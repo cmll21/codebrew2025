@@ -3,7 +3,7 @@ from .models import User, ConsumerProfile, SupplierProfile
 
 
 class ConsumerProfileSerializer(serializers.ModelSerializer):
-    # user_info = serializers.PrimaryKeyRelatedField(read_only=True)
+    #user_info = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = ConsumerProfile
@@ -11,10 +11,11 @@ class ConsumerProfileSerializer(serializers.ModelSerializer):
 
 
 class SupplierProfileSerializer(serializers.ModelSerializer):
-    # user_info = serializers.PrimaryKeyRelatedField(read_only=True)
+   # user_info = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = SupplierProfile
+        fields = ["location_address"]
         fields = ["location_address"]
 
 
@@ -45,4 +46,3 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
-  
