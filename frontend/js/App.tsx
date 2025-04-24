@@ -6,7 +6,7 @@ import cookie from "cookie";
 
 import { OpenAPI } from "./api";
 import Home from "./pages/Home";
-import DummyPage from "./pages/DummyPage";
+import AuthPage from "./pages/AuthPage";
 
 OpenAPI.interceptors.request.use((request) => {
   const { csrftoken } = cookie.parse(document.cookie);
@@ -20,7 +20,7 @@ const App = () => (
   <Sentry.ErrorBoundary fallback={<p>An error has occurred.</p>}>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/dummy" element={<DummyPage />} />
+      <Route path="/auth" element={<AuthPage />} />
     </Routes>
   </Sentry.ErrorBoundary>
 );

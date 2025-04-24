@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "../components/Button";
 
-function DummyPage() {
+function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({ email: "", password: "" });
   // const navigate = useNavigate();
@@ -69,4 +69,4 @@ const handleClick = () => {
   console.log("Clicked!");
 };
 
-export default DummyPage;
+export default AuthPage;
