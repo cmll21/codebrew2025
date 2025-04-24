@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
-import Button from "../components/Button";
-import { Link } from "react-router-dom";
 import { RestService } from "../api";
-import '../Home.css';
-import LandingPageHeader from "../LandingPageHeader";
-import Carousel from "../Carousel";
+import "../Home.css";
+import Carousel from "../components/Carousel";
 import SeasonalProduceHeader from "../components/SeasonalProduceHeader";
 
 const Home = () => {
@@ -21,9 +18,8 @@ const Home = () => {
 
   return (
     <>
-      <LandingPageHeader/>
-      <Carousel/>
-      <SeasonalProduceHeader/>
+      <Carousel />
+      <SeasonalProduceHeader />
       <div id="django-background">
         If you are seeing the green Jacob logo on a white background and this
         text color is #092e20, frontend static files serving is working:

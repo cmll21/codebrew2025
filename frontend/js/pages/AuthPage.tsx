@@ -15,15 +15,17 @@ function AuthPage() {
     console.log(isLogin ? "Logging in..." : "Signing up...", form);
     // setTimeout(() => navigate("/nextPage"), 500);
     try {
+
       const url = isLogin ? "/api/token/" : "/api/register/";
-      const res = await axios.post(url, {
-        email: form.email,
-        password: form.password,
-        user_type: "consumer", // for signup
-        is_active: true,
-        is_staff: true,
-        is_superuser: true,
-      });
+      const data = isLogin 
+        ? { email: form.email, password: form.password }
+        : { 
+            email: form.email, 
+            password: form.password,
+            user_type: form.userType,
+          };
+
+      const res = await axios.post(url, data);
 
       if (isLogin) {
         const { access, refresh } = res.data;
@@ -112,8 +114,8 @@ function AuthPage() {
                   <option value="" disabled>
                     Select User Type
                   </option>
-                  <option value="Farmer">Farmer</option>
-                  <option value="Customer">Customer</option>
+                  <option value="SUPPLIER">Farmer</option>
+                  <option value="CONSUMER">Customer</option>
                 </select>
               </div>
             )}
