@@ -3,7 +3,12 @@
   src: url("../assets/fonts/CrimsonPro-ExtraLight.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-family: "CrimsonPro";
+  src: url("../assets/fonts/CrimsonPro-ExtraLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
+
 
 @font-face {
   font-family: "CrimsonPro Italic";
@@ -13,6 +18,11 @@
 }
 
 @font-face {
+  font-family: "Milky Vintage";
+  src: url("/frontend/assets/fonts/MilkyVintage-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
   font-family: "Milky Vintage";
   src: url("/frontend/assets/fonts/MilkyVintage-Regular.ttf") format("truetype");
   font-weight: normal;
