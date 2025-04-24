@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { RestService } from "../api";
 import '../Home.css';
 import LandingPageHeader from "../LandingPageHeader";
+import Carousel from "../Carousel";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -20,6 +21,7 @@ const Home = () => {
   return (
     <>
       <LandingPageHeader/>
+      <Carousel/>
       <div id="django-background">
         If you are seeing the green Jacob logo on a white background and this
         text color is #092e20, frontend static files serving is working:

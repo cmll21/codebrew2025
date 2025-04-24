@@ -43,3 +43,13 @@
   flex-shrink: 0;
   aspect-ratio: 1/1;
 }
+
+/* Carousel styling*/
+.seasonal-specials {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: #E2D7C3;
+}
