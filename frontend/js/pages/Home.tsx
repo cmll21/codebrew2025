@@ -21,7 +21,6 @@ const Home = () => {
 
   return (
     <>
-      <LandingPageHeader/>
       <Carousel/>
       <SeasonalProduceHeader/>
       <div id="django-background">
