@@ -45,11 +45,38 @@
 }
 
 /* Carousel styling*/
-.seasonal-specials {
+/* .seasonal-specials {
     display: flex;
     padding: 10px;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     background-color: #E2D7C3;
-}
+} */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #E2D7C3;
+    padding: 10px;
+  }
+  
+  .carousel-track {
+    display: inline-block;
+    animation: scroll 20s linear infinite;
+  }
+  
+  .carousel-item {
+    display: inline-block;
+    margin-right: 30px;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
