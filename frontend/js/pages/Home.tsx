@@ -5,9 +5,6 @@ import "../Home.css";
 import LandingPageHeader from "../LandingPageHeader";
 import Carousel from "../Carousel";
 
-import Button from "../components/Button";
-import ProductCard from "../components/ProductCard";
-
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
   const [restCheck, setRestCheck] =
