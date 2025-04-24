@@ -1,10 +1,11 @@
-html, body {
-    background-color: #F4F1E6; /* Replace with your color */
-    margin: 0;
-    padding: 0;
-    height: 100%; /* Ensures full coverage */
-    width: 100%;
-  }
+html,
+body {
+  background-color: #f4f1e6; /* Replace with your color */
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensures full coverage */
+  width: 100%;
+}
 
 .header-container {
   display: flex;
@@ -22,7 +23,7 @@ html, body {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #3c3c3b;
   font-family: "Milky Vintage";
-  font-size: 96px;
+  font-size: 72px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -31,7 +32,7 @@ html, body {
 
 .nav-left {
   display: flex;
-  width: 326px;
+  width: 250px;
   justify-content: center;
   align-items: center;
   gap: 60px;
@@ -53,38 +54,60 @@ html, body {
 }
 
 /* Carousel styling*/
-/* .seasonal-specials {
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    background-color: #E2D7C3;
-} */
 
 .carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #e2d7c3;
+  padding: 10px;
+}
+
+.carousel-track {
+  display: inline-block;
+  animation: scroll 10s linear infinite;
+}
+
+.carousel-item {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Seasonal Produce Header */
+
+.seasonal-produce-header {
     position: relative;
-    width: 100%;
-    overflow: hidden;
-    background-color: #E2D7C3;
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Set a fixed height matching the underlying box */
+    flex-shrink: 0;
+    align-self: stretch;
   }
   
-  .carousel-track {
-    display: inline-block;
-    animation: scroll 10s linear infinite;
-  }
-  
-  .carousel-item {
-    display: inline-block;
-    margin-right: 30px;
-  }
-  
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  .overlay-text {
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--Golden-Squash, #E9B44C);
+    text-shadow: 4px 4px 0px #3c3c3b;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #3c3c3b;
+    font-family: "Milky Vintage";
+    font-size: 112px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    pointer-events: none;
   }
