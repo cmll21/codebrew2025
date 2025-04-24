@@ -8,6 +8,7 @@ import LandingPageHeader from "./components/LandingPageHeader";
 import { OpenAPI } from "./api";
 import Home from "./pages/Home";
 import AuthPage from "./pages/AuthPage";
+import AboutPage from "./pages/AboutPage";
 
 OpenAPI.interceptors.request.use((request) => {
   const { csrftoken } = cookie.parse(document.cookie);
@@ -23,6 +24,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/auth" element={<AuthPage />} />
+      <Route path="/about" element={<AboutPage />} />
     </Routes>
   </Sentry.ErrorBoundary>
 );
