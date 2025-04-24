@@ -1,0 +1,14 @@
+.landing-page-title {
+  color: var(--Grass-Green, #82a36b);
+  text-shadow: 4px 4px 0px #3c3c3b;
+  /* Display Heading */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #3c3c3b;
+  font-family: "Milky Vintage";
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
