@@ -1,3 +1,5 @@
+import './App.css';
+import '../assets/fonts/CrimsonPro-ExtraLight.ttf';
 import { Route, Routes } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import cookie from "cookie";
