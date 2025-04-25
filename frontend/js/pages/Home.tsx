@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { RestService } from "../api";
 import "../Home.css";
 import LandingPageHeader from "../LandingPageHeader";
 import Carousel from "../Carousel";
 import ProductCard from "../components/ProductCard";
+=======
+import { RestService } from "../api";
+import "../Home.css";
+import Carousel from "../components/Carousel";
+import SeasonalProduceHeader from "../components/SeasonalProduceHeader";
+>>>>>>> main
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -20,8 +27,13 @@ const Home = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <LandingPageHeader />
       <Carousel />
+=======
+      <Carousel />
+      <SeasonalProduceHeader />
+>>>>>>> main
       <div id="django-background">
         If you are seeing the green Jacob logo on a white background and this
         text color is #092e20, frontend static files serving is working:
@@ -38,7 +50,10 @@ const Home = () => {
         Click to test if Sentry is capturing frontend errors! (Should only work
         in Production)
       </button>
+<<<<<<< HEAD
       <ProductCard />
+=======
+>>>>>>> main
       {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {showBugComponent && (showBugComponent as any).field.notexist}

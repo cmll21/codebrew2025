@@ -7,7 +7,7 @@ from users.models import SupplierProfile
 class ProduceTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProduceType
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'image']
 
 
 class ProduceItemSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class ProduceItemSerializer(serializers.ModelSerializer):
             'id',
             'produce_type', 'produce_type_id',
             'supplier_profile', 'supplier_profile_id',
-            'quantity',
+            'weight',
             'created_time',
             'expiry_time',
             'quality'

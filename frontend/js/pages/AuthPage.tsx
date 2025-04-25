@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({ email: "", password: "", userType: "" });
+<<<<<<< HEAD
   const [userInfo, setUserInfo] = useState<{
     email: string;
     user_type: string;
   } | null>(null);
+=======
+  const [userInfo, setUserInfo] = useState<{ email: string; user_type: string } | null>(null);
+>>>>>>> main
   // const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,6 +26,7 @@ function AuthPage() {
     console.log(isLogin ? "Logging in..." : "Signing up...", form);
     // setTimeout(() => navigate("/nextPage"), 500);
     try {
+<<<<<<< HEAD
       const url = isLogin ? "/api/token/" : "/api/register/";
       const res = await axios.post(url, {
         email: form.email,
@@ -28,6 +36,19 @@ function AuthPage() {
         is_staff: true,
         is_superuser: true,
       });
+=======
+
+      const url = isLogin ? "/api/token/" : "/api/register/";
+      const data = isLogin 
+        ? { email: form.email, password: form.password }
+        : { 
+            email: form.email, 
+            password: form.password,
+            user_type: form.userType,
+          };
+
+      const res = await axios.post(url, data);
+>>>>>>> main
 
       if (isLogin) {
         const { access, refresh } = res.data;
@@ -60,8 +81,12 @@ function AuthPage() {
     const token = localStorage.getItem("access_token");
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+<<<<<<< HEAD
       axios
         .get("/api/users/me/")
+=======
+      axios.get("/api/users/me/")
+>>>>>>> main
         .then((res) => setUserInfo(res.data))
         .catch(() => setUserInfo(null));
     }
@@ -77,12 +102,17 @@ function AuthPage() {
 
           {userInfo && (
             <div className="bg-green-100 border p-4 rounded mb-4 text-center">
+<<<<<<< HEAD
               <p>
                 <strong>Email:</strong> {userInfo.email}
               </p>
               <p>
                 <strong>User Type:</strong> {userInfo.user_type}
               </p>
+=======
+              <p><strong>Email:</strong> {userInfo.email}</p>
+              <p><strong>User Type:</strong> {userInfo.user_type}</p>
+>>>>>>> main
             </div>
           )}
 
@@ -121,8 +151,13 @@ function AuthPage() {
                   <option value="" disabled>
                     Select User Type
                   </option>
+<<<<<<< HEAD
                   <option value="Farmer">Farmer</option>
                   <option value="Customer">Customer</option>
+=======
+                  <option value="SUPPLIER">Farmer</option>
+                  <option value="CONSUMER">Customer</option>
+>>>>>>> main
                 </select>
               </div>
             )}

@@ -52,3 +52,7 @@ tmp_email/
 .direnv
 .envrc
 .tool-versions
+
+# media
+/mediafiles/
+/media/

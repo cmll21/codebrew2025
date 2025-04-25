@@ -15,7 +15,11 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     # Optional: use IsAuthenticated instead of AllowAny for protected actions
+<<<<<<< HEAD
     permission_classes = [IsAuthenticated]
+=======
+    permission_classes = [AllowAny]
+>>>>>>> main
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def me(self, request):
@@ -28,6 +32,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
+<<<<<<< HEAD
+=======
+        token["first_name"] = user.first_name
+        token["last_name"] = user.last_name
+>>>>>>> main
         token["email"] = user.email
         token["user_type"] = user.user_type
         return token

@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 import React from "react";
 import "../styles/Button.css";
 
+=======
+>>>>>>> main
 type ButtonProps = {
   text: string;
   handleClick: () => void;

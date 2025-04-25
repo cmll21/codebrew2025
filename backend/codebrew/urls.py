@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
 import django_js_reverse.views
 from common.routes import routes as common_routes
@@ -44,3 +46,7 @@ urlpatterns = [
     path("api/register/", RegisterView.as_view(), name="register"),
 
 ]
+
+# Serve static and media files in development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
