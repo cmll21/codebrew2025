@@ -7,7 +7,7 @@ class ProduceTypeSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=ProduceCategory.objects.all())
     class Meta:
         model = ProduceType
-        fields = ['id', 'name', 'image', 'category']
+        fields = ['id', 'name', 'image', 'category', 'season']
 
 class ProduceItemSerializer(serializers.ModelSerializer):
     produce_type = ProduceTypeSerializer(read_only=True)
