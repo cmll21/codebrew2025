@@ -5,8 +5,17 @@ import axios from "axios";
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [form, setForm] = useState({ email: "", password: "", userType: "" });
-  const [userInfo, setUserInfo] = useState<{ email: string; user_type: string } | null>(null);
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    userType: "",
+  });
+  const [userInfo, setUserInfo] = useState<{
+    email: string;
+    user_type: string;
+  } | null>(null);
   // const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -15,12 +24,13 @@ function AuthPage() {
     console.log(isLogin ? "Logging in..." : "Signing up...", form);
     // setTimeout(() => navigate("/nextPage"), 500);
     try {
-
       const url = isLogin ? "/api/token/" : "/api/register/";
-      const data = isLogin 
+      const data = isLogin
         ? { email: form.email, password: form.password }
-        : { 
-            email: form.email, 
+        : {
+            first_name: form.firstName,
+            last_name: form.lastName,
+            email: form.email,
             password: form.password,
             user_type: form.userType,
           };
@@ -49,7 +59,13 @@ function AuthPage() {
 
   const toggleMode = () => {
     setIsLogin(!isLogin);
-    setForm({ email: "", password: "", userType: "" });
+    setForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      userType: "",
+    });
     setUserInfo(null);
   };
 
@@ -58,7 +74,8 @@ function AuthPage() {
     const token = localStorage.getItem("access_token");
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      axios.get("/api/users/me/")
+      axios
+        .get("/api/users/me/")
         .then((res) => setUserInfo(res.data))
         .catch(() => setUserInfo(null));
     }
@@ -74,8 +91,12 @@ function AuthPage() {
 
           {userInfo && (
             <div className="bg-green-100 border p-4 rounded mb-4 text-center">
-              <p><strong>Email:</strong> {userInfo.email}</p>
-              <p><strong>User Type:</strong> {userInfo.user_type}</p>
+              <p>
+                <strong>Email:</strong> {userInfo.email}
+              </p>
+              <p>
+                <strong>User Type:</strong> {userInfo.user_type}
+              </p>
             </div>
           )}
 
@@ -101,23 +122,51 @@ function AuthPage() {
               />
             </div>
             {!isLogin && (
-              <div>
-                <label className="block text-sm font-medium">User Type</label>
-                <select
-                  value={form.userType || ""}
-                  onChange={(e) =>
-                    setForm({ ...form, userType: e.target.value })
-                  }
-                  required
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                >
-                  <option value="" disabled>
-                    Select User Type
-                  </option>
-                  <option value="SUPPLIER">Farmer</option>
-                  <option value="CONSUMER">Customer</option>
-                </select>
-              </div>
+              <>
+                <div>
+                  <label className="block text-sm font-medium">
+                    First Name
+                  </label>
+                  <input
+                    type="firstName"
+                    value={form.firstName}
+                    onChange={(e) =>
+                      setForm({ ...form, firstName: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium">Last Name</label>
+                  <input
+                    type="lastName"
+                    value={form.lastName}
+                    onChange={(e) =>
+                      setForm({ ...form, lastName: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium">User Type</label>
+                  <select
+                    value={form.userType || ""}
+                    onChange={(e) =>
+                      setForm({ ...form, userType: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  >
+                    <option value="" disabled>
+                      Select User Type
+                    </option>
+                    <option value="SUPPLIER">Supplier</option>
+                    <option value="CUSTOMER">Customer</option>
+                  </select>
+                </div>
+              </>
             )}
             <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
           </form>
