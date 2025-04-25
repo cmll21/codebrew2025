@@ -6,6 +6,8 @@ import ProduceCardCarousel from "../components/ProduceCardCarousel";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const CURR_SEASON = "winter";
+
 type ProduceType = {
   id: number;
   name: string;
@@ -49,7 +51,12 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E9B44C" }}
         >
           <ProduceCardCarousel
-            produceList={produceItems.map((type) => ({
+            produceList={produceItems
+              .filter(item => {
+                console.log("Here:",item.season)
+                return item.season == CURR_SEASON;
+              })
+              .map((type) => ({
               name: type.name,
               image: type.image,
               cardColour: "#E2D7C3",
@@ -66,7 +73,7 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E2D7C3" }}
         >
           <ProduceCardCarousel
-            produceList={produceItems.map((type) => ({
+            produceList={produceItems.map((type) => ({ // Match with category (FK) of each vegetable by doing 2 separate API calls and mapping id to categories
               name: type.name,
               image: type.image,
               cardColour: "#E9B44C",
