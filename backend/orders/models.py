@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
-from backend.common.models import Address
-from backend.users.models import CustomerProfile
+from common.models import Address
+from users.models import CustomerProfile
 from produce.models import ProduceItem
 
 class OrderStatus(models.TextChoices):
@@ -34,7 +34,7 @@ class CartItem(models.Model):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='cart_items')
 
 class OrderItem(models.Model):
-    item = models.OnetoOneField(Item, on_delete=models.CASCADE)
+    item = models.OneToOneField(Item, on_delete=models.CASCADE)
     order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='order_items')
 
 class Cart(models.Model):
