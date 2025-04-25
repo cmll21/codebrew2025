@@ -23,7 +23,7 @@ class ProduceItem(models.Model):
     ])
 
     def __str__(self):
-        return f"{self.produce_type} from {self.supplier_profile} - {self.quantity} units"
+        return f"{self.produce_type} from {self.supplier_profile} - {self.weight} g"
 
     class Meta:
         ordering = ['-created_time']

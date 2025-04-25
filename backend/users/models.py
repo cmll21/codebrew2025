@@ -59,14 +59,12 @@ class SupplierAddress(Address):
 
 class CustomerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="customer_profile")
-    delivery_address = models.CharField(max_length=255) # TODO need to change to Address model
 
     def __str__(self):
         return f"CustomerProfile({self.user.email})"
 
 class SupplierProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="supplier_profile")
-    location_address = models.CharField(max_length=255) # TODO need to change to Address model
 
     def __str__(self):
         return f"SupplierProfile({self.user.email})"
