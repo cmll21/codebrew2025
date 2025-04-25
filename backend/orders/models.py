@@ -9,19 +9,25 @@ class OrderStatus(models.TextChoices):
     COMPLETED = 'completed'
     CANCELLED = 'cancelled'
 
+
 class Item(models.Model):
     produce_item = models.ForeignKey(ProduceItem, on_delete=models.CASCADE)
     cart_item_weight = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
-    cart_item_price = models.FloatField(default=self.calculate_price, validators=[MinValueValidator(0.0)])
+    # Cannot use self in field definition
+    cart_item_price = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
     is_ordered = models.BooleanField(default=False)
 
     def validate_item_weight(self):
-        if self.cart_weight > self.produce_item.weight:
+        if self.cart_item_weight > self.produce_item.weight:
             raise ValueError("Cart weight cannot exceed the available produce item weight.")
         return True
 
     def calculate_price(self):
-        return self.cart_weight * self.produce_item.price
+        return self.cart_item_weight * self.produce_item.price
+
+    def save(self, *args, **kwargs):
+        self.cart_item_price = self.calculate_price()
+        super().save(*args, **kwargs)
 
 class CartItem(models.Model):
     item = models.OneToOneField(Item, on_delete=models.CASCADE)
