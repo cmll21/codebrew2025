@@ -8,12 +8,16 @@ import { Link } from "react-router-dom";
 export type ProduceCardProps = {
   name: string;
   image?: string;
+  cardColour: string;
 };
 
 const ProduceCard = (props: ProduceCardProps) => {
   return (
     <Link key={props.name} to={`/produce/${props.name}`}>
-      <div className="seasonal-produce-card">
+      <div
+        className="seasonal-produce-card"
+        style={{ backgroundColor: props.cardColour }}
+      >
         <div
           style={{
             display: "flex",

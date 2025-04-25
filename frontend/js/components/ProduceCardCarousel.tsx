@@ -17,8 +17,8 @@ const ProduceCardCarousel = ({
     centerMode: true, // Enables center positioning
     centerPadding: "0",
     dots: true,
-    beforeChange: (current, next) => setCurrentSlide(next),
-    customPaging: (i) => (
+    beforeChange: (current: any, next: any) => setCurrentSlide(next),
+    customPaging: (i: any) => (
       <div
         style={{
           width: "10px",
@@ -29,7 +29,7 @@ const ProduceCardCarousel = ({
         }}
       ></div>
     ),
-    infinite: false,
+    infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
