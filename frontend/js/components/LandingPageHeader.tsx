@@ -1,6 +1,27 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const LandingPageHeader = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState<{
+    first_name: string;
+    last_name: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    setIsLoggedIn(token ? true : false);
+    if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        axios
+          .get("/api/users/me/")
+          .then((res) => setUserInfo(res.data))
+          .catch(() => setUserInfo(null));
+    }
+    console.log(userInfo);
+  }, []);
+
   return (
     <header className="header-container">
       <div className="nav-left">
@@ -13,7 +34,13 @@ const LandingPageHeader = () => {
       </h1>
 
       <div className="nav-right">
-        <a href="#auth">Log In/Sign Up</a>
+        {isLoggedIn ? (
+          // Profile button
+          <a href="#auth">{userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : "Loading..."}</a>
+        ) : (
+          // Log In/Sign Up button
+          <a href="#auth">Log In/Sign Up</a>
+        )}
         <Link to="/checkout" className="cart-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"

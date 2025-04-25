@@ -103,14 +103,6 @@ function AuthPage() {
             <h2 className="auth-box-header">
               {isLogin ? "Welcome Back!" : "Sign Up"}
             </h2>
-            {userInfo && (
-              <div>
-                <strong>Email:</strong>
-                <span>{userInfo.email}</span>
-                <strong>User Type:</strong>
-                <span>{userInfo.user_type}</span>
-              </div>
-            )}
 
             <form onSubmit={handleSubmit}>
               <div>
