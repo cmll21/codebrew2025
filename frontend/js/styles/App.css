@@ -34,6 +34,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "EB Garamond";
+  src: url("../../assets/fonts/EBGaramond-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: "CrimsonPro";
   overflow-x: hidden;

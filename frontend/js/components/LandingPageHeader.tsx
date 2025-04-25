@@ -5,7 +5,7 @@ const LandingPageHeader = () => {
     <header className="header-container">
       <div className="nav-left">
         <a href="#about">About Us</a>
-        <a href="#products">Shop Products</a>
+        <a href="#shop">Shop Produce</a>
       </div>
 
       <h1 className="landing-page-title">

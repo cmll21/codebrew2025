@@ -45,7 +45,10 @@ a:visited {
   justify-content: center;
   align-items: center;
   gap: 50px;
-  font-size: 24px;
+  font-size: 20px;
+  font-family: "EB Garamond";
+  font-weight: 700;
+  color: #3c3c3b;
 }
 
 .nav-right {
@@ -54,7 +57,10 @@ a:visited {
   justify-content: center;
   align-items: center;
   gap: 50px;
-  font-size: 24px;
+  font-size: 20px;
+  font-family: "EB Garamond";
+  font-weight: 700;
+  color: #3c3c3b;
 }
 
 .cart-button {
