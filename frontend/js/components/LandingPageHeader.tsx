@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/LandingPageHeader.css";
 
-const LandingPageHeader = ({ loggedIn, setLoggedIn }: { loggedIn: boolean; setLoggedIn: (loggedIn: boolean) => void }) => {
+interface LandingPageHeaderProps {
+  loggedIn: boolean;
+  setLoggedIn: (loggedIn: boolean) => void;
+  userType: 'consumer' | 'supplier' | null;
+}
+
+const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeaderProps) => {
   const [userInfo, setUserInfo] = useState<{
     first_name: string;
     last_name: string;
@@ -41,7 +47,7 @@ const LandingPageHeader = ({ loggedIn, setLoggedIn }: { loggedIn: boolean; setLo
     <header className="header-container">
       <div className="nav-left">
         <Link to="/about">About Us</Link>
-        <Link to="/shop">Shop Produce</Link>
+        {userType !== 'supplier' && <Link to="/shop">Shop Produce</Link>}
       </div>
 
       <h1 className="landing-page-title">
@@ -69,20 +75,22 @@ const LandingPageHeader = ({ loggedIn, setLoggedIn }: { loggedIn: boolean; setLo
         ) : (
           <Link to="/auth">Log In/Sign Up</Link>
         )}
-        <Link to="/checkout" className="cart-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 31 30"
-            fill="none"
-          >
-            <path
-              d="M26.8283 19.0909V21.8182H9.10102V20.4545H7.73738V15H6.37375V10.9091H5.01011V4.09091H2.28284V1.36364H7.73738V5.45455H29.5556V10.9091H28.1919V15H26.8283V16.3636H10.4647V19.0909H26.8283ZM7.73738 9.54545H9.10102V13.6364H25.4647V9.54545H26.8283V8.18182H7.73738V9.54545ZM10.4647 23.1818H13.1919V24.5455H14.5556V27.2727H13.1919V28.6364H10.4647V27.2727H9.10102V24.5455H10.4647V23.1818ZM21.3737 23.1818H24.101V24.5455H25.4647V27.2727H24.101V28.6364H21.3737V27.2727H20.0101V24.5455H21.3737V23.1818Z"
-              fill="#3C3C3B"
-            />
-          </svg>
-        </Link>
+        {userType !== 'supplier' && (
+          <Link to="/checkout" className="cart-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 31 30"
+              fill="none"
+            >
+              <path
+                d="M26.8283 19.0909V21.8182H9.10102V20.4545H7.73738V15H6.37375V10.9091H5.01011V4.09091H2.28284V1.36364H7.73738V5.45455H29.5556V10.9091H28.1919V15H26.8283V16.3636H10.4647V19.0909H26.8283ZM7.73738 9.54545H9.10102V13.6364H25.4647V9.54545H26.8283V8.18182H7.73738V9.54545ZM10.4647 23.1818H13.1919V24.5455H14.5556V27.2727H13.1919V28.6364H10.4647V27.2727H9.10102V24.5455H10.4647V23.1818ZM21.3737 23.1818H24.101V24.5455H25.4647V27.2727H24.101V28.6364H21.3737V27.2727H20.0101V24.5455H21.3737V23.1818Z"
+                fill="#3C3C3B"
+              />
+            </svg>
+          </Link>
+        )}
       </div>
     </header>
   );
