@@ -1,6 +1,13 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from backend.common.models import Address
+from backend.users.models import CustomerProfile
 from produce.models import ProduceItem
+
+class OrderStatus(models.TextChoices):
+    CONFIRMED = 'confirmed'
+    COMPLETED = 'completed'
+    CANCELLED = 'cancelled'
 
 class Item(models.Model):
     produce_item = models.ForeignKey(ProduceItem, on_delete=models.CASCADE)
@@ -26,3 +33,10 @@ class OrderItem(models.Model):
 
 class Cart(models.Model):
     ...
+
+class Order(models.Model):
+    customer = models.ForeignKey(CustomerProfile, on_delete=models.CASCADE)
+    delivery_address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    order_date = models.DateTimeField(auto_now_add=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=OrderStatus.choices)
