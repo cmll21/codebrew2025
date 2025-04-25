@@ -66,6 +66,7 @@ const ShopProducePage = () => {
             produceList={produceItems.map((item) => ({
               name: item.produce_type.name,
               image: item.produce_type.image,
+              cardColour: "#E2D7C3",
             }))}
           />
         </div>
@@ -79,18 +80,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E2D7C3" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((item) => ({
+              name: item.produce_type.name,
+              image: item.produce_type.image,
+              cardColour: "#E9B44C",
+            }))}
           />
         </div>
       </div>
@@ -103,18 +97,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#F4F1E6" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((item) => ({
+              name: item.produce_type.name,
+              image: item.produce_type.image,
+              cardColour: "#82A36B",
+            }))}
           />
         </div>
       </div>
@@ -127,18 +114,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E2D7C3" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((item) => ({
+              name: item.produce_type.name,
+              image: item.produce_type.image,
+              cardColour: "#82A36B",
+            }))}
           />
         </div>
       </div>
@@ -151,18 +131,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#F4F1E6" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((item) => ({
+              name: item.produce_type.name,
+              image: item.produce_type.image,
+              cardColour: "#E9B44C",
+            }))}
           />
         </div>
       </div>
@@ -175,18 +148,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E2D7C3" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((item) => ({
+              name: item.produce_type.name,
+              image: item.produce_type.image,
+              cardColour: "#C87A3F",
+            }))}
           />
         </div>
       </div>
