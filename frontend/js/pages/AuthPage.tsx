@@ -70,6 +70,14 @@ function AuthPage() {
     setUserInfo(null);
   };
 
+  const handleUserTypeChange = (userType: string) => {
+    setForm((prev) => ({
+      ...prev,
+
+      userType,
+    }));
+  };
+
   useEffect(() => {
     // On mount, if token exists, fetch user info
     const token = localStorage.getItem("access_token");
@@ -173,22 +181,30 @@ function AuthPage() {
 
               {!isLogin && (
                 <div>
-                  <select
-                    value={form.userType || ""}
-                    onChange={(e) =>
-                      setForm({ ...form, userType: e.target.value })
-                    }
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  >
-                    <option value="" disabled>
-                      Select User Type
-                    </option>
+                  
+            <div className="form-group">
+              <div className="user-type-container">
+                <button
+                  type="button"
+                  className={`user-type-button ${
+                    form.userType === "Customer" ? "selected" : ""
+                  }`}
+                  onClick={() => handleUserTypeChange("Customer")}
+                >
+                  Customer
+                </button>
 
-                    <option value="SUPPLIER">Supplier</option>
-
-                    <option value="CUSTOMER">Customer</option>
-                  </select>
+                <button
+                  type="button"
+                  className={`user-type-button ${
+                    form.userType === "Supplier" ? "supplier-selected" : ""
+                  }`}
+                  onClick={() => handleUserTypeChange("Supplier")}
+                >
+                  Supplier
+                </button>
+              </div>
+            </div>
                 </div>
               )}
 
