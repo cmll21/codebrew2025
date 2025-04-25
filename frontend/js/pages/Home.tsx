@@ -4,6 +4,7 @@ import "../styles/Home.css";
 import Carousel from "../components/Carousel";
 import SeasonalProduceHeader from "../components/SeasonalProduceHeader";
 import ProduceCard from "../components/ProduceCard";
+import LandingPage from "../components/LandingPage";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -20,6 +21,7 @@ const Home = () => {
   return (
     <>
       <Carousel />
+      <LandingPage/>
       <div className="seasonal-produce-section">
         <SeasonalProduceHeader />
         <div className="seasonal-produce-grid">
