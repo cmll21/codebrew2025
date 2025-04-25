@@ -35,8 +35,22 @@
 }
 
 @font-face {
-  font-family: "EB Garamond";
+  font-family: "EB Garamond Bold";
   src: url("../../assets/fonts/EBGaramond-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("../../assets/fonts/EBGaramond-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EB Garamond Italic";
+  src: url("../../assets/fonts/EBGaramond-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
