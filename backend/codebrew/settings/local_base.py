@@ -1,11 +1,12 @@
 from .base import *
 
-
 DEBUG = True
 
 HOST = "http://localhost:8000"
 
 SECRET_KEY = "secret"  # noqa: S105
+STRIPE_SECRET_KEY = "secret"
+STRIPE_PUBLISHABLE_KEY = "test"
 
 STATIC_ROOT = base_dir_join("staticfiles")
 STATIC_URL = "/static/"

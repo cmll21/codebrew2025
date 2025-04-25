@@ -9,6 +9,8 @@ from .base import *
 DEBUG = False
 
 SECRET_KEY = config("SECRET_KEY")
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
+STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY")
 
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
