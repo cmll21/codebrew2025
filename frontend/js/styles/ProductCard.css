@@ -1,0 +1,90 @@
+.marginTop {
+  margin-top: 15px;
+}
+
+.productImage {
+  width: 265px;
+  height: 271px;
+  background-color: #e2d7c3;
+}
+
+.dropdownContainer {
+  font-family: "CrimsonPro Bold";
+  background-color: #2d5948;
+  padding: 5px 10px 7px 10px;
+  border: none;
+  border-radius: 10px;
+  width: 245px;
+  height: 39px;
+  margin-top: 20px;
+}
+
+.dropdownButtonContainer {
+  display: flex;
+}
+
+.dropdownButton {
+  font-family: "CrimsonPro Bold";
+  font-size: 24px;
+  margin-top: 7px;
+  color: #f4f1e6;
+  font-weight: 700;
+  width: 50%;
+  text-align: center;
+  -webkit-text-stroke: 1px #3c3c3b;
+  display: flex;
+  min-width: 60%;
+}
+
+.dropdownButton:hover {
+  cursor: pointer;
+}
+
+.dropdownArrow {
+  color: #f4f1e6;
+  width: 100%;
+  text-align: right;
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: white;
+  margin: 0 12px;
+}
+
+.price {
+  color: #f4f1e6;
+  font-size: 24px;
+  -webkit-text-stroke: 1px #3c3c3b;
+  margin-top: 7px;
+}
+
+.dropdownMenu {
+  margin-top: 15px;
+  background-color: #e8dbc7;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 60%;
+  position: relative;
+  z-index: 1;
+}
+
+.dropdownItem {
+  padding: 12px;
+  font-size: 24px;
+  text-align: center;
+  border-top: 1px solid #fff;
+  color: #f4f1e6;
+  cursor: pointer;
+  font-weight: 700;
+  -webkit-text-stroke: 1px #3c3c3b;
+}
+
+.dropdownItem:first-child {
+  border-top: none;
+}
+
+.dropdownItem:hover {
+  background-color: #d3c3a5;
+}
