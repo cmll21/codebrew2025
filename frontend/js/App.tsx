@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import cookie from "cookie";
 import LandingPageHeader from "./components/LandingPageHeader";
+import Footer from "./components/Footer";
 
 import { OpenAPI } from "./api";
 import Home from "./pages/Home";
@@ -38,6 +39,8 @@ const App = () => {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/shop" element={<ShopProducePage />} />
       </Routes>
+
+    <Footer/>
     </Sentry.ErrorBoundary>
   );
 };
