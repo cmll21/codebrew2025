@@ -11,7 +11,7 @@ function AuthPage() {
     lastName: "",
     email: "",
     password: "",
-    userType: "",
+    userType: "", // Default val
   });
   const [userInfo, setUserInfo] = useState<{
     email: string;
@@ -23,7 +23,7 @@ function AuthPage() {
     e.preventDefault();
     // Simulate auth
     console.log(isLogin ? "Logging in..." : "Signing up...", form);
-    // setTimeout(() => navigate("/nextPage"), 500);
+    // setTimeout(() => navigate("/nextPage"), 500); // todo: Add next pages from log in and sign up
     try {
       const url = isLogin ? "/api/token/" : "/api/register/";
       const data = isLogin
@@ -65,7 +65,7 @@ function AuthPage() {
       lastName: "",
       email: "",
       password: "",
-      userType: "",
+      userType: "Customer",
     });
     setUserInfo(null);
   };
@@ -120,7 +120,6 @@ function AuthPage() {
                       <label className="block text-sm font-medium">
                         First Name
                       </label>
-
                       <div></div>
                       <input
                         type="firstName"
