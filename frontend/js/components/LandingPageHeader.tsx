@@ -8,7 +8,9 @@ const LandingPageHeader = () => {
         <a href="#products">Shop Products</a>
       </div>
 
-      <h1 className="landing-page-title">Farmers' Market</h1>
+      <h1 className="landing-page-title">
+        <a href="#">Farmers' Market</a>
+      </h1>
 
       <div className="nav-right">
         <a href="#auth">Log In/Sign Up</a>
