@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import ProduceCard from "../components/ProduceCard";
 import "../styles/ShopProduce.css";
 import { Link } from "react-router-dom";
 import ProduceCardCarousel from "../components/ProduceCardCarousel";
@@ -58,20 +57,20 @@ const ShopProducePage = () => {
       <div className="section">
         <h2 className="section-subtitle">Produce in Season</h2>
         <div className="produce-carousel-container">
-        <ProduceCardCarousel
-          produceList={[
-            { name: "Carrot" },
-            { name: "Tomato" },
-            { name: "Potato" },
-            { name: "Eggplant" },
-            { name: "Lettuce" },
-            { name: "Carrot" },
-            { name: "Tomato" },
-            { name: "Potato" },
-            { name: "Eggplant" },
-            { name: "Lettuce" },
-          ]}
-        />
+          <ProduceCardCarousel
+            produceList={[
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+            ]}
+          />
         </div>
       </div>
     </div>
@@ -80,7 +79,8 @@ const ShopProducePage = () => {
 
 export default ShopProducePage;
 
-{/* <div className="produce-grid">
+{
+  /* <div className="produce-grid">
   <Link key={"carrot"} to={"/produce/carrot"}>
     <ProduceCard name={"Carrot"} />
   </Link>
@@ -88,4 +88,5 @@ export default ShopProducePage;
   <ProduceCard name={"Potato"} />
   <ProduceCard name={"Eggplant"} />
   <ProduceCard name={"Lettuce"} />
-</div>; */}
+</div>; */
+}
