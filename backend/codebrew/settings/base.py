@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "common",
     "users",
     "produce",
+    "orders",
     "rest_framework_simplejwt",
 ]
 
