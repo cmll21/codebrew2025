@@ -12,11 +12,11 @@ class IndexedTimeStampedModel(models.Model):
         abstract = True
 
 class Address(models.Model):
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20)
+    street = models.CharField(max_length=255, default="", blank=True)
+    city = models.CharField(max_length=100, default="", blank=True)
+    state = models.CharField(max_length=100, default="", blank=True)
+    country = models.CharField(max_length=100, default="", blank=True)
+    postal_code = models.CharField(max_length=20, default="", blank=True)
 
     class Meta:
         abstract = True
