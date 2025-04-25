@@ -34,7 +34,8 @@ class ProduceItemSerializer(serializers.ModelSerializer):
             'price',
             'created_time',
             'expiry_time',
-            'quality'
+            'quality',
+            'item_image'
         ]
 
 class ProduceCategorySerializer(serializers.ModelSerializer):
