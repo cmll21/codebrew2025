@@ -44,11 +44,14 @@ function AboutPage() {
       <div className="about-page-part2--three-column-layout">
         <div className="left-about-box">
           <div className="about-page-dummy-img" />
+
           <div className="about-page-left-align-text">
             <div className="about-page-header-2-box">
-            <h2 className="about-page-header-2">Support our Aussie Farmers</h2>
+              <h2 className="about-page-header-right-align">
+                Support our Aussie Farmers
+              </h2>
             </div>
-            
+
             <p>
               We support Aussie farmers by connecting them directly with
               consumers, reducing waste from discarded produce that doesn’t meet
@@ -60,7 +63,31 @@ function AboutPage() {
           <div className="about-page-dummy-img" />
         </div>
         <img src={Vine} alt="Vine" className="center-vine-image" />
-        <div className="right-about-box">Right Content</div>
+
+        <div className="right-about-box">
+          <div className="about-page-right-align-text-box">
+            <h2 className="about-page-header-left-align">
+              More Bites, Less Bin
+            </h2>
+            <p>
+              Everyone deserves access to real, affordable, nutritious food —
+              not just the glossy stuff that makes it to the shelves.
+            </p>
+          </div>
+          
+          <div className="about-page-dummy-img2" />
+
+          <div className="about-page-right-align-text-box">
+            <h2 className="about-page-header-left-align">
+              Community over Cosmetic
+            </h2>
+            <p>
+              By rethinking cosmetic standards, we reduce waste, save resources,
+              and keep food where it belongs, in bellies, not bins. We celebrate
+              food in all its quirky, lovable forms.
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );
