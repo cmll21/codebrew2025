@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import User, ConsumerProfile, SupplierProfile, ConsumerAddress, SupplierAddress
+from .models import User, CustomerProfile, SupplierProfile, CustomerAddress, SupplierAddress, CustomerAddress
 from common.serializers import AddressSerializer
 
 
-class NestedConsumerProfileSerializer(serializers.ModelSerializer):
+class NestedCustomerProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ConsumerProfile
+        model = CustomerProfile
         fields = ["delivery_address"]
 
 
@@ -20,11 +20,11 @@ class NestedUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "first_name", "last_name", "user_type"]
 
-class ConsumerProfileSerializer(serializers.ModelSerializer):
+class CustomerProfileSerializer(serializers.ModelSerializer):
     user = NestedUserSerializer(read_only=True)
 
     class Meta:
-        model = ConsumerProfile
+        model = CustomerProfile
         fields = ["user", "delivery_address"]
 
 class SupplierProfileSerializer(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class SupplierProfileSerializer(serializers.ModelSerializer):
         fields = ["user", "location_address"]
 
 class UserSerializer(serializers.ModelSerializer):
-    consumer_profile = NestedConsumerProfileSerializer(required=False)
+    customer_profile = NestedCustomerProfileSerializer(required=False)
     supplier_profile = NestedSupplierProfileSerializer(required=False)
 
     class Meta:
@@ -53,7 +53,7 @@ class UserSerializer(serializers.ModelSerializer):
             "modified",
             "last_login",
             "user_type",
-            "consumer_profile",
+            "customer_profile",
             "supplier_profile",
         ]
         extra_kwargs = {
@@ -61,25 +61,25 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        consumer_data = validated_data.pop("consumer_profile", None)
+        customer_data = validated_data.pop("customer_profile", None)
         supplier_data = validated_data.pop("supplier_profile", None)
 
         user = User.objects.create_user(**validated_data)
 
-        if user.user_type == "consumer" and consumer_data:
-            ConsumerProfile.objects.create(user=user, **consumer_data)
+        if user.user_type == "customer" and customer_data:
+            CustomerProfile.objects.create(user=user, **customer_data)
         elif user.user_type == "supplier" and supplier_data:
             SupplierProfile.objects.create(user=user, **supplier_data)
 
         return user
 
-class ConsumerAddressSerializer(AddressSerializer, serializers.ModelSerializer):
+class CustomerAddressSerializer(AddressSerializer, serializers.ModelSerializer):
     class Meta:
-        model = ConsumerAddress
+        model = CustomerAddress
         fields = [
             "id",
             "nickname",
-            "consumer",
+            "customer",
             "is_primary",
             "street",
             "city",
