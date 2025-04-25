@@ -1,0 +1,36 @@
+.login-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%; /* Subtract the header height*/
+  height: calc(100vh - 128px); /* 96px + 1rem top 1 rem bottom */
+  flex-wrap: wrap;
+}
+
+.left-ty-box {
+  display: flex;
+  width: 50%;
+  height: calc(100vh - 128px);
+  background-color: #90caf9;
+  justify-content: center; /* Horizontal centering */
+  align-items: center;     /* Vertical centering */
+
+
+  color: var(--Golden-Squash, #e9b44c);
+  text-align: center;
+  text-shadow: 4px 4px 0px #3c3c3b;
+  /* Display Heading Big */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--Text, #3c3c3b);
+  font-family: "Milky Vintage";
+  font-size: 112px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.right-box {
+  display: flex;
+  width: 50%;
+  height: calc(100vh - 128px);
+  background-color: #a5d6a7;
+}

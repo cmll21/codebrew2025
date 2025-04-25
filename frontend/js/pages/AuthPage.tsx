@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import "../styles/AuthPage.css";
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -83,104 +84,10 @@ function AuthPage() {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
-        <div className="bg-white p-8 rounded-2xl w-full max-w-md">
-          <h2 className="text-2xl font-bold text-center">
-            {isLogin ? "Welcome Back" : "Create an Account"}
-          </h2>
-
-          {userInfo && (
-            <div className="bg-green-100 border p-4 rounded mb-4 text-center">
-              <p>
-                <strong>Email:</strong> {userInfo.email}
-              </p>
-              <p>
-                <strong>User Type:</strong> {userInfo.user_type}
-              </p>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium">Email</label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                required
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium">Password</label>
-              <input
-                type="password"
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                required
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-            {!isLogin && (
-              <>
-                <div>
-                  <label className="block text-sm font-medium">
-                    First Name
-                  </label>
-                  <input
-                    type="firstName"
-                    value={form.firstName}
-                    onChange={(e) =>
-                      setForm({ ...form, firstName: e.target.value })
-                    }
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium">Last Name</label>
-                  <input
-                    type="lastName"
-                    value={form.lastName}
-                    onChange={(e) =>
-                      setForm({ ...form, lastName: e.target.value })
-                    }
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium">User Type</label>
-                  <select
-                    value={form.userType || ""}
-                    onChange={(e) =>
-                      setForm({ ...form, userType: e.target.value })
-                    }
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  >
-                    <option value="" disabled>
-                      Select User Type
-                    </option>
-                    <option value="SUPPLIER">Supplier</option>
-                    <option value="CUSTOMER">Customer</option>
-                  </select>
-                </div>
-              </>
-            )}
-            <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
-          </form>
-          <p className="text-sm text-center mt-4">
-            {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-            <button onClick={toggleMode}>
-              {isLogin ? "Sign Up" : "Login"}
-            </button>
-          </p>
-        </div>
+      <div className="login-container">
+        <div className="left-ty-box">Thanks for Helping Us Defeat Food Waste!</div>
+        <div className="right-box">Right (30%)</div>
       </div>
-      <button>
-        <Link to="/">Go back</Link>
-      </button>
     </>
   );
 }

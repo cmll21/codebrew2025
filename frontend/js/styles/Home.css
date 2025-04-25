@@ -5,6 +5,7 @@ body {
   padding: 0;
   height: 100%; /* Ensures full coverage */
   width: 100%;
+  overflow-x: hidden; /* Prevent vertical overflow */
 }
 
 .header-container {
