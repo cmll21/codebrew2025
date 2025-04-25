@@ -1,6 +1,136 @@
-.about-page-part1 {
-    height: 763px;
-    flex-shrink: 0;
-    align-self: stretch;
-    background-color: rebeccapurple;
-  }
+.landing-page-part1 {
+  height: 700px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.landing-page-heading {
+  font-family: "Milky Vintage";
+  color: #82a36b;
+  font-size: 100px;
+  text-shadow:
+    4px 4px 0px #3c3c3b,
+    8px 8px 0px #e9b44c;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #3c3c3b;
+  margin: 0;
+  margin-top: 80px;
+}
+
+.landing-page-part1-image {
+  height: 238px;
+  width: 1100px;
+  background-color: #e2d7c3;
+  margin: auto;
+  margin-top: 45px;
+  margin-bottom: 0;
+}
+
+.part1-text-container {
+  width: 1100px;
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.landing-page-body-text {
+  font-family: "EB Garamond";
+  font-size: 32px;
+  color: #000;
+}
+
+.button-container {
+  width: 140px;
+  height: 42px;
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.instructions-container {
+  width: 1200px;
+  height: 400px;
+  margin: auto;
+  display: flex;
+  gap: 150px;
+  z-index: 2;
+}
+
+.instruction1-sticker {
+  height: 120px;
+  width: 120px;
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+}
+
+.instruction2-sticker {
+  height: 120px;
+  width: 120px;
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  transform: translateX(-150px);
+}
+
+.instruction3-sticker {
+  height: 120px;
+  width: 120px;
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  transform: translateX(300px);
+}
+
+.external-container {
+  position: relative;
+  display: flex;
+  height: 500px;
+  width: 1320px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  z-index: 2;
+}
+
+.instruction-background {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  height: 600px;
+  top: 0;
+  transform: translateY(100px);
+  object-fit: contain;
+  margin: auto;
+}
+
+.landing-page-part2 {
+  height: 500px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  position: relative;
+  background-color: #e2d7c3;
+}
+
+.left-section {
+  width: 50%;
+  padding-left: 100px;
+  padding-right: 50px;
+}
+
+.right-section {
+  width: 50%;
+  display: flex;
+}
+
+.landing-page-part2-image {
+  background-color: #f4f1e6;
+  width: 600px;
+  height: 400px;
+  margin: auto;
+  border-radius: 10px;
+}

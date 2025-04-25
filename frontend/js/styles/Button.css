@@ -18,7 +18,7 @@
 }
 
 .lightButton {
-  font-family: "CrimsonPro Bold";
+  font-family: "EB Garamond Bold";
   color: #f4f1e6;
   background-color: #b5bd89;
   -webkit-text-stroke: 1px #3c3c3b;
@@ -33,4 +33,25 @@
 .lightButton:hover {
   box-shadow: inset 0 0 0 2px #2d5948;
   cursor: pointer;
+}
+
+.outlineButton {
+  font-family: "EB Garamond Bold";
+  color: #3c3c3b;
+  background-color: #b5bd89;
+  padding: 5px 10px 7px 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 24px;
+  width: 100%;
+  font-weight: 700;
+}
+
+.outlineButton:hover {
+  box-shadow: inset 0 0 0 2px #2d5948;
+  cursor: pointer;
+  color: #f4f1e6;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #3c3c3b;
+  text-shadow: 1px 2px 0px #2d5948;
 }
