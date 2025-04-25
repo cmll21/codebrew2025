@@ -11,4 +11,3 @@ class Payment(models.Model):
         ('failed', 'Failed')
     ])
     created_at = models.DateTimeField(auto_now_add=True)
-
