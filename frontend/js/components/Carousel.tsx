@@ -20,7 +20,7 @@ const Carousel = () => {
   const doubledItems = [...seasonalItems, ...seasonalItems];
 
   return (
-    <div className="carousel-container" style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
+    <div className="header-carousel-container" style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
       <div className="carousel-track">
         {doubledItems.map((item, index) => (
           <span

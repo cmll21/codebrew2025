@@ -56,3 +56,16 @@ Link {
   gap: 40px;
   flex-wrap: wrap;
 }
+
+.produce-carousel-container {
+  position: relative;
+  width: 90%;
+  background-color: #e2d7c3;
+}
+
+/* Center align carousel slides */
+.slick-slide > div {
+  display: flex !important;
+  justify-content: center !important; /* Horizontally center */
+}
+

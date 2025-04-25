@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import ProduceCard from "../components/ProduceCard";
 import "../styles/ShopProduce.css";
 import { Link } from "react-router-dom";
+import ProduceCardCarousel from "../components/ProduceCardCarousel";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 type ProduceItem = {
   id: number;
@@ -54,14 +57,21 @@ const ShopProducePage = () => {
       </div>
       <div className="section">
         <h2 className="section-subtitle">Produce in Season</h2>
-        <div className="produce-grid">
-          <Link key={"carrot"} to={"/produce/carrot"}>
-            <ProduceCard name={"Carrot"} />
-          </Link>
-          <ProduceCard name={"Tomato"} />
-          <ProduceCard name={"Potato"} />
-          <ProduceCard name={"Eggplant"} />
-          <ProduceCard name={"Lettuce"} />
+        <div className="produce-carousel-container">
+        <ProduceCardCarousel
+          produceList={[
+            { name: "Carrot" },
+            { name: "Tomato" },
+            { name: "Potato" },
+            { name: "Eggplant" },
+            { name: "Lettuce" },
+            { name: "Carrot" },
+            { name: "Tomato" },
+            { name: "Potato" },
+            { name: "Eggplant" },
+            { name: "Lettuce" },
+          ]}
+        />
         </div>
       </div>
     </div>
@@ -69,3 +79,13 @@ const ShopProducePage = () => {
 };
 
 export default ShopProducePage;
+
+{/* <div className="produce-grid">
+  <Link key={"carrot"} to={"/produce/carrot"}>
+    <ProduceCard name={"Carrot"} />
+  </Link>
+  <ProduceCard name={"Tomato"} />
+  <ProduceCard name={"Potato"} />
+  <ProduceCard name={"Eggplant"} />
+  <ProduceCard name={"Lettuce"} />
+</div>; */}

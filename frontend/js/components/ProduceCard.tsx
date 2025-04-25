@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Home.css";
 import "../styles/App.css";
 
-type ProduceCardProps = {
+export type ProduceCardProps = {
   name: string;
 };
 
