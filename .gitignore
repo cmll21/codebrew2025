@@ -5,8 +5,9 @@
 .env
 */.env
 **/settings/local.py
-/staticfiles/*
-/mediafiles/*
+/staticfiles/
+/mediafiles/
+/media/*
 __pycache__/
 /.vscode/
 
@@ -54,5 +55,5 @@ tmp_email/
 .tool-versions
 
 # media
-/mediafiles/
-/media/
+media/*
+mediafiles/*
