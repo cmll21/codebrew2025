@@ -11,6 +11,7 @@ import AuthPage from "./pages/AuthPage";
 import AboutPage from "./pages/AboutPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopProducePage from "./pages/ShopProducePage";
+import ProducePage from "./pages/ProducePage";
 
 OpenAPI.interceptors.request.use((request) => {
   const { csrftoken } = cookie.parse(document.cookie);
@@ -29,6 +30,7 @@ const App = () => (
       <Route path="/about" element={<AboutPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/shop" element={<ShopProducePage />} />
+      <Route path="/produce/:produceName" element={<ProducePage />} />
     </Routes>
   </Sentry.ErrorBoundary>
 );
