@@ -60,12 +60,8 @@ const App = () => {
         } />
         <Route path="/auth" element={<AuthPage setLoggedIn={setLoggedIn} />} />
         <Route path="/about" element={<AboutPage />} />
-        {userType !== 'SUPPLIER' && (
-          <>
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/shop" element={<ShopProducePage />} />
-          </>
-        )}
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/shop" element={<ShopProducePage />} />
       </Routes>
     </Sentry.ErrorBoundary>
   );

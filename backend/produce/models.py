@@ -1,6 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
-from users.models import SupplierProfile
+from users.models import User
 
 class ProduceCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -24,7 +24,8 @@ class ProduceType(models.Model):
 
 class ProduceItem(models.Model):
     produce_type = models.ForeignKey(ProduceType, on_delete=models.CASCADE)
-    supplier_profile = models.ForeignKey(SupplierProfile, on_delete=models.CASCADE)
+    #supplier_profile = models.ForeignKey(SupplierProfile, on_delete=models.CASCADE)
+    supplier_profile = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     weight = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
     # price per kilogram
     price = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])

@@ -21,6 +21,7 @@ __pycache__/
 # data
 *.dump
 
+
 # npm
 node_modules/
 npm-debug.log
@@ -56,3 +57,5 @@ tmp_email/
 # media
 /mediafiles/
 /media/
+backend/mediafiles/produce/types/*.jpg
+backend/mediafiles/produce/types/*.jpeg

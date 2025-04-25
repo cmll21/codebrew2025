@@ -6,7 +6,7 @@ import "../styles/LandingPageHeader.css";
 interface LandingPageHeaderProps {
   loggedIn: boolean;
   setLoggedIn: (loggedIn: boolean) => void;
-  userType: 'consumer' | 'supplier' | null;
+  userType: 'CONSUMER' | 'SUPPLIER' | null;
 }
 
 const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeaderProps) => {
@@ -47,7 +47,7 @@ const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeade
     <header className="header-container">
       <div className="nav-left">
         <Link to="/about">About Us</Link>
-        {userType !== 'supplier' && <Link to="/shop">Shop Produce</Link>}
+        {userType !== 'SUPPLIER' && <Link to="/shop">Shop Produce</Link>}
       </div>
 
       <h1 className="landing-page-title">
@@ -75,7 +75,7 @@ const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeade
         ) : (
           <Link to="/auth">Log In/Sign Up</Link>
         )}
-        {userType !== 'supplier' && (
+        {userType !== 'SUPPLIER' && (
           <Link to="/checkout" className="cart-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
