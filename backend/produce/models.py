@@ -37,6 +37,7 @@ class ProduceItem(models.Model):
         ('select', 'Select'),
         ('premium', 'Premium')
     ])
+    item_image = models.ImageField(upload_to='produce/items/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.produce_type} from {self.supplier_profile} - {self.weight} g"
