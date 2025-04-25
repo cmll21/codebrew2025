@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User, ConsumerProfile, SupplierProfile
+from .models import User, ConsumerProfile, SupplierProfile, ConsumerAddress, SupplierAddress
+from common.serializers import AddressSerializer
 
 
 class NestedConsumerProfileSerializer(serializers.ModelSerializer):
@@ -71,3 +72,31 @@ class UserSerializer(serializers.ModelSerializer):
             SupplierProfile.objects.create(user=user, **supplier_data)
 
         return user
+
+class ConsumerAddressSerializer(AddressSerializer, serializers.ModelSerializer):
+    class Meta:
+        model = ConsumerAddress
+        fields = [
+            "id",
+            "nickname",
+            "consumer",
+            "is_primary",
+            "street",
+            "city",
+            "state",
+            "country",
+            "postal_code",
+        ]
+
+class SupplierAddressSerializer(AddressSerializer, serializers.ModelSerializer):
+    class Meta:
+        model = SupplierAddress
+        fields = [
+            "id",
+            "supplier",
+            "street",
+            "city",
+            "state",
+            "country",
+            "postal_code",
+        ]
