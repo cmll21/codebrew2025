@@ -12,6 +12,7 @@ class ProduceItem(models.Model):
     produce_type = models.ForeignKey(ProduceType, on_delete=models.CASCADE)
     supplier_profile = models.ForeignKey(SupplierProfile, on_delete=models.CASCADE)
     weight = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
+    price = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
 
     created_time = models.DateTimeField(auto_now_add=True)
     expiry_time = models.DateTimeField(null=True, blank=True)
