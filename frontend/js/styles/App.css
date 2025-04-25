@@ -21,6 +21,13 @@
 }
 
 @font-face {
+  font-family: "CrimsonPro Extra Bold";
+  src: url("../../assets/fonts/CrimsonPro-ExtraBold.ttf") format ("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Milky Vintage";
   src: url("../../assets/fonts/MilkyVintage-Regular.ttf") format("truetype");
   font-weight: normal;
@@ -29,6 +36,7 @@
 
 body {
   font-family: "CrimsonPro";
+  overflow-x: hidden;
 }
 
 :root {
@@ -39,6 +47,10 @@ h1,
 h2,
 header {
   font-family: "Milky Vintage", sans-serif;
+}
+
+h3 {
+  font-family: "CrimsonPro Extra Bold";
 }
 
 .button {
