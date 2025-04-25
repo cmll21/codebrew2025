@@ -60,7 +60,6 @@ function CheckoutPage() {
             </div>
             <div className="center-align">
               <div className="checkout-button">
-                <Button text={"Checkout"} handleClick={handleClick} />
                 <CheckoutButton />
               </div>
             </div>
