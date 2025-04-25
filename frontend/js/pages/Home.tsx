@@ -4,6 +4,7 @@ import "../styles/Home.css";
 import Carousel from "../components/Carousel";
 import SeasonalProduceHeader from "../components/SeasonalProduceHeader";
 import ProductCard from "../components/ProductCard";
+import SeasonalProduceCard from "../components/SeasonalProduceCard";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -20,24 +21,26 @@ const Home = () => {
   return (
     <>
       <Carousel />
-      <SeasonalProduceHeader />
-      <div id="django-background">
-        If you are seeing the green Jacob logo on a white background and this
-        text color is #092e20, frontend static files serving is working:
-      </div>
-      <div id="django-logo-wrapper">
-        <div>
-          Below this text, you should see an img tag with the white Django logo
-          on a green background:
+      <div className="seasonal-produce-section">
+        <SeasonalProduceHeader />
+        <div className="seasonal-produce-grid">
+          <SeasonalProduceCard />
+          <SeasonalProduceCard />
+          <SeasonalProduceCard />
+          <SeasonalProduceCard />
+          <SeasonalProduceCard />
         </div>
       </div>
-      <h2>Rest API</h2>
-      <p>{restCheck?.message}</p>
-      <button onClick={() => setShowBugComponent(true)}>
-        Click to test if Sentry is capturing frontend errors! (Should only work
-        in Production)
-      </button>
-      <ProductCard />
+
+      <div className="home-section-container">
+        <div className="home-section">
+          <div className="left-subsection">
+            <h1>Help us defeat food wastage and support Australian farmers!</h1>
+          </div>
+          <div className="right-subsection"></div>
+        </div>
+      </div>
+
       {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {showBugComponent && (showBugComponent as any).field.notexist}

@@ -47,20 +47,20 @@ body {
 }
 
 .cart-button {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    border: none; 
-    background: transparent;
-  }
-  
-  .cart-button svg {
-    width: 30px;
-    height: 30px;
-  }
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.cart-button svg {
+  width: 30px;
+  height: 30px;
+}
 
 /* Carousel styling*/
 
@@ -94,29 +94,93 @@ body {
 /* Seasonal Produce Header */
 
 .seasonal-produce-header {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px; /* Set a fixed height matching the underlying box */
-    flex-shrink: 0;
-    align-self: stretch;
-  }
-  
-  .overlay-text {
-    position: absolute;
-    top: 65px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--Golden-Squash, #E9B44C);
-    text-shadow: 4px 4px 0px #3c3c3b;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #3c3c3b;
-    font-family: "Milky Vintage";
-    font-size: 112px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
-    pointer-events: none;
-  }
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* Set a fixed height matching the underlying box */
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--Golden-Squash, #e9b44c);
+  text-shadow: 4px 4px 0px #3c3c3b;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #3c3c3b;
+  font-family: "Milky Vintage";
+  font-size: 112px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  pointer-events: none;
+}
+
+.seasonal-produce-section {
+  width: 100%;
+  text-align: center;
+}
+
+.seasonal-produce-grid {
+  width: 80%;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 25px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.seasonal-produce-card {
+  background-color: #e2d7c3;
+  width: 212px;
+  height: 300px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 2px #2d5948;
+}
+
+.seasonal-produce-card-label {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  padding: 0;
+}
+
+.home-section-container {
+  background-color: #e2d7c3;
+  width: 100%;
+  height: 600px;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-section {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 21px;
+  width: 90%;
+}
+
+.left-subsection {
+  width: 50%;
+  color: #2d5948;
+  font-size: 36px;
+  text-align: center;
+  justify-content: center;
+  text-shadow: 4px 4px 0px #b5bd89;
+}
+
+.right-subsection {
+  width: 50%;
+  justify-content: center;
+  background-color: #f4f1e6;
+  height: 500px;
+}
