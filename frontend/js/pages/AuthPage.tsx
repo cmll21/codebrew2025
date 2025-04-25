@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "../styles/AuthPage.css";
 
-function AuthPage() {
+function AuthPage({ setLoggedIn }: { setLoggedIn: (loggedIn: boolean) => void }) {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({
     firstName: "",
@@ -17,7 +17,8 @@ function AuthPage() {
     email: string;
     user_type: string;
   } | null>(null);
-  // const navigate = useNavigate();
+  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,10 +46,11 @@ function AuthPage() {
         localStorage.setItem("access_token", access);
         localStorage.setItem("refresh_token", refresh);
         axios.defaults.headers.common["Authorization"] = `Bearer ${access}`;
-
+        setLoggedIn(true);
         // Fetch user details
         const profileRes = await axios.get("/api/users/me/"); // adjust to your endpoint
         setUserInfo(profileRes.data);
+        navigate("/");
       } else {
         console.log("Signed up successfully!");
         setIsLogin(true);
@@ -103,14 +105,6 @@ function AuthPage() {
             <h2 className="auth-box-header">
               {isLogin ? "Welcome Back!" : "Sign Up"}
             </h2>
-            {userInfo && (
-              <div>
-                <strong>Email:</strong>
-                <span>{userInfo.email}</span>
-                <strong>User Type:</strong>
-                <span>{userInfo.user_type}</span>
-              </div>
-            )}
 
             <form onSubmit={handleSubmit}>
               <div>

@@ -6,33 +6,19 @@ import ProduceCardCarousel from "../components/ProduceCardCarousel";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-type ProduceItem = {
+type ProduceType = {
   id: number;
-  produce_type: {
-    id: number;
-    name: string;
-    image: string;
-  };
-  supplier_profile: {
-    user: {
-      id: number;
-      first_name: string;
-      last_name: string;
-      user_type: string;
-    };
-  };
-  weight: number;
-  price: number;
-  created_time: string;
-  expiry_time: string;
-  quality: string;
+  name: string;
+  image: string;
+  category: string | null;
+  season: string | null;
 };
 
 const ShopProducePage = () => {
-  const [produceItems, setProduceItems] = useState<ProduceItem[]>([]);
+  const [produceItems, setProduceItems] = useState<ProduceType[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/produce/items/")
+    fetch("http://localhost:8000/api/produce/types/")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch items");
@@ -63,18 +49,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E9B44C" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((type) => ({
+              name: type.name,
+              image: type.image,
+              cardColour: "#E2D7C3",
+            }))}
           />
         </div>
       </div>
@@ -87,18 +66,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E2D7C3" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((type) => ({
+              name: type.name,
+              image: type.image,
+              cardColour: "#E9B44C",
+            }))}
           />
         </div>
       </div>
@@ -111,18 +83,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#F4F1E6" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((type) => ({
+              name: type.name,
+              image: type.image,
+              cardColour: "#82A36B",
+            }))}
           />
         </div>
       </div>
@@ -135,18 +100,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E2D7C3" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((type) => ({
+              name: type.name,
+              image: type.image,
+              cardColour: "#82A36B",
+            }))}
           />
         </div>
       </div>
@@ -159,18 +117,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#F4F1E6" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((type) => ({
+              name: type.name,
+              image: type.image,
+              cardColour: "#E9B44C",
+            }))}
           />
         </div>
       </div>
@@ -183,18 +134,11 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E2D7C3" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((type) => ({
+              name: type.name,
+              image: type.image,
+              cardColour: "#C87A3F",
+            }))}
           />
         </div>
       </div>

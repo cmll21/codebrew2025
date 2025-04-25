@@ -23,11 +23,11 @@ const Home = () => {
       <div className="seasonal-produce-section">
         <SeasonalProduceHeader />
         <div className="seasonal-produce-grid">
-          <ProduceCard />
-          <ProduceCard />
-          <ProduceCard />
-          <ProduceCard />
-          <ProduceCard />
+          <ProduceCard name={"Test"} cardColour={"#E9B44C"} />
+          <ProduceCard name={"Test"} cardColour={"#E9B44C"} />
+          <ProduceCard name={"Test"} cardColour={"#E9B44C"} />
+          <ProduceCard name={"Test"} cardColour={"#E9B44C"} />
+          <ProduceCard name={"Test"} cardColour={"#E9B44C"} />
         </div>
       </div>
 
