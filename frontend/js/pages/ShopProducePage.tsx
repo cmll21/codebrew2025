@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import ProduceCard from "../components/ProduceCard";
 import "../styles/ShopProduce.css";
+import { Link } from "react-router-dom";
 
 type ProduceItem = {
   id: number;
@@ -25,7 +26,7 @@ type ProduceItem = {
   quality: string;
 };
 
-const ShopProductsPage = () => {
+const ShopProducePage = () => {
   const [produceItems, setProduceItems] = useState<ProduceItem[]>([]);
 
   useEffect(() => {
@@ -54,15 +55,17 @@ const ShopProductsPage = () => {
       <div className="section">
         <h2 className="section-subtitle">Produce in Season</h2>
         <div className="produce-grid">
-          <ProduceCard />
-          <ProduceCard />
-          <ProduceCard />
-          <ProduceCard />
-          <ProduceCard />
+          <Link key={"carrot"} to={"/produce/carrot"}>
+            <ProduceCard name={"Carrot"} />
+          </Link>
+          <ProduceCard name={"Tomato"} />
+          <ProduceCard name={"Potato"} />
+          <ProduceCard name={"Eggplant"} />
+          <ProduceCard name={"Lettuce"} />
         </div>
       </div>
     </div>
   );
 };
 
-export default ShopProductsPage;
+export default ShopProducePage;

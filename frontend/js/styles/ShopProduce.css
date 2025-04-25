@@ -2,6 +2,10 @@ body {
   width: 100vw;
 }
 
+Link {
+  text-decoration: none;
+}
+
 .section-header {
   text-align: center;
 }
