@@ -11,6 +11,7 @@ import AuthPage from "./pages/AuthPage";
 import AboutPage from "./pages/AboutPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopProducePage from "./pages/ShopProducePage";
+import ProducePage from "./pages/ProducePage";
 import { useState } from "react";
 
 OpenAPI.interceptors.request.use((request) => {
@@ -20,7 +21,7 @@ OpenAPI.interceptors.request.use((request) => {
   }
   return request;
 });
-
+  
 const App = () => {
   // State to store the access token
   const [loggedIn, setLoggedIn] = useState(false);

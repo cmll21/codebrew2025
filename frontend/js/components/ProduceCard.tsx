@@ -2,17 +2,34 @@ import React from "react";
 import "../styles/Home.css";
 import "../styles/App.css";
 
+import { toTitleCase } from "../utils";
+import { Link } from "react-router-dom";
+
 export type ProduceCardProps = {
   name: string;
+  image?: string;
 };
 
 const ProduceCard = (props: ProduceCardProps) => {
   return (
-    <div className="seasonal-produce-card">
-      <h3 className="seasonal-produce-card-label">
-        {props.name || "ProducePlaceholder"}
-      </h3>
-    </div>
+    <Link key={props.name} to={`/produce/${props.name}`}>
+      <div className="seasonal-produce-card">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div className="produce-image-container">
+            <img src={props.image} className="produce-image" />
+          </div>
+        </div>
+        <h3 className="seasonal-produce-card-label">
+          {toTitleCase(props.name) || "ProducePlaceholder"}
+        </h3>
+      </div>
+    </Link>
   );
 };
 

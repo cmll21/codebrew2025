@@ -63,18 +63,10 @@ const ShopProducePage = () => {
           style={{ backgroundColor: "#E9B44C" }}
         >
           <ProduceCardCarousel
-            produceList={[
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-              { name: "Carrot" },
-              { name: "Tomato" },
-              { name: "Potato" },
-              { name: "Eggplant" },
-              { name: "Lettuce" },
-            ]}
+            produceList={produceItems.map((item) => ({
+              name: item.produce_type.name,
+              image: item.produce_type.image,
+            }))}
           />
         </div>
       </div>
