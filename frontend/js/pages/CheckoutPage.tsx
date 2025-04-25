@@ -60,7 +60,7 @@ function CheckoutPage() {
             </div>
             <div className="center-align">
               <div className="checkout-button">
-                <CheckoutButton />
+                <CheckoutButton amount={50} />
               </div>
             </div>
           </div>
