@@ -1,12 +1,15 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/LandingPageHeader.css";
 
-const LandingPageHeader = ({ loggedIn }: { loggedIn: boolean }) => {
+const LandingPageHeader = ({ loggedIn, setLoggedIn }: { loggedIn: boolean; setLoggedIn: (loggedIn: boolean) => void }) => {
   const [userInfo, setUserInfo] = useState<{
     first_name: string;
     last_name: string;
   } | null>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("loggedIn", loggedIn);
@@ -22,6 +25,18 @@ const LandingPageHeader = ({ loggedIn }: { loggedIn: boolean }) => {
     }
   }, [loggedIn]);
 
+  const handleLogout = () => {
+    // Clear tokens from localStorage
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    // Clear axios default headers
+    delete axios.defaults.headers.common["Authorization"];
+    // Update logged in state
+    setLoggedIn(false);
+    // Navigate to auth page
+    navigate("/auth");
+  };
+
   return (
     <header className="header-container">
       <div className="nav-left">
@@ -35,10 +50,23 @@ const LandingPageHeader = ({ loggedIn }: { loggedIn: boolean }) => {
 
       <div className="nav-right">
         {loggedIn ? (
-          // Profile button
-          <Link to="/auth">{userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : "Loading..."}</Link>
+          <div 
+            className="profile-dropdown-container"
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+          >
+            <button className="profile-button">
+              {userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : "Loading..."}
+            </button>
+            {showDropdown && (
+              <div className="profile-dropdown">
+                <button onClick={handleLogout} className="dropdown-item">
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
         ) : (
-          // Log In/Sign Up button
           <Link to="/auth">Log In/Sign Up</Link>
         )}
         <Link to="/checkout" className="cart-button">

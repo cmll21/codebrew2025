@@ -28,7 +28,7 @@ const App = () => {
   return (
     <Sentry.ErrorBoundary fallback={<p>An error has occurred.</p>}>
       {/* Pass accessToken to LandingPageHeader */}
-      <LandingPageHeader loggedIn={loggedIn} />
+      <LandingPageHeader loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       
       <Routes>
         <Route path="/" element={<Home />} />
