@@ -43,8 +43,21 @@ function AboutPage() {
       </div>
       <div className="about-page-part2--three-column-layout">
         <div className="left-about-box">
-          <div className="about-page-dummy-img"/>
-          Left Content
+          <div className="about-page-dummy-img" />
+          <div className="about-page-left-align-text">
+            <div className="about-page-header-2-box">
+            <h2 className="about-page-header-2">Support our Aussie Farmers</h2>
+            </div>
+            
+            <p>
+              We support Aussie farmers by connecting them directly with
+              consumers, reducing waste from discarded produce that doesn’t meet
+              supermarket standards. This helps cut labour, water, and fuel
+              waste, boosts farmers' income, and reduces the environmental
+              impact, making our food system more sustainable.
+            </p>
+          </div>
+          <div className="about-page-dummy-img" />
         </div>
         <img src={Vine} alt="Vine" className="center-vine-image" />
         <div className="right-about-box">Right Content</div>

@@ -109,7 +109,6 @@
   height: 1456px;
   justify-content: center; /* Horizontal centering */
   align-items: center; /* Vertical centering */
-  background: red;
 }
 .right-about-box {
   display: flex;
@@ -124,4 +123,35 @@
   width: 575px;
   height: 333px;
   background: grey;
+}
+
+.about-page-header-2 {
+    color: var(--Text, #3C3C3B);
+    text-align: right;
+    text-shadow: 4px 4px 0px var(--Card-Background, #E2D7C3);
+    /* Display Heading Small */
+    font-family: "Milky Vintage";
+    font-size: 72px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.about-page-header-2-box {
+    height: 144px;
+    width:450px;
+    margin-left: auto;
+}
+
+.about-page-left-align-text {
+    color: #000;
+
+    text-align: right;
+    font-family: "EB Garamond";
+    font-size: 28px;
+    font-style: normal;
+    line-height: normal;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 100px;
 }
