@@ -25,6 +25,7 @@ const ProduceCardCarousel = ({
           height: "10px",
           backgroundColor: i === currentSlide ? "black" : "gray",
           borderRadius: "50%",
+          marginTop: "20px",
         }}
       ></div>
     ),
@@ -33,6 +34,7 @@ const ProduceCardCarousel = ({
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
+    initialSlide: 3,
     responsive: [
       {
         breakpoint: 1024,
@@ -56,13 +58,13 @@ const ProduceCardCarousel = ({
   };
 
   return (
-      <Slider {...settings}>
-        {produceList.map((produce, index) => (
-          <div key={index} className="carousel-item">
-            <ProduceCard {...produce} />
-          </div>
-        ))}
-      </Slider>
+    <Slider {...settings}>
+      {produceList.map((produce, index) => (
+        <div key={index} className="carousel-item">
+          <ProduceCard {...produce} />
+        </div>
+      ))}
+    </Slider>
   );
 };
 

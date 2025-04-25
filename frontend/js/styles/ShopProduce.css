@@ -61,6 +61,7 @@ Link {
   position: relative;
   width: 90%;
   background-color: #e2d7c3;
+  margin-top: 20px;
 }
 
 /* Center align carousel slides */
@@ -68,4 +69,3 @@ Link {
   display: flex !important;
   justify-content: center !important; /* Horizontally center */
 }
-
