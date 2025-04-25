@@ -6,11 +6,6 @@ class OrderAddressSerializer(serializers.ModelSerializer):
         model = OrderAddress
         fields = ['street', 'city', 'state', 'country', 'postal_code']
 
-class CartItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CartItem
-        fields = ['id', 'item',]
-
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
@@ -30,9 +25,16 @@ class OrderSerializer(serializers.ModelSerializer):
                   'status', 
                   'order_items'
                   ]
+        
+class CartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['id', 'item']
+
 
 class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True, source='cart_items')
+
     class Meta:
         model = Cart
         fields = ['id', 'customer', 'items']
-
