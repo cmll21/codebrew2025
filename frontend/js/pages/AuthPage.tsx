@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "../styles/AuthPage.css";
 
-function AuthPage({ setAccessToken }: { setAccessToken: (token: string) => void }) {
+function AuthPage({ setLoggedIn }: { setLoggedIn: (loggedIn: boolean) => void }) {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({
     firstName: "",
@@ -46,7 +46,7 @@ function AuthPage({ setAccessToken }: { setAccessToken: (token: string) => void 
         localStorage.setItem("access_token", access);
         localStorage.setItem("refresh_token", refresh);
         axios.defaults.headers.common["Authorization"] = `Bearer ${access}`;
-        setAccessToken(access);
+        setLoggedIn(true);
         // Fetch user details
         const profileRes = await axios.get("/api/users/me/"); // adjust to your endpoint
         setUserInfo(profileRes.data);

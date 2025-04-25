@@ -2,16 +2,16 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const LandingPageHeader = ({ accessToken }: { accessToken: string | null }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const LandingPageHeader = ({ loggedIn }: { loggedIn: boolean }) => {
   const [userInfo, setUserInfo] = useState<{
     first_name: string;
     last_name: string;
   } | null>(null);
 
   useEffect(() => {
-    setIsLoggedIn(!!accessToken);
-    if (accessToken) {
+    console.log("loggedIn", loggedIn);
+    if (loggedIn) {
+      const accessToken = localStorage.getItem("access_token");
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       axios
         .get("/api/users/me/")
@@ -20,26 +20,26 @@ const LandingPageHeader = ({ accessToken }: { accessToken: string | null }) => {
     } else {
       setUserInfo(null);
     }
-  }, [localStorage.getItem("access_token")]);
+  }, [loggedIn]);
 
   return (
     <header className="header-container">
       <div className="nav-left">
-        <a href="#about">About Us</a>
-        <a href="#shop">Shop Produce</a>
+        <Link to="/about">About Us</Link>
+        <Link to="/shop">Shop Produce</Link>
       </div>
 
       <h1 className="landing-page-title">
-        <a href="#">Farmers' Market</a>
+        <Link to="/">Farmers' Market</Link>
       </h1>
 
       <div className="nav-right">
-        {isLoggedIn ? (
+        {loggedIn ? (
           // Profile button
-          <a href="#auth">{userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : "Loading..."}</a>
+          <Link to="/auth">{userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : "Loading..."}</Link>
         ) : (
           // Log In/Sign Up button
-          <a href="#auth">Log In/Sign Up</a>
+          <Link to="/auth">Log In/Sign Up</Link>
         )}
         <Link to="/checkout" className="cart-button">
           <svg
