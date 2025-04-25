@@ -3,6 +3,7 @@ import React from "react";
 import ProductImageWrapper from "./ProductImageWrapper";
 import PriceDropdown from "./PriceDropdown";
 import Button from "./Button";
+import LightButton from "./LightButton";
 
 const ProductCard = () => {
   return (
@@ -10,7 +11,10 @@ const ProductCard = () => {
       <ProductImageWrapper />
       <PriceDropdown />
       <div className="marginTop">
-        <Button text={"Add to Cart"} handleClick={() => console.log("hi")} />
+        <LightButton
+          text={"Add to Cart"}
+          handleClick={() => console.log("hi")}
+        />
       </div>
     </div>
   );
