@@ -207,19 +207,18 @@ function AuthPage() {
             </div>
                 </div>
               )}
-
-              <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
+              <div className="auth-button-container">
+              <Button className= "button" type="submit">{isLogin ? "Log In" : "Sign Up"}</Button>
+              </div>
+              
             </form>
 
             <p className="text-sm text-center mt-4">
               {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
               <button onClick={toggleMode}>
-                {isLogin ? "Sign Up" : "Login"}
+                {isLogin ? "Sign Up here." : "Log In here."}
               </button>
             </p>
-            <button>
-              <Link to="/">Go back</Link>
-            </button>
           </div>
         </div>
       </div>

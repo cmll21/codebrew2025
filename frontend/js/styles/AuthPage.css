@@ -91,6 +91,8 @@ background: var(--Background, #F4F1E6);
     border: 2px solid #6a8d5f;
     border-radius: 10px;
     overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
   
   .user-type-button {
@@ -134,3 +136,19 @@ background: var(--Background, #F4F1E6);
   color: #333;
   font-style: italic;
 }
+
+.auth-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto; 
+    width: fit-content; 
+    max-width: 100%; 
+    
+    padding: 10px 0;
+  }
+  
+  .button {
+    width: auto;
+    min-width: 100px; 
+    padding: 5px 20px; 
+  }
