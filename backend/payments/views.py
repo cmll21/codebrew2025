@@ -18,8 +18,8 @@ def create_checkout_session(request):
                 "quantity": 1,
             }],
             mode="payment",
-            success_url="http://localhost:8000/payments/success/",
-            cancel_url="http://localhost:8000/payments/cancel/",
+            success_url=f"{settings.HOST}/payments/success/",
+            cancel_url=f"{settings.HOST}/payments/cancel/",
         )
         return JsonResponse({"sessionId": session.id})
     except stripe.error.StripeError as e:
