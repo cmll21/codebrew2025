@@ -32,6 +32,15 @@ const Home = () => {
         </div>
       </div>
 
+      <div className="home-section-container">
+        <div className="home-section">
+          <div className="left-subsection">
+            <h1>Help us defeat food wastage and support Australian farmers!</h1>
+          </div>
+          <div className="right-subsection"></div>
+        </div>
+      </div>
+
       {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {showBugComponent && (showBugComponent as any).field.notexist}
