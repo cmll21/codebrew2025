@@ -1,7 +1,7 @@
 # payments/views.py
 import stripe
 from django.conf import settings
-from django.http import HttpResponseServerError, HttpResponse
+from django.http import HttpResponseServerError, HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
@@ -21,9 +21,10 @@ def create_checkout_session(request):
             success_url="http://localhost:8000/payments/success/",
             cancel_url="http://localhost:8000/payments/cancel/",
         )
-        return redirect(session.url, code=303)
+        return JsonResponse({"sessionId": session.id})
     except stripe.error.StripeError as e:
         return HttpResponseServerError(str(e))
+
 
 
 def success(request):

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../styles/Checkout.css";
 import CheckoutItem from "../components/CheckoutItem";
 import Button from "../components/Button";
+import CheckoutButton from "../components/CheckoutButton";
 
 const handleClick = () => {
   console.log("clicked");
@@ -60,6 +61,7 @@ function CheckoutPage() {
             <div className="center-align">
               <div className="checkout-button">
                 <Button text={"Checkout"} handleClick={handleClick} />
+                <CheckoutButton />
               </div>
             </div>
           </div>
