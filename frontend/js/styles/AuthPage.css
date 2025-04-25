@@ -12,8 +12,7 @@
   height: calc(100vh - 128px);
   background-color: #90caf9;
   justify-content: center; /* Horizontal centering */
-  align-items: center;     /* Vertical centering */
-
+  align-items: center; /* Vertical centering */
 
   color: var(--Golden-Squash, #e9b44c);
   text-align: center;
@@ -33,4 +32,18 @@
   width: 50%;
   height: calc(100vh - 128px);
   background-color: #a5d6a7;
+  justify-content: center;  /* center horizontally */
+  align-items: center;      
+}
+
+.auth-box {
+  display: inline-flex;
+  padding: 60px 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 10px;
+  background: var(--Card-Background, #E2D7C3);
+  box-shadow: 7px 7px 0px 0px var(--Light-Text, #6A6A67);
 }

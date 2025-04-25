@@ -85,8 +85,124 @@ function AuthPage() {
   return (
     <>
       <div className="login-container">
-        <div className="left-ty-box">Thanks for Helping Us Defeat Food Waste!</div>
-        <div className="right-box">Right (30%)</div>
+        <div className="left-ty-box">
+          Thanks for Helping Us Defeat Food Waste!
+        </div>
+        <div className="right-box">
+          <div className="auth-box">
+            <h2 className="">{isLogin ? "Welcome Back!" : "Sign Up"}</h2>
+            {userInfo && (
+              <div className="bg-green-100 border p-4 rounded mb-4 text-center">
+                <p>
+                  <strong>Email:</strong> {userInfo.email}
+                </p>
+
+                <p>
+                  <strong>User Type:</strong> {userInfo.user_type}
+                </p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label className="block text-sm font-medium">Email</label>
+
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Password</label>
+
+                <input
+                  type="password"
+                  value={form.password}
+                  onChange={(e) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+
+              {!isLogin && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium">
+                      First Name
+                    </label>
+
+                    <input
+                      type="firstName"
+                      value={form.firstName}
+                      onChange={(e) =>
+                        setForm({ ...form, firstName: e.target.value })
+                      }
+                      required
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium">
+                      Last Name
+                    </label>
+
+                    <input
+                      type="lastName"
+                      value={form.lastName}
+                      onChange={(e) =>
+                        setForm({ ...form, lastName: e.target.value })
+                      }
+                      required
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium">
+                      User Type
+                    </label>
+
+                    <select
+                      value={form.userType || ""}
+                      onChange={(e) =>
+                        setForm({ ...form, userType: e.target.value })
+                      }
+                      required
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    >
+                      <option value="" disabled>
+                        Select User Type
+                      </option>
+
+                      <option value="SUPPLIER">Supplier</option>
+
+                      <option value="CUSTOMER">Customer</option>
+                    </select>
+                  </div>
+                </>
+              )}
+
+              <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
+            </form>
+
+            <p className="text-sm text-center mt-4">
+              {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+              <button onClick={toggleMode}>
+                {isLogin ? "Sign Up" : "Login"}
+              </button>
+            </p>
+            <button>
+              <Link to="/">Go back</Link>
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );
