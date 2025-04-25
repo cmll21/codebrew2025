@@ -1,0 +1,165 @@
+.login-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%; /* Subtract the header height*/
+  height: calc(100vh - 128px); /* 96px + 1rem top 1 rem bottom */
+  flex-wrap: wrap;
+}
+
+.left-ty-box {
+  display: flex;
+  width: 50%;
+  height: calc(100vh - 128px);
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+
+  color: var(--Golden-Squash, #e9b44c);
+  text-align: center;
+  text-shadow: 4px 4px 0px #3c3c3b;
+  /* Display Heading Big */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--Text, #3c3c3b);
+  font-family: "Milky Vintage";
+  font-size: 112px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.right-box {
+  display: flex;
+  width: 50%;
+  height: calc(100vh - 128px);
+  justify-content: center; /* center horizontally */
+  align-items: center;
+}
+
+.auth-box {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 30px 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 10px;
+  background: var(--Card-Background, #e2d7c3);
+  box-shadow: 7px 7px 0px 0px var(--Light-Text, #6a6a67);
+}
+
+.auth-box-header {
+  color: var(--Text, #3c3c3b);
+  /* H1 Heading */
+  font-family: "Milky Vintage";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  align-self: stretch;
+}
+
+.auth-input-text {
+  color: var(--Text, #3c3c3b);
+  text-align: center;
+  font-family: "EB Garamond";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.auth-input-field {
+  display: flex;
+  height: 15px;
+  width: 400px;
+  padding: 10px 20px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 10px;
+border: 2px solid var(--Forest-Green, #2D5948);
+background: var(--Background, #F4F1E6);
+}
+
+.user-type-container {
+    display: flex;
+    width: 100%;
+    max-width: 460px;
+    height: 30px;
+    border: 2px solid #6a8d5f;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .user-type-button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1.25rem;
+    font-family: "Crimson Pro", serif;
+    font-style: italic;
+    color: #3C3C3B;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0; /* Remove padding */
+    height: 100%; /* Make button take full height */
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+  }
+  
+/* Set regular font style (non-italic) for selected buttons */
+.user-type-button.selected,
+.user-type-button.supplier-selected {
+  font-style: normal;
+}
+
+.user-type-button.supplier-selected {
+  background-color: #6a8d5f;
+  color: white;
+}
+
+/* When customer is selected, apply these styles */
+.user-type-container .user-type-button:first-child.selected {
+  background-color: #6a8d5f;
+  color: white;
+  font-style: normal;
+}
+
+/* When supplier is selected, apply these styles */
+.user-type-container .user-type-button:last-child:not(.supplier-selected) {
+  background-color: transparent;
+  color: #333;
+  font-style: italic;
+}
+
+.auth-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto; 
+    width: fit-content; 
+    max-width: 100%; 
+    
+    padding: 10px 0;
+  }
+  
+  .button {
+    width: auto;
+    min-width: 100px; 
+    padding: 5px 20px; 
+  }
+
+  .auth-toggle-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2D5948; /* Your forest green color */
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    display: inline; /* Makes it flow like text */
+  }
+  

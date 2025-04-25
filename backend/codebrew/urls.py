@@ -13,13 +13,14 @@ from drf_spectacular.views import (
 from rest_framework.routers import DefaultRouter
 from users.routes import routes as users_routes
 from produce.routes import routes as produce_routes
+from orders.routes import routes as orders_routes
 
 from users.views import CustomTokenObtainPairView, RegisterView, UserViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()
 
-routes = common_routes + users_routes + produce_routes
+routes = common_routes + users_routes + produce_routes + orders_routes
 for route in routes:
     router.register(route["regex"], route["viewset"], basename=route["basename"])
 
