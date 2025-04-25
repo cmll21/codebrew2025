@@ -227,10 +227,13 @@ CSP_SCRIPT_SRC = [
     "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
     "https://cdn.jsdelivr.net/npm/redoc@latest/",
     "blob:",
+    "https://js.stripe.com",
 ] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_CONNECT_SRC = [
     "'self'",
     "*.sentry.io",
+    "https://checkout.stripe.com",
+    "https://api.stripe.com",
 ] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_STYLE_SRC = [
     "'self'",
@@ -252,6 +255,12 @@ CSP_IMG_SRC = [
     "data:",
     "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
     "https://cdn.redoc.ly/redoc/",
+]
+
+CSP_FRAME_SRC = [
+    "'self'",
+    "https://js.stripe.com",
+    "https://checkout.stripe.com",
 ]
 
 # Django-defender
