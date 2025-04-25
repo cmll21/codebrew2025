@@ -32,6 +32,7 @@ class ProduceItemSerializer(serializers.ModelSerializer):
             'produce_type', 'produce_type_id',
             'supplier_profile', 'supplier_profile_id',
             'weight',
+            'price',
             'created_time',
             'expiry_time',
             'quality'
