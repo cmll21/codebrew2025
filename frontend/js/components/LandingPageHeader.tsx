@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const LandingPageHeader = () => {
+const LandingPageHeader = ({ accessToken }: { accessToken: string | null }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState<{
     first_name: string;
@@ -10,17 +10,17 @@ const LandingPageHeader = () => {
   } | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    setIsLoggedIn(token ? true : false);
-    if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        axios
-          .get("/api/users/me/")
-          .then((res) => setUserInfo(res.data))
-          .catch(() => setUserInfo(null));
+    setIsLoggedIn(!!accessToken);
+    if (accessToken) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      axios
+        .get("/api/users/me/")
+        .then((res) => setUserInfo(res.data))
+        .catch(() => setUserInfo(null));
+    } else {
+      setUserInfo(null);
     }
-    console.log(userInfo);
-  }, []);
+  }, [localStorage.getItem("access_token")]);
 
   return (
     <header className="header-container">
