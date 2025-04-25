@@ -4,6 +4,7 @@ import { RestService } from "../api";
 import "../Home.css";
 import LandingPageHeader from "../LandingPageHeader";
 import Carousel from "../Carousel";
+import ProductCard from "../components/ProductCard";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
