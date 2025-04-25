@@ -1,0 +1,152 @@
+.checkout-container {
+  display: flex;
+}
+
+.left-container {
+  width: 40%;
+  padding-left: 74px;
+}
+
+.item-right {
+  width: 70%;
+}
+
+.top-right-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-text {
+  color: #e9b44c;
+  text-align: center;
+  text-shadow: 4px 4px 0px #3c3c3b;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #3c3c3b;
+  font-family: "Milky Vintage";
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+.checkout-list-container {
+  background-color: #e2d7c3;
+  padding: 30px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 7px 7px 0px 0px #6a6a67;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.shopping-cart-text {
+  color: #3c3c3b;
+  font-family: "Milky Vintage";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.checkout-item {
+  margin-top: 30px;
+  text-align: left;
+  display: flex;
+}
+
+.item-image {
+  background-color: #f4f1e6;
+  border-radius: 10px;
+  display: flex;
+  padding: 3px;
+  align-items: center;
+  width: 160px;
+  height: 160px;
+}
+
+.item-text {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.item-name {
+  color: #3c3c3b;
+  font-family: "EB Garamond";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+
+.item-details {
+  margin-top: 0;
+  font-family: "EB Garamond Italic";
+}
+
+.dotted-line {
+  border: none;
+  border-top: 2px dotted black;
+  margin: 10px 0;
+  width: 95%;
+  margin-left: 20px;
+}
+
+.price {
+  text-align: right;
+  margin: 0;
+  font-size: 20px;
+}
+
+.payment-form-container {
+  background-color: #e4d8c3;
+  margin: auto;
+}
+
+.payment-form-container h2 {
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input {
+  padding: 5px;
+  border: 2px solid #2f4f4f;
+  border-radius: 8px;
+  background-color: #fefdf2;
+  font-style: italic;
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  font-family: "EB Garamond";
+}
+
+.postcode-state-row {
+  display: flex;
+  gap: 110px;
+}
+
+.checkout-button {
+  width: 50px;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.center-align {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
