@@ -12,6 +12,7 @@ import AboutPage from "./pages/AboutPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopProducePage from "./pages/ShopProducePage";
 import ProducePage from "./pages/ProducePage";
+import { useState } from "react";
 
 OpenAPI.interceptors.request.use((request) => {
   const { csrftoken } = cookie.parse(document.cookie);
@@ -20,19 +21,25 @@ OpenAPI.interceptors.request.use((request) => {
   }
   return request;
 });
+  
+const App = () => {
+  // State to store the access token
+  const [loggedIn, setLoggedIn] = useState(false);
 
-const App = () => (
-  <Sentry.ErrorBoundary fallback={<p>An error has occurred.</p>}>
-    <LandingPageHeader />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/auth" element={<AuthPage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/checkout" element={<CheckoutPage />} />
-      <Route path="/shop" element={<ShopProducePage />} />
-      <Route path="/produce/:produceName" element={<ProducePage />} />
-    </Routes>
-  </Sentry.ErrorBoundary>
-);
+  return (
+    <Sentry.ErrorBoundary fallback={<p>An error has occurred.</p>}>
+      {/* Pass accessToken to LandingPageHeader */}
+      <LandingPageHeader loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<AuthPage setLoggedIn={setLoggedIn} />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/shop" element={<ShopProducePage />} />
+      </Routes>
+    </Sentry.ErrorBoundary>
+  );
+};
 
 export default App;

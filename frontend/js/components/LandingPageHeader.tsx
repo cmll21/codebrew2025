@@ -1,19 +1,74 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/LandingPageHeader.css";
 
-const LandingPageHeader = () => {
+const LandingPageHeader = ({ loggedIn, setLoggedIn }: { loggedIn: boolean; setLoggedIn: (loggedIn: boolean) => void }) => {
+  const [userInfo, setUserInfo] = useState<{
+    first_name: string;
+    last_name: string;
+  } | null>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("loggedIn", loggedIn);
+    if (loggedIn) {
+      const accessToken = localStorage.getItem("access_token");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      axios
+        .get("/api/users/me/")
+        .then((res) => setUserInfo(res.data))
+        .catch(() => setUserInfo(null));
+    } else {
+      setUserInfo(null);
+    }
+  }, [loggedIn]);
+
+  const handleLogout = () => {
+    // Clear tokens from localStorage
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    // Clear axios default headers
+    delete axios.defaults.headers.common["Authorization"];
+    // Update logged in state
+    setLoggedIn(false);
+    // Navigate to auth page
+    navigate("/auth");
+  };
+
   return (
     <header className="header-container">
       <div className="nav-left">
-        <a href="#about">About Us</a>
-        <a href="#shop">Shop Produce</a>
+        <Link to="/about">About Us</Link>
+        <Link to="/shop">Shop Produce</Link>
       </div>
 
       <h1 className="landing-page-title">
-        <a href="#">Farmers' Market</a>
+        <Link to="/">Farmers' Market</Link>
       </h1>
 
       <div className="nav-right">
-        <a href="#auth">Log In/Sign Up</a>
+        {loggedIn ? (
+          <div 
+            className="profile-dropdown-container"
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+          >
+            <button className="profile-button">
+              {userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : "Loading..."}
+            </button>
+            {showDropdown && (
+              <div className="profile-dropdown">
+                <button onClick={handleLogout} className="dropdown-item">
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link to="/auth">Log In/Sign Up</Link>
+        )}
         <Link to="/checkout" className="cart-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
