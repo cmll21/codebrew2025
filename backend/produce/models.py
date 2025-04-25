@@ -2,9 +2,16 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from users.models import SupplierProfile
 
+class ProduceCategory(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
 class ProduceType(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='produce/types/', null=True, blank=True)
+    category = models.ForeignKey(ProduceCategory, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return self.name
 
