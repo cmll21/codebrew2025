@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Home.css";
 import "../styles/App.css";
 
-const SeasonalProduceCard = () => {
+const ProduceCard = () => {
   return (
     <div className="seasonal-produce-card">
       <h3 className="seasonal-produce-card-label">ProducePlaceholder</h3>
@@ -10,4 +10,4 @@ const SeasonalProduceCard = () => {
   );
 };
 
-export default SeasonalProduceCard;
+export default ProduceCard;

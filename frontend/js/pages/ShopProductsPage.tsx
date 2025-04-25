@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import ProduceCard from "../components/ProduceCard";
+import "../styles/ShopProduce.css";
 
 type ProduceItem = {
   id: number;
@@ -46,26 +47,20 @@ const ShopProductsPage = () => {
 
   return (
     <div>
-      <h1>Peculiar Produce</h1>
-      <ul>
-        {produceItems.map((item) => (
-          <li key={item.id}>
-            <h3>{item.produce_type.name}</h3>
-            <img
-              src={item.produce_type.image}
-              alt={item.produce_type.name}
-              style={{ width: "200px" }}
-            />
-            <p>
-              Supplier: {item.supplier_profile.user.first_name}{" "}
-              {item.supplier_profile.user.last_name}
-            </p>
-            <p>Weight: {item.weight}kg</p>
-            <p>Price: ${item.price}</p>
-            <p>Quality: {item.quality}</p>
-          </li>
-        ))}
-      </ul>
+      <div className="section-header">
+        <h1 className="section-title">Peculiar Produce</h1>
+        {/* Category filters go here */}
+      </div>
+      <div className="section">
+        <h2 className="section-subtitle">Produce in Season</h2>
+        <div className="produce-grid">
+          <ProduceCard />
+          <ProduceCard />
+          <ProduceCard />
+          <ProduceCard />
+          <ProduceCard />
+        </div>
+      </div>
     </div>
   );
 };
