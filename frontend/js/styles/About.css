@@ -1,15 +1,15 @@
 .about-page-part1 {
-  height: calc(100vh - 128px);
+  height: calc(100vh - 73px);
   flex-shrink: 0;
   align-self: stretch;
 }
 
 .about-page-part2 {
-    height: calc(100vh - 128px);
-    flex-shrink: 0;
-    align-self: stretch;
-    background: var(--Matcha-Green, #B5BD89);
-  }
+  height: calc(100vh - 128px);
+  flex-shrink: 0;
+  align-self: stretch;
+  background: var(--Matcha-Green, #b5bd89);
+}
 
 .about-page-title {
   display: flex;
@@ -20,7 +20,7 @@
   color: var(--Text, #3c3c3b);
   text-align: center;
   font-family: "EB Garamond";
-  font-size: 64px;
+  font-size: 60px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -29,4 +29,26 @@
   justify-content: center;
   align-items: center;
   align-self: stretch;
+}
+
+.about-page-part1-header {
+    transform: scale(0.8);
+    margin-top: -55px;
+    height: 455px;
+}
+
+.about-page-text {
+  color: #000;
+
+  text-align: center;
+  font-family: "EB Garamond";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about-page-text1-box {
+    padding-left: 15%;
+    padding-right: 15%;
 }
