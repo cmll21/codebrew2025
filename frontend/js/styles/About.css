@@ -1,0 +1,32 @@
+.about-page-part1 {
+  height: calc(100vh - 128px);
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.about-page-part2 {
+    height: calc(100vh - 128px);
+    flex-shrink: 0;
+    align-self: stretch;
+    background: var(--Matcha-Green, #B5BD89);
+  }
+
+.about-page-title {
+  display: flex;
+  justify-content: center;
+}
+
+.about-page-header {
+  color: var(--Text, #3c3c3b);
+  text-align: center;
+  font-family: "EB Garamond";
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+}
