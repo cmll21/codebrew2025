@@ -49,20 +49,20 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
         return self.email
 
 # Profiles to store additional fields
-class ConsumerAddress(Address):
+class CustomerAddress(Address):
     nickname = models.CharField(max_length=255)
-    consumer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="consumer_addresses")
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer_address")
     is_primary = models.BooleanField(default=False)
 
 class SupplierAddress(Address):
     supplier = models.ForeignKey(User, on_delete=models.CASCADE, related_name="supplier_addresses")
 
-class ConsumerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="consumer_profile")
+class CustomerProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="customer_profile")
     delivery_address = models.CharField(max_length=255) # TODO need to change to Address model
 
     def __str__(self):
-        return f"ConsumerProfile({self.user.email})"
+        return f"CustomerProfile({self.user.email})"
 
 class SupplierProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="supplier_profile")
@@ -76,6 +76,6 @@ class SupplierProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         if instance.user_type == User.UserType.CONSUMER:
-            ConsumerProfile.objects.create(user=instance)
+            CustomerProfile.objects.create(user=instance)
         elif instance.user_type == User.UserType.SUPPLIER:
             SupplierProfile.objects.create(user=instance)
