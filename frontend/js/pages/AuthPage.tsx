@@ -86,7 +86,9 @@ function AuthPage() {
     <>
       <div className="login-container">
         <div className="left-ty-box">
-        {isLogin ? "Thanks for Helping Us Defeat Food Waste!" : "Help Us Defeat Food Waste!"}
+          {isLogin
+            ? "Thanks for Helping Us Defeat Food Waste!"
+            : "Help Us Defeat Food Waste!"}
         </div>
         <div className="right-box">
           <div className="auth-box">
@@ -95,15 +97,53 @@ function AuthPage() {
             </h2>
             {userInfo && (
               <div>
-                  <strong>Email:</strong>
-                  <span>{userInfo.email}</span>
-                  <strong>User Type:</strong>
-                  <span>{userInfo.user_type}</span>
-                </div>
+                <strong>Email:</strong>
+                <span>{userInfo.email}</span>
+                <strong>User Type:</strong>
+                <span>{userInfo.user_type}</span>
+              </div>
             )}
 
             <form onSubmit={handleSubmit}>
               <div>
+                {!isLogin && (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium">
+                        First Name
+                      </label>
+
+                      <div></div>
+                      <input
+                        type="firstName"
+                        value={form.firstName}
+                        onChange={(e) =>
+                          setForm({ ...form, firstName: e.target.value })
+                        }
+                        required
+                        className="auth-input-field"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium">
+                        Last Name
+                      </label>
+
+                      <div></div>
+                      <input
+                        type="lastName"
+                        value={form.lastName}
+                        onChange={(e) =>
+                          setForm({ ...form, lastName: e.target.value })
+                        }
+                        required
+                        className="auth-input-field"
+                      />
+                    </div>
+                  </>
+                )}
+
                 <label>Email</label>
 
                 <div></div>
@@ -132,65 +172,24 @@ function AuthPage() {
               </div>
 
               {!isLogin && (
-                <>
-                  <div>
-                    <label className="block text-sm font-medium">
-                      First Name
-                    </label>
+                <div>
+                  <select
+                    value={form.userType || ""}
+                    onChange={(e) =>
+                      setForm({ ...form, userType: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  >
+                    <option value="" disabled>
+                      Select User Type
+                    </option>
 
-                    <div></div>
-                    <input
-                      type="firstName"
-                      value={form.firstName}
-                      onChange={(e) =>
-                        setForm({ ...form, firstName: e.target.value })
-                      }
-                      required
-                      className="auth-input-field"
-                    />
-                  </div>
+                    <option value="SUPPLIER">Supplier</option>
 
-                  <div>
-                    <label className="block text-sm font-medium">
-                      Last Name
-                    </label>
-                      
-                    <div></div>
-                    <input
-                      type="lastName"
-                      value={form.lastName}
-                      onChange={(e) =>
-                        setForm({ ...form, lastName: e.target.value })
-                      }
-                      required
-                      className="auth-input-field"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium">
-                      User Type
-                    </label>
-                    <div></div>
-
-                    <select
-                      value={form.userType || ""}
-                      onChange={(e) =>
-                        setForm({ ...form, userType: e.target.value })
-                      }
-                      required
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    >
-                      <option value="" disabled>
-                        Select User Type
-                      </option>
-
-                      <option value="SUPPLIER">Supplier</option>
-
-                      <option value="CUSTOMER">Customer</option>
-                    </select>
-                  </div>
-                </>
+                    <option value="CUSTOMER">Customer</option>
+                  </select>
+                </div>
               )}
 
               <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
