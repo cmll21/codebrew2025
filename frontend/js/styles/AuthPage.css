@@ -38,7 +38,7 @@
 
 .auth-box {
   display: inline-flex;
-  flex-direction:column;
+  flex-direction: column;
   padding: 60px 50px;
   justify-content: center;
   align-items: center;
@@ -57,4 +57,28 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  align-self: stretch;
+}
+
+.auth-input-text {
+  color: var(--Text, #3c3c3b);
+  text-align: center;
+  font-family: "EB Garamond";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.auth-input-field {
+  display: flex;
+  height: 15px;
+  width: 400px;
+  padding: 10px 20px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 10px;
+border: 2px solid var(--Forest-Green, #2D5948);
+background: var(--Background, #F4F1E6);
 }

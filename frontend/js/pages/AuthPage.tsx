@@ -103,21 +103,23 @@ function AuthPage() {
             )}
 
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label className="block text-sm font-medium">Email</label>
+              <div>
+                <label>Email</label>
 
+                <div></div>
                 <input
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="auth-input-field"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium">Password</label>
 
+                <div></div>
                 <input
                   type="password"
                   value={form.password}
@@ -125,7 +127,7 @@ function AuthPage() {
                     setForm({ ...form, password: e.target.value })
                   }
                   required
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="auth-input-field"
                 />
               </div>
 
@@ -136,6 +138,7 @@ function AuthPage() {
                       First Name
                     </label>
 
+                    <div></div>
                     <input
                       type="firstName"
                       value={form.firstName}
@@ -143,7 +146,7 @@ function AuthPage() {
                         setForm({ ...form, firstName: e.target.value })
                       }
                       required
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className="auth-input-field"
                     />
                   </div>
 
@@ -151,7 +154,8 @@ function AuthPage() {
                     <label className="block text-sm font-medium">
                       Last Name
                     </label>
-
+                      
+                    <div></div>
                     <input
                       type="lastName"
                       value={form.lastName}
@@ -159,7 +163,7 @@ function AuthPage() {
                         setForm({ ...form, lastName: e.target.value })
                       }
                       required
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className="auth-input-field"
                     />
                   </div>
 
@@ -167,6 +171,7 @@ function AuthPage() {
                     <label className="block text-sm font-medium">
                       User Type
                     </label>
+                    <div></div>
 
                     <select
                       value={form.userType || ""}
