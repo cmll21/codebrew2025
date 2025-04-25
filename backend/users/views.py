@@ -15,7 +15,21 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     # Optional: use IsAuthenticated instead of AllowAny for protected actions
-    permission_classes = [AllowAny]
+    #permission_classes = [AllowAny]
+    def get_permissions(self):
+        """
+        Override to set specific permissions per action
+        """
+        if self.action == 'create':
+            # Allow anyone to register/create a user
+            permission_classes = [AllowAny]
+        elif self.action == 'list' or self.action == 'retrieve':
+            # For admin/staff to list all users or view a specific user
+            permission_classes = [IsAuthenticated]
+        else:
+            # For editing/deleting, require authentication
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def me(self, request):
@@ -48,3 +62,4 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+    authentication_classes = []

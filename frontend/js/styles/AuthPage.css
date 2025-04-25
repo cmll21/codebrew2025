@@ -77,39 +77,39 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 10px;
-border: 2px solid var(--Forest-Green, #2D5948);
-background: var(--Background, #F4F1E6);
+  border: 2px solid var(--Forest-Green, #2d5948);
+  background: var(--Background, #f4f1e6);
 }
 
 .user-type-container {
-    display: flex;
-    width: 100%;
-    max-width: 460px;
-    height: 30px;
-    border: 2px solid #6a8d5f;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .user-type-button {
-    flex: 1;
-    border: none;
-    background: transparent;
-    font-size: 1.25rem;
-    font-family: "Crimson Pro", serif;
-    font-style: italic;
-    color: #3C3C3B;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0; /* Remove padding */
-    height: 100%; /* Make button take full height */
-    display: flex;
-    align-items: center; /* Center text vertically */
-    justify-content: center; /* Center text horizontally */
-  }
-  
+  display: flex;
+  width: 100%;
+  max-width: 460px;
+  height: 30px;
+  border: 2px solid #6a8d5f;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.user-type-button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  font-family: "Crimson Pro", serif;
+  font-style: italic;
+  color: #3c3c3b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0; /* Remove padding */
+  height: 100%; /* Make button take full height */
+  display: flex;
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+}
+
 /* Set regular font style (non-italic) for selected buttons */
 .user-type-button.selected,
 .user-type-button.supplier-selected {
@@ -136,30 +136,29 @@ background: var(--Background, #F4F1E6);
 }
 
 .auth-button-container {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto; 
-    width: fit-content; 
-    max-width: 100%; 
-    
-    padding: 10px 0;
-  }
-  
-  .button {
-    width: auto;
-    min-width: 100px; 
-    padding: 5px 20px; 
-  }
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 100%;
 
-  .auth-toggle-link {
-    background: none;
-    border: none;
-    padding: 0;
-    color: #2D5948; /* Your forest green color */
-    text-decoration: underline;
-    font-family: inherit;
-    font-size: inherit;
-    cursor: pointer;
-    display: inline; /* Makes it flow like text */
-  }
-  
+  padding: 10px 0;
+}
+
+.button {
+  width: auto;
+  min-width: 100px;
+  padding: 5px 20px;
+}
+
+.auth-toggle-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #2d5948; /* Your forest green color */
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  display: inline; /* Makes it flow like text */
+}

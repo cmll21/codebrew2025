@@ -8,7 +8,7 @@ class OrderAddressSerializer(serializers.ModelSerializer):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
-
+  
     class Meta:
         model = OrderItem
         fields = ['id', 'item', 'price']

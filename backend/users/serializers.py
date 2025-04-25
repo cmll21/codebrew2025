@@ -1,86 +1,25 @@
 from rest_framework import serializers
-from .models import (
-    User,
-    CustomerProfile,
-    SupplierProfile,
-    CustomerAddress,
-    SupplierAddress,
-)
-from common.serializers import AddressSerializer
+from .models import User, CustomerProfile, SupplierProfile
 
 
-class CustomerAddressSerializer(AddressSerializer, serializers.ModelSerializer):
-    class Meta:
-        model = CustomerAddress
-        fields = [
-            "id",
-            "nickname",
-            "is_primary",
-            "street",
-            "city",
-            "state",
-            "country",
-            "postal_code",
-        ]
-
-
-class SupplierAddressSerializer(AddressSerializer, serializers.ModelSerializer):
-    class Meta:
-        model = SupplierAddress
-        fields = [
-            "id",
-            "street",
-            "city",
-            "state",
-            "country",
-            "postal_code",
-        ]
+class AddressFieldsMixin(serializers.Serializer):
+    street = serializers.CharField(max_length=255, allow_blank=True, required=False, default="", allow_null=True)
+    city = serializers.CharField(max_length=100, allow_blank=True, required=False, default="", allow_null=True)
+    state = serializers.CharField(max_length=100, allow_blank=True, required=False, default="", allow_null=True)
+    country = serializers.CharField(max_length=100, allow_blank=True, required=False, default="", allow_null=True)
+    postal_code = serializers.CharField(max_length=20, allow_blank=True, required=False, default="", allow_null=True)
 
 
 class NestedCustomerProfileSerializer(serializers.ModelSerializer):
-    addresses = CustomerAddressSerializer(
-        source="customer_address",
-        many=True,
-        required=False,
-    )
-
     class Meta:
         model = CustomerProfile
-        fields = ["addresses"]
-
-    def validate_addresses(self, value):
-        # Ensure only one address is marked primary
-        primary_count = sum(addr.get('is_primary', False) for addr in value)
-        if primary_count > 1:
-            raise serializers.ValidationError("Only one address can be marked as primary.")
-        return value
-
-    def update(self, instance, validated_data):
-        address_list = validated_data.get('addresses', [])
-        # remove existing addresses and recreate with validated data
-        instance.customer_address.all().delete()
-        for addr in address_list:
-            CustomerAddress.objects.create(customer=instance.user, **addr)
-        return instance
+        fields = ["nickname"]
 
 
 class NestedSupplierProfileSerializer(serializers.ModelSerializer):
-    addresses = SupplierAddressSerializer(
-        source="supplier_addresses",
-        many=True,
-        required=False,
-    )
-
     class Meta:
         model = SupplierProfile
-        fields = ["addresses"]
-
-    def update(self, instance, validated_data):
-        address_list = validated_data.get('addresses', [])
-        instance.supplier_addresses.all().delete()
-        for addr in address_list:
-            SupplierAddress.objects.create(supplier=instance.user, **addr)
-        return instance
+        fields = []
 
 
 class NestedUserSerializer(serializers.ModelSerializer):
@@ -89,7 +28,7 @@ class NestedUserSerializer(serializers.ModelSerializer):
         fields = ["id", "first_name", "last_name", "user_type"]
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(AddressFieldsMixin, serializers.ModelSerializer):
     customer_profile = NestedCustomerProfileSerializer(required=False)
     supplier_profile = NestedSupplierProfileSerializer(required=False)
 
@@ -102,6 +41,11 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "password",
             "user_type",
+            "street",
+            "city",
+            "state",
+            "country",
+            "postal_code",
             "customer_profile",
             "supplier_profile",
         ]
@@ -127,18 +71,20 @@ class UserSerializer(serializers.ModelSerializer):
             NestedSupplierProfileSerializer().update(user.supplier_profile, supp_data)
         return user
 
+
 class CustomerProfileSerializer(serializers.ModelSerializer):
     user = NestedUserSerializer()
 
     class Meta:
         model = CustomerProfile
-        fields = ["user"]
+        fields = ["user", "nickname"]
 
     def update(self, instance, validated_data):
         user_data = validated_data.pop('user', None)
         if user_data:
             NestedUserSerializer().update(instance.user, user_data)
         return super().update(instance, validated_data)
+
 
 class SupplierProfileSerializer(serializers.ModelSerializer):
     user = NestedUserSerializer()

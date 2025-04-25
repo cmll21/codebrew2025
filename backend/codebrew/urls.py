@@ -15,7 +15,7 @@ from users.routes import routes as users_routes
 from produce.routes import routes as produce_routes
 from orders.routes import routes as orders_routes
 
-from users.views import CustomTokenObtainPairView, RegisterView, UserViewSet
+from users.views import CustomTokenObtainPairView, RegisterView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()

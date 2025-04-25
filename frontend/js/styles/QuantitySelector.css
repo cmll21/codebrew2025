@@ -1,0 +1,63 @@
+.quantity-container {
+  display: flex;
+  align-items: center;
+  background-color: #f4f0e8;
+  border-radius: 12px;
+  padding: 8px 16px;
+  margin-left: 20px;
+  width: 150px;
+}
+
+.qty-button {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #3c3c3b;
+  background-color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  color: #3c3c3b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.qty-input-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 0 12px;
+}
+
+.qty-input {
+  width: 60px;
+  font-family: "EB Garamond";
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  text-align: center;
+  -moz-appearance: textfield;
+  padding-right: 1.2em;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-input:focus {
+  outline: none;
+}
+
+.qty-unit {
+  position: absolute;
+  right: 0.4em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #3c3c3b;
+  pointer-events: none;
+}
