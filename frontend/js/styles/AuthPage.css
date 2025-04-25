@@ -32,18 +32,29 @@
   width: 50%;
   height: calc(100vh - 128px);
   background-color: #a5d6a7;
-  justify-content: center;  /* center horizontally */
-  align-items: center;      
+  justify-content: center; /* center horizontally */
+  align-items: center;
 }
 
 .auth-box {
   display: inline-flex;
+  flex-direction:column;
   padding: 60px 50px;
   justify-content: center;
   align-items: center;
   gap: 10px;
 
   border-radius: 10px;
-  background: var(--Card-Background, #E2D7C3);
-  box-shadow: 7px 7px 0px 0px var(--Light-Text, #6A6A67);
+  background: var(--Card-Background, #e2d7c3);
+  box-shadow: 7px 7px 0px 0px var(--Light-Text, #6a6a67);
+}
+
+.auth-box-header {
+  color: var(--Text, #3c3c3b);
+  /* H1 Heading */
+  font-family: "Milky Vintage";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

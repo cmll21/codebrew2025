@@ -86,21 +86,20 @@ function AuthPage() {
     <>
       <div className="login-container">
         <div className="left-ty-box">
-          Thanks for Helping Us Defeat Food Waste!
+        {isLogin ? "Thanks for Helping Us Defeat Food Waste!" : "Help Us Defeat Food Waste!"}
         </div>
         <div className="right-box">
           <div className="auth-box">
-            <h2 className="">{isLogin ? "Welcome Back!" : "Sign Up"}</h2>
+            <h2 className="auth-box-header">
+              {isLogin ? "Welcome Back!" : "Sign Up"}
+            </h2>
             {userInfo && (
-              <div className="bg-green-100 border p-4 rounded mb-4 text-center">
-                <p>
-                  <strong>Email:</strong> {userInfo.email}
-                </p>
-
-                <p>
-                  <strong>User Type:</strong> {userInfo.user_type}
-                </p>
-              </div>
+              <div>
+                  <strong>Email:</strong>
+                  <span>{userInfo.email}</span>
+                  <strong>User Type:</strong>
+                  <span>{userInfo.user_type}</span>
+                </div>
             )}
 
             <form onSubmit={handleSubmit}>
