@@ -28,7 +28,6 @@ const App = () => (
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
-      <Route path="/shop" element={<ShopProducePage />} />
     </Routes>
   </Sentry.ErrorBoundary>
 );
