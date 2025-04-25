@@ -1,7 +1,9 @@
 import AboutPageTitle from "../../assets/images/AboutPageTitle.svg";
 import Carrot from "../../assets/images/Carrot.svg";
 import Apple from "../../assets/images/Apple.svg";
+import Vine from "../../assets/images/Vine.svg";
 import "../styles/About.css";
+import "../styles/AuthPage.css";
 
 function AboutPage() {
   return (
@@ -39,9 +41,24 @@ function AboutPage() {
           <img src={Apple} alt="Right" className="about-page-apple-image" />
         </div>
       </div>
-      <div className="about-page-part2">hi</div>
+      <div className="about-page-part2--three-column-layout">
+        <div className="left-about-box">
+          <div className="about-page-dummy-img"/>
+          Left Content
+        </div>
+        <img src={Vine} alt="Vine" className="center-vine-image" />
+        <div className="right-about-box">Right Content</div>
+      </div>
     </>
   );
 }
 
 export default AboutPage;
+
+<div className="about-page-part2">
+  <div className="left-about-box">Left</div>
+  <div className="right-about-box">
+    <img src={Vine} alt="Left" className="about-page-vine-image" />
+    Right
+  </div>
+</div>;
