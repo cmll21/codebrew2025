@@ -7,6 +7,15 @@ body {
   width: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
 .header-container {
   display: flex;
   height: 96px;
@@ -35,7 +44,8 @@ body {
   width: 250px;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 50px;
+  font-size: 24px;
 }
 
 .nav-right {
@@ -43,7 +53,8 @@ body {
   width: 245.162px;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 50px;
+  font-size: 24px;
 }
 
 .cart-button {
