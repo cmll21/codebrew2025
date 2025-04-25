@@ -10,7 +10,6 @@
   display: flex;
   width: 50%;
   height: calc(100vh - 128px);
-  background-color: #90caf9;
   justify-content: center; /* Horizontal centering */
   align-items: center; /* Vertical centering */
 
@@ -31,7 +30,6 @@
   display: flex;
   width: 50%;
   height: calc(100vh - 128px);
-  background-color: #a5d6a7;
   justify-content: center; /* center horizontally */
   align-items: center;
 }
