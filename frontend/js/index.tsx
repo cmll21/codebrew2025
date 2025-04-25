@@ -1,5 +1,5 @@
 // import pages
-import './App.css';
+import "./styles/App.css";
 import * as Sentry from "@sentry/browser";
 import { createRoot } from "react-dom/client";
 import { HashRouter as Router } from "react-router-dom";
@@ -17,5 +17,5 @@ const root = createRoot(document.getElementById("react-app") as HTMLElement);
 root.render(
   <Router>
     <App />
-  </Router>
+  </Router>,
 );
