@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import ProduceCard from "../components/ProduceCard";
 import "../styles/ShopProduce.css";
 import { Link } from "react-router-dom";
 import ProduceCardCarousel from "../components/ProduceCardCarousel";
@@ -55,23 +54,148 @@ const ShopProducePage = () => {
         <h1 className="section-title">Peculiar Produce</h1>
         {/* Category filters go here */}
       </div>
-      <div className="section">
-        <h2 className="section-subtitle">Produce in Season</h2>
-        <div className="produce-carousel-container">
-        <ProduceCardCarousel
-          produceList={[
-            { name: "Carrot" },
-            { name: "Tomato" },
-            { name: "Potato" },
-            { name: "Eggplant" },
-            { name: "Lettuce" },
-            { name: "Carrot" },
-            { name: "Tomato" },
-            { name: "Potato" },
-            { name: "Eggplant" },
-            { name: "Lettuce" },
-          ]}
-        />
+      <div className="section" style={{ backgroundColor: "#E9B44C" }}>
+        <h2 className="section-subtitle" style={{ color: "#E2D7C3" }}>
+          Produce in Season
+        </h2>
+        <div
+          className="produce-carousel-container"
+          style={{ backgroundColor: "#E9B44C" }}
+        >
+          <ProduceCardCarousel
+            produceList={[
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+            ]}
+          />
+        </div>
+      </div>
+      <div className="section" style={{ backgroundColor: "#E2D7C3" }}>
+        <h2 className="section-subtitle" style={{ color: "#E9B44C" }}>
+          Wonky and Wonderful Vegetables
+        </h2>
+        <div
+          className="produce-carousel-container"
+          style={{ backgroundColor: "#E2D7C3" }}
+        >
+          <ProduceCardCarousel
+            produceList={[
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+            ]}
+          />
+        </div>
+      </div>
+      <div className="section" style={{ backgroundColor: "#F4F1E6" }}>
+        <h2 className="section-subtitle" style={{ color: "#82A36B" }}>
+          Funky and Fresh Fruits
+        </h2>
+        <div
+          className="produce-carousel-container"
+          style={{ backgroundColor: "#F4F1E6" }}
+        >
+          <ProduceCardCarousel
+            produceList={[
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+            ]}
+          />
+        </div>
+      </div>
+      <div className="section" style={{ backgroundColor: "#E2D7C3" }}>
+        <h2 className="section-subtitle" style={{ color: "#82A36B" }}>
+          Wild and Wavy Greens
+        </h2>
+        <div
+          className="produce-carousel-container"
+          style={{ backgroundColor: "#E2D7C3" }}
+        >
+          <ProduceCardCarousel
+            produceList={[
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+            ]}
+          />
+        </div>
+      </div>
+      <div className="section" style={{ backgroundColor: "#F4F1E6" }}>
+        <h2 className="section-subtitle" style={{ color: "#E9B44C" }}>
+          Wild and Whimsical Mushies
+        </h2>
+        <div
+          className="produce-carousel-container"
+          style={{ backgroundColor: "#F4F1E6" }}
+        >
+          <ProduceCardCarousel
+            produceList={[
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+            ]}
+          />
+        </div>
+      </div>
+      <div className="section" style={{ backgroundColor: "#E2D7C3" }}>
+        <h2 className="section-subtitle" style={{ color: "#C87A3F" }}>
+          Lumpy Root Legends
+        </h2>
+        <div
+          className="produce-carousel-container"
+          style={{ backgroundColor: "#E2D7C3" }}
+        >
+          <ProduceCardCarousel
+            produceList={[
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+              { name: "Carrot" },
+              { name: "Tomato" },
+              { name: "Potato" },
+              { name: "Eggplant" },
+              { name: "Lettuce" },
+            ]}
+          />
         </div>
       </div>
     </div>
@@ -80,7 +204,8 @@ const ShopProducePage = () => {
 
 export default ShopProducePage;
 
-{/* <div className="produce-grid">
+{
+  /* <div className="produce-grid">
   <Link key={"carrot"} to={"/produce/carrot"}>
     <ProduceCard name={"Carrot"} />
   </Link>
@@ -88,4 +213,5 @@ export default ShopProducePage;
   <ProduceCard name={"Potato"} />
   <ProduceCard name={"Eggplant"} />
   <ProduceCard name={"Lettuce"} />
-</div>; */}
+</div>; */
+}
