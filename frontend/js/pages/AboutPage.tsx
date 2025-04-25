@@ -1,4 +1,6 @@
 import AboutPageTitle from "../../assets/images/AboutPageTitle.svg";
+import Carrot from "../../assets/images/Carrot.svg";
+import Apple from "../../assets/images/Apple.svg";
 import "../styles/About.css";
 
 function AboutPage() {
@@ -14,7 +16,8 @@ function AboutPage() {
             &nbsp;with Taste
           </div>
         </div>
-        <div className="about-page-text1-box">
+        <div className="about-page-three-column-layout">
+          <img src={Carrot} alt="Left" className="about-page-carrot-image" />
           <p className="about-page-text">
             We’re here to shake things up and we’re not afraid to get a little
             wonky doing it. Every year, Aussie farmers are forced to toss out
@@ -28,7 +31,9 @@ function AboutPage() {
             landfills — and the future of food should be full of flavor,
             fairness, and a little bit of funk.
           </p>
+          <img src={Apple} alt="Right" className="about-page-apple-image" />
         </div>
+
       </div>
       <div className="about-page-part2">hi</div>
     </>
