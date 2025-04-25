@@ -2,6 +2,7 @@ import AboutPageTitle from "../../assets/images/AboutPageTitle.svg";
 import Carrot from "../../assets/images/Carrot.svg";
 import Apple from "../../assets/images/Apple.svg";
 import Vine from "../../assets/images/Vine.svg";
+import Footer from "../../assets/images/Footer.svg";
 import "../styles/About.css";
 import "../styles/AuthPage.css";
 
@@ -88,6 +89,11 @@ function AboutPage() {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="about-page-part3">
+      <img src={Footer} alt="Footer"/>
+      
       </div>
     </>
   );

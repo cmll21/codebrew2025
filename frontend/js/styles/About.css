@@ -190,3 +190,10 @@
 }
 
 
+/* Footer */
+
+.about-page-part3 {
+    height: 700px;
+    flex-shrink: 0;
+    align-self: stretch;
+  }
