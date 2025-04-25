@@ -2,7 +2,7 @@ from datetime import timezone
 from django.core.validators import MinValueValidator
 from django.db import models
 from common.models import Address
-from users.models import CustomerAddress, CustomerProfile
+from users.models import CustomerProfile
 from produce.models import ProduceItem
 
 class OrderStatus(models.TextChoices):
@@ -46,7 +46,7 @@ class Cart(models.Model):
     def get_total_price(self):
         return sum(item.item.cart_item_price for item in self.cart_items.all())
 
-    def checkout(self, delivery_address: CustomerAddress):
+    def checkout(self, delivery_address: Address):
         # Create the order first
         order = Order.objects.create(
             customer=self.customer,

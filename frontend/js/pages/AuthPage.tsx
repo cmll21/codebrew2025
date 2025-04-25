@@ -65,7 +65,7 @@ function AuthPage() {
       lastName: "",
       email: "",
       password: "",
-      userType: "Customer",
+      userType: "CONSUMER",
     });
     setUserInfo(null);
   };
@@ -185,9 +185,9 @@ function AuthPage() {
                       <button
                         type="button"
                         className={`user-type-button ${
-                          form.userType === "Customer" ? "selected" : ""
+                          form.userType === "CONSUMER" ? "selected" : ""
                         }`}
-                        onClick={() => handleUserTypeChange("Customer")}
+                        onClick={() => handleUserTypeChange("CONSUMER")}
                       >
                         Customer
                       </button>
@@ -195,11 +195,11 @@ function AuthPage() {
                       <button
                         type="button"
                         className={`user-type-button ${
-                          form.userType === "Supplier"
+                          form.userType === "SUPPLIER"
                             ? "supplier-selected"
                             : ""
                         }`}
-                        onClick={() => handleUserTypeChange("Supplier")}
+                        onClick={() => handleUserTypeChange("SUPPLIER")}
                       >
                         Supplier
                       </button>

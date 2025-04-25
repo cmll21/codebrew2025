@@ -3,77 +3,58 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from common.models import Address
 
-from common.models import IndexedTimeStampedModel
-
+from common.models import Address, IndexedTimeStampedModel
 from .managers import UserManager
 
 
-class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
-    # UserType choices of consumer and supplier
+class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel, Address):
     class UserType(models.TextChoices):
         CONSUMER = "CONSUMER", _("Consumer")
         SUPPLIER = "SUPPLIER", _("Supplier")
 
-    email = models.EmailField(max_length=255, unique=True)
-    first_name = models.CharField(max_length=255, null=True, blank=True)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
-    password = models.CharField(max_length=255)
-    is_staff = models.BooleanField(
-        default=False, help_text=_("Designates whether the user can log into this admin site.")
-    )
-    is_active = models.BooleanField(
-        default=True,
-        help_text=_(
-            "Designates whether this user should be treated as "
-            "active. Unselect this instead of deleting accounts."
-        ),
-    )
-    # UserType choices
-    user_type = models.CharField(
+    email      = models.EmailField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=255, blank=True, null=True)
+    last_name  = models.CharField(max_length=255, blank=True, null=True)
+    is_staff   = models.BooleanField(default=False)
+    is_active  = models.BooleanField(default=True)
+    user_type  = models.CharField(
         max_length=20, choices=UserType.choices, default=UserType.CONSUMER
     )
 
     objects = UserManager()
-
     USERNAME_FIELD = "email"
 
     def get_full_name(self):
-        return self.first_name + " " + self.last_name
+        return f"{self.first_name} {self.last_name}".strip()
 
     def get_short_name(self):
-        return self.first_name
+        return self.first_name or self.email
 
     def __str__(self):
         return self.email
 
-# Profiles to store additional fields
-class CustomerAddress(Address):
-    nickname = models.CharField(max_length=255)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer_address")
-    is_primary = models.BooleanField(default=False)
-
-class SupplierAddress(Address):
-    supplier = models.ForeignKey(User, on_delete=models.CASCADE, related_name="supplier_addresses")
 
 class CustomerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="customer_profile")
+    user     = models.OneToOneField(User, on_delete=models.CASCADE, related_name="customer_profile")
+    nickname = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f"CustomerProfile({self.user.email})"
+        return f"{self.user.email} (Customer)"
+
 
 class SupplierProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="supplier_profile")
 
     def __str__(self):
-        return f"SupplierProfile({self.user.email})"
+        return f"{self.user.email} (Supplier)"
 
-# Signals to auto-create profile when user is created
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        if instance.user_type == User.UserType.CONSUMER:
-            CustomerProfile.objects.create(user=instance)
-        elif instance.user_type == User.UserType.SUPPLIER:
-            SupplierProfile.objects.create(user=instance)
+    if not created:
+        return
+    if instance.user_type == User.UserType.CONSUMER:
+        CustomerProfile.objects.create(user=instance)
+    else:
+        SupplierProfile.objects.create(user=instance)
