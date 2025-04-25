@@ -3,8 +3,7 @@ import { RestService } from "../api";
 import "../styles/Home.css";
 import Carousel from "../components/Carousel";
 import SeasonalProduceHeader from "../components/SeasonalProduceHeader";
-import ProductCard from "../components/ProductCard";
-import SeasonalProduceCard from "../components/SeasonalProduceCard";
+import ProduceCard from "../components/ProduceCard";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -24,11 +23,11 @@ const Home = () => {
       <div className="seasonal-produce-section">
         <SeasonalProduceHeader />
         <div className="seasonal-produce-grid">
-          <SeasonalProduceCard />
-          <SeasonalProduceCard />
-          <SeasonalProduceCard />
-          <SeasonalProduceCard />
-          <SeasonalProduceCard />
+          <ProduceCard />
+          <ProduceCard />
+          <ProduceCard />
+          <ProduceCard />
+          <ProduceCard />
         </div>
       </div>
 
