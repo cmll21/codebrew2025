@@ -152,3 +152,16 @@ background: var(--Background, #F4F1E6);
     min-width: 100px; 
     padding: 5px 20px; 
   }
+
+  .auth-toggle-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2D5948; /* Your forest green color */
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    display: inline; /* Makes it flow like text */
+  }
+  

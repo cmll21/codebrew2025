@@ -181,41 +181,43 @@ function AuthPage() {
 
               {!isLogin && (
                 <div>
-                  
-            <div className="form-group">
-              <div className="user-type-container">
-                <button
-                  type="button"
-                  className={`user-type-button ${
-                    form.userType === "Customer" ? "selected" : ""
-                  }`}
-                  onClick={() => handleUserTypeChange("Customer")}
-                >
-                  Customer
-                </button>
+                  <div className="form-group">
+                    <div className="user-type-container">
+                      <button
+                        type="button"
+                        className={`user-type-button ${
+                          form.userType === "Customer" ? "selected" : ""
+                        }`}
+                        onClick={() => handleUserTypeChange("Customer")}
+                      >
+                        Customer
+                      </button>
 
-                <button
-                  type="button"
-                  className={`user-type-button ${
-                    form.userType === "Supplier" ? "supplier-selected" : ""
-                  }`}
-                  onClick={() => handleUserTypeChange("Supplier")}
-                >
-                  Supplier
-                </button>
-              </div>
-            </div>
+                      <button
+                        type="button"
+                        className={`user-type-button ${
+                          form.userType === "Supplier"
+                            ? "supplier-selected"
+                            : ""
+                        }`}
+                        onClick={() => handleUserTypeChange("Supplier")}
+                      >
+                        Supplier
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
               <div className="auth-button-container">
-              <Button className= "button" type="submit">{isLogin ? "Log In" : "Sign Up"}</Button>
+                <Button className="button" type="submit">
+                  {isLogin ? "Log In" : "Sign Up"}
+                </Button>
               </div>
-              
             </form>
 
             <p className="text-sm text-center mt-4">
               {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-              <button onClick={toggleMode}>
+              <button onClick={toggleMode} className="auth-toggle-link">
                 {isLogin ? "Sign Up here." : "Log In here."}
               </button>
             </p>
