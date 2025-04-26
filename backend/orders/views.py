@@ -57,7 +57,4 @@ class CartItemViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-    
-
-
-
+  
