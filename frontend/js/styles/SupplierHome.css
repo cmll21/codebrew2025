@@ -17,6 +17,14 @@
   text-align: center;
 }
 
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap */
+  gap: 15px; /* Your desired spacing */
+  align-items: center; 
+  justify-content: center;
+}
+
 .wrap-filter-buttons {
   display: flex;
   gap: 0.5rem;
