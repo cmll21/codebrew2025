@@ -10,7 +10,7 @@ type Category = {
   name: string;
 };
 
-type ProduceItem = {
+export type ProduceItem = {
   id: number;
   produce_type: {
     id: number;
