@@ -63,6 +63,23 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
     }
   };
 
+  const handleRemoveProduct = async (productId: number) => {
+    try {
+      const accessToken = localStorage.getItem('access_token');
+      await axios.delete(`/api/produce/items/${productId}/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      
+      // Update the products list by removing the deleted product
+      setProducts(products.filter(product => product.id !== productId));
+      setAllProducts(allProducts.filter(product => product.id !== productId));
+    } catch (error) {
+      console.error('Error removing product:', error);
+    }
+  };
+
   useEffect(() => {
     if (userInfo) {
       fetchProducts();
@@ -84,6 +101,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
               name={`${product.species} ${product.produce_type.name}`}
               image={product.produce_type.image}
               cardColour="beige"
+              onRemove={() => handleRemoveProduct(product.id)}
             />
             <div className="product-info">
               <p>Weight: {product.weight}kg</p>

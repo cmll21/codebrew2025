@@ -9,6 +9,7 @@ export type ProduceCardProps = {
   name: string;
   image?: string;
   cardColour: string;
+  onRemove?: () => void;
 };
 
 const ProduceCard = (props: ProduceCardProps) => {
@@ -32,6 +33,17 @@ const ProduceCard = (props: ProduceCardProps) => {
         <h3 className="seasonal-produce-card-label">
           {toTitleCase(props.name) || "ProducePlaceholder"}
         </h3>
+        {props.onRemove && (
+          <div className="produce-card-overlay">
+            <button className="remove-button" onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              props.onRemove?.();
+            }}>
+              ×
+            </button>
+          </div>
+        )}
       </div>
     </Link>
   );
