@@ -1,4 +1,4 @@
-import "../styles/ProductCard.css";
+import "../styles/Card.css";
 
 const ProductImageWrapper = () => {
   return <div className="productImage"></div>;
