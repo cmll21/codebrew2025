@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import Item, ProduceItem
 from .models import Order, OrderItem, Cart, CartItem, OrderAddress
 
 class OrderAddressSerializer(serializers.ModelSerializer):
@@ -30,8 +31,22 @@ class OrderSerializer(serializers.ModelSerializer):
                   'status', 
                   'order_items'
                   ]
+
+class ProduceItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProduceItem
+        fields = '__all__'
+
+class ItemSerializer(serializers.ModelSerializer):
+    produce_item = ProduceItemSerializer()
+
+    class Meta:
+        model = Item
+        fields = '__all__'
         
 class CartItemSerializer(serializers.ModelSerializer):
+    item = ItemSerializer()
+
     class Meta:
         model = CartItem
         fields = ['id', 'item']
