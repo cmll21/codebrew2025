@@ -13,6 +13,13 @@ import Instruction2Sticker from "../../assets/images/instruction2.png";
 import Instruction3Sticker from "../../assets/images/instruction3.png";
 import InstructionBackground from "../../assets/images/instruction-background.png";
 import { useNavigate } from "react-router-dom";
+
+import LandingPageGraphic from "../../assets/images/LandingPageGraphic.png";
+import Instruction1Graphic from "../../assets/images/Instruction1Graphic.png";
+import Instruction2Graphic from "../../assets/images/Instruction2Graphic.png";
+import Instruction3Graphic from "../../assets/images/Instruction3Graphic.png";
+import LandingPageImage from "../../assets/images/LandingPageImage.png";
+
 import { CURR_SEASON } from "./ShopProducePage";
 import { ProduceType } from "./ShopProducePage";
 
@@ -45,7 +52,9 @@ const LandingPage = () => {
         <h1 className="landing-page-heading">
           Funky, Fresh and Proudly Aussie.
         </h1>
-        <div className="landing-page-part1-image"></div>
+        <div className="landing-page-part1-image">
+          <img src={LandingPageGraphic} />
+        </div>
         <div className="part1-text-container">
           <p className="landing-page-body-text">
             Join us in saving{" "}
@@ -94,9 +103,18 @@ const LandingPage = () => {
           <img src={Instruction2Sticker} className="instruction2-sticker" />
           <img src={Instruction3Sticker} className="instruction3-sticker" />
           <div className="instructions-container">
-            <InstructionCard text={"Pick your favourite funky fruit & veg"} />
-            <InstructionCard text={"Add your favourites into your cart"} />
-            <InstructionCard text={"Get it delivered or pick up nearby"} />
+            <InstructionCard
+              text={"Pick your favourite funky fruit & veg"}
+              image={Instruction1Graphic}
+            />
+            <InstructionCard
+              text={"Add your favourites into your cart"}
+              image={Instruction2Graphic}
+            />
+            <InstructionCard
+              text={"Get it delivered or pick up nearby"}
+              image={Instruction3Graphic}
+            />
           </div>
         </div>
         <img src={InstructionBackground} className="instruction-background" />
@@ -126,7 +144,17 @@ const LandingPage = () => {
           </p>
         </div>
         <div className="right-section">
-          <div className="landing-page-part2-image"></div>
+          <div className="landing-page-part2-image">
+            <img
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+              src={LandingPageImage}
+            />
+          </div>
         </div>
       </div>
     </div>
