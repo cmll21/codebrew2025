@@ -3,7 +3,7 @@ import "../styles/Checkout.css";
 import CheckoutItem from "../components/CheckoutItem";
 import Button from "../components/Button";
 import CheckoutButton from "../components/CheckoutButton";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
 type User = {
@@ -137,9 +137,9 @@ function CheckoutPage() {
     });
   };
 
-  const cartTotal = itemTotals
-    .reduce((acc, item) => acc + item.price, 0)
-    .toFixed(2);
+  const cartTotal = useMemo(() => {
+    return itemTotals.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+  }, [itemTotals]);
 
   const handleRemove = async (cartItemId: number) => {
     try {
@@ -189,7 +189,7 @@ function CheckoutPage() {
                       weight={cartItem.item.produce_item.weight}
                       itemImage={cartItem.item.produce_item.item_image || ""}
                       onPriceChange={(price) =>
-                        updateItemTotal(cartItem.item.produce_item.id, price)
+                        updateItemTotal(cartItem.id, price)
                       }
                       onRemove={() => handleRemove(cartItem.id)}
                     />
