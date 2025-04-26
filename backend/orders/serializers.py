@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Item, ProduceItem
 from .models import Order, OrderItem, Cart, CartItem, OrderAddress
+from produce.serializers import ProduceItemSerializer
 
 class OrderAddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,7 +10,7 @@ class OrderAddressSerializer(serializers.ModelSerializer):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
-  
+
     class Meta:
         model = OrderItem
         fields = ['id', 'item', 'price']
@@ -23,19 +24,14 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 
-                  'customer', 
-                  'delivery_address', 
-                  'order_date', 
-                  'total_price', 
-                  'status', 
+        fields = ['id',
+                  'customer',
+                  'delivery_address',
+                  'order_date',
+                  'total_price',
+                  'status',
                   'order_items'
                   ]
-
-class ProduceItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProduceItem
-        fields = '__all__'
 
 class ItemSerializer(serializers.ModelSerializer):
     produce_item = ProduceItemSerializer()
@@ -43,7 +39,7 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = '__all__'
-        
+
 class CartItemSerializer(serializers.ModelSerializer):
     item = ItemSerializer()
 
