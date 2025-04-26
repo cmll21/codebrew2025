@@ -1,6 +1,11 @@
 from drf_spectacular.utils import extend_schema_serializer, extend_schema_field
 from rest_framework import serializers
-from .models import Order, OrderItem, Cart, CartItem, OrderAddress
+from .models import Order, OrderItem, Cart, CartItem, OrderAddress, Item
+
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = ['id', 'produce_item', 'cart_item_weight', 'cart_item_price']
 
 class OrderAddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,6 +39,8 @@ class OrderSerializer(serializers.ModelSerializer):
                   ]
 
 class CartItemSerializer(serializers.ModelSerializer):
+    item = ItemSerializer(read_only=True)
+
     class Meta:
         model = CartItem
         fields = ['id', 'item']
