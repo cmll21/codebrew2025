@@ -1,8 +1,4 @@
-import React from "react";
-
-import ProductImageWrapper from "./ProductImageWrapper";
 import PriceDropdown from "./PriceDropdown";
-import Button from "./Button";
 import LightButton from "./LightButton";
 import "../styles/Card.css";
 import Carrot from "../../assets/images/Carrot.svg";

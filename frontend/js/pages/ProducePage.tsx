@@ -100,13 +100,17 @@ const ProducePage = ({ categories }: ProducePageProps) => {
       </div>
 
       <div className="product-card-boxes">
-      <div className="grid-container">
-        {products.map((product, index) => (
-          <div key={index} className="product-details">
-            <ProductCard />
-          </div>
-        ))}
-      </div>
+        <div className="grid-container">
+          {allProducts.map((product, index) => (
+            <div key={index} className="product-details">
+              <ProductCard
+                name={product.produce_type.name}
+                image={product.produce_type.image}
+                cardColour="beige"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
