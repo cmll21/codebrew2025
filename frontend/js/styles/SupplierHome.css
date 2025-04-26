@@ -54,12 +54,24 @@
   border-radius: 20px;
   cursor: pointer;
   color: #3C3C3B;
+  transition: all 0.2s ease;
+}
+
+.filter-buttons button:hover {
+  background-color: #E5E5E1;
+}
+
+.filter-buttons button.active {
+  background-color: #C4946A;
+  color: white;
 }
 
 .filter-buttons input {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   border: 1px solid #C4946A;
+  flex-grow: 1;
+  max-width: 200px;
 }
 
 .products-grid {

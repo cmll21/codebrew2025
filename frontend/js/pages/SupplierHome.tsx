@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import '../styles/SupplierHome.css';
 import axios from 'axios';
 import ProduceCard from '../components/ProduceCard';
+import AddItemForm from '../components/AddItemForm';
 
 type ProduceItem = {
   id: number;
@@ -12,6 +13,7 @@ type ProduceItem = {
     category: string;
   };
   supplier_profile: {
+    id: number;
     user: {
       id: number;
       first_name: string;
@@ -24,6 +26,10 @@ type ProduceItem = {
   created_time: string;
   expiry_time: string;
   quality: string;
+};
+
+type SupplierHomeProps = {
+  userInfo: any;
 };
 
 const StoreProfile = () => {
@@ -40,8 +46,23 @@ const StoreProfile = () => {
   );
 };
 
-const StoreFront = () => {
+const StoreFront = ({ userInfo }: { userInfo: any }) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
+  const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedQualities, setSelectedQualities] = useState<string[]>([]);
+  const [priceSort, setPriceSort] = useState<'asc' | 'desc' | null>(null);
+
+  const categories = [
+    'Vegetables',
+    'Fruits',
+    'Mushrooms',
+    'Herbs & Greens',
+    'Roots & Tubers',
+    'Grains & Legumes'
+  ];
+
+  const qualities = ['Value', 'Select', 'Premium'];
 
   const fetchProducts = async () => {
     try {
@@ -51,31 +72,107 @@ const StoreFront = () => {
           Authorization: `Bearer ${accessToken}`
         }
       });
-      setProducts(response.data.results || response.data);
+      
+      const supplierProducts = response.data.results.filter(
+        (product: ProduceItem) => product.supplier_profile.id === userInfo?.id
+      );
+      setAllProducts(supplierProducts);
+      setProducts(supplierProducts);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
   };
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    if (userInfo) {
+      fetchProducts();
+    }
+  }, [userInfo]);
+
+  useEffect(() => {
+    let filteredProducts = [...allProducts];
+
+    // Apply category filters
+    if (selectedCategories.length > 0) {
+      console.log('Selected categories:', selectedCategories);
+      console.log('Products before category filter:', filteredProducts);
+      filteredProducts = filteredProducts.filter(product => 
+        selectedCategories.includes(product.produce_type.category)
+      );
+      console.log('Products after category filter:', filteredProducts);
+    }
+
+    // Apply quality filters
+    if (selectedQualities.length > 0) {
+      filteredProducts = filteredProducts.filter(product => 
+        selectedQualities.includes(product.quality)
+      );
+    }
+
+    // Apply price sorting
+    if (priceSort) {
+      filteredProducts.sort((a, b) => {
+        return priceSort === 'asc' ? a.price - b.price : b.price - a.price;
+      });
+    }
+
+    setProducts(filteredProducts);
+  }, [selectedCategories, selectedQualities, priceSort, allProducts]);
+
+  const toggleCategory = (category: string) => {
+    setSelectedCategories(prev => 
+      prev.includes(category)
+        ? prev.filter(c => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  const toggleQuality = (quality: string) => {
+    setSelectedQualities(prev => 
+      prev.includes(quality)
+        ? prev.filter(q => q !== quality)
+        : [...prev, quality]
+    );
+  };
+
+  const handlePriceSort = (order: 'asc' | 'desc') => {
+    setPriceSort(prev => prev === order ? null : order);
+  };
 
   return (
     <div className="storefront-section">
       <h1 className="storefront-title">Your StoreFront</h1>
       <div className="filter-buttons">
-        <button>Vegetables</button>
-        <button>Fruits</button>
-        <button>Mushrooms</button>
-        <button>Herbs & Greens</button>
-        <button>Roots & Tubers</button>
-        <button>Grains & Legumes</button>
-        <button>Value</button>
-        <button>Select</button>
-        <button>Premium</button>
-        <button>Ascending Price</button>
-        <button>Descending Price</button>
+        {categories.map(category => (
+          <button
+            key={category}
+            className={selectedCategories.includes(category) ? 'active' : ''}
+            onClick={() => toggleCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+        {qualities.map(quality => (
+          <button
+            key={quality}
+            className={selectedQualities.includes(quality.toLowerCase()) ? 'active' : ''}
+            onClick={() => toggleQuality(quality.toLowerCase())}
+          >
+            {quality}
+          </button>
+        ))}
+        <button
+          className={priceSort === 'asc' ? 'active' : ''}
+          onClick={() => handlePriceSort('asc')}
+        >
+          Ascending Price
+        </button>
+        <button
+          className={priceSort === 'desc' ? 'active' : ''}
+          onClick={() => handlePriceSort('desc')}
+        >
+          Descending Price
+        </button>
         <input type="text" placeholder="Search" />
       </div>
       
@@ -98,225 +195,8 @@ const StoreFront = () => {
   );
 };
 
-const AddItemForm = ({ userInfo, onItemAdded }: { userInfo: any; onItemAdded: () => void }) => {
-  const initialFormState = {
-    weight: 0,
-    price: 0,
-    quality: 'Value',
-    produce_type: {
-      id: 0,
-      name: '',
-      image: '',
-      category: ''
-    }
-  };
-
-  const [newItem, setNewItem] = useState<Partial<ProduceItem>>(initialFormState);
-  const [imageFile, setImageFile] = useState<File | null>(null);
-
-  const productCategories = [
-    'Vegetables',
-    'Fruits',
-    'Mushrooms',
-    'Herbs & Greens',
-    'Roots & Tubers',
-    'Grains & Legumes'
-  ];
-
-  const qualityLevels = ['Value', 'Select', 'Premium'];
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    try {
-      const accessToken = localStorage.getItem('access_token');
-      if (!accessToken) {
-        throw new Error('No access token found');
-      }
-
-      const headers = {
-        Authorization: `Bearer ${accessToken}`
-      };
-      
-      const produceTypeFormData = new FormData();
-      
-      produceTypeFormData.append('name', newItem.produce_type?.name || '');
-      produceTypeFormData.append('category', '1'); // ← replace with a valid ProduceCategory ID
-      produceTypeFormData.append('season', 'spring');
-      if (imageFile) {
-        produceTypeFormData.append('image', imageFile);
-      }
-
-      // First, create a new ProduceType with the image
-      const produceTypeResponse = await axios.post('/api/produce/types/', produceTypeFormData, {
-        headers: {
-          ...headers,
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      console.log('ProduceType created:', produceTypeResponse.data);
-
-      // Then create the ProduceItem using the new ProduceType
-      const produceItemResponse = await axios.post('/api/produce/items/', {
-        produce_type_id: produceTypeResponse.data.id,
-        supplier_profile_id: userInfo.id,
-        weight: newItem.weight,
-        price: newItem.price,
-        quality: newItem.quality?.toLowerCase() // backend expects lowercase
-      }, {
-        headers
-      });
-
-      console.log('ProduceItem created:', produceItemResponse.data);
-
-      // Reset form after successful submission
-      setNewItem(initialFormState);
-      setImageFile(null);
-      
-      // Clear the file input
-      const fileInput = document.getElementById('image-upload') as HTMLInputElement;
-      if (fileInput) {
-        fileInput.value = '';
-      }
-
-      alert('Item added successfully!');
-      onItemAdded();
-    } catch (error: any) {
-      console.error('Error creating produce item:', error.response?.data || error.message);
-      alert('Failed to add item. Please try again.');
-    }
-  };
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setImageFile(file);
-      // Create a preview URL for the image
-      setNewItem({
-        ...newItem,
-        produce_type: {
-          ...newItem.produce_type!,
-          image: URL.createObjectURL(file)
-        }
-      });
-    }
-  };
-
-  return (
-    <div className="add-item-form">
-      <h3>Add Item</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            value={newItem.produce_type?.name || ''}
-            onChange={(e) => setNewItem({
-              ...newItem,
-              produce_type: {
-                ...newItem.produce_type!,
-                name: e.target.value
-              }
-            })}
-            placeholder="Heirloom Tomato"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Product Category</label>
-          <select 
-            value={newItem.produce_type?.category || ''}
-            onChange={(e) => setNewItem({
-              ...newItem,
-              produce_type: {
-                ...newItem.produce_type!,
-                category: e.target.value
-              }
-            })}
-            className="form-select"
-          >
-            <option value="" disabled>Select a category</option>
-            {productCategories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Product Quality</label>
-          <select
-            value={newItem.quality || 'Value'}
-            onChange={(e) => setNewItem({
-              ...newItem,
-              quality: e.target.value
-            })}
-            className="form-select"
-          >
-            {qualityLevels.map((quality) => (
-              <option key={quality} value={quality}>
-                {quality}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Weight (kg)</label>
-          <input
-            type="number"
-            value={newItem.weight || ''}
-            onChange={(e) => setNewItem({
-              ...newItem,
-              weight: parseFloat(e.target.value)
-            })}
-            placeholder="100"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Selling Price ($/kg)</label>
-          <input
-            type="number"
-            value={newItem.price || ''}
-            onChange={(e) => setNewItem({
-              ...newItem,
-              price: parseFloat(e.target.value)
-            })}
-            placeholder="20"
-          />
-        </div>
-
-        <div className="image-upload">
-          <input
-            type="file"
-            id="image-upload"
-            hidden
-            onChange={handleImageUpload}
-            accept="image/*"
-          />
-          <label htmlFor="image-upload" className="button">Select Image</label>
-          <button type="submit">Add Item</button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-const SupplierHome = () => {
-  const [userInfo, setUserInfo] = useState<any>(null);
+const SupplierHome = ({ userInfo }: SupplierHomeProps) => {
   const [shouldRefresh, setShouldRefresh] = useState(0);
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
-    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-    axios
-      .get("/api/users/me/")
-      .then((res) => setUserInfo(res.data))
-      .catch(() => setUserInfo(null));
-  }, []);
 
   const handleItemAdded = () => {
     setShouldRefresh(prev => prev + 1);
@@ -325,7 +205,7 @@ const SupplierHome = () => {
   return (
     <div className="supplier-home">
       <StoreProfile />
-      <StoreFront key={shouldRefresh} />
+      <StoreFront userInfo={userInfo} key={shouldRefresh} />
       <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} />
     </div>
   );

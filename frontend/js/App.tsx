@@ -25,24 +25,24 @@ OpenAPI.interceptors.request.use((request) => {
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userType, setUserType] = useState<'CONSUMER' | 'SUPPLIER' | null>(null);
+  const [userInfo, setUserInfo] = useState<any>(null);
 
   useEffect(() => {
     if (loggedIn) {
       const accessToken = localStorage.getItem("access_token");
       if (accessToken) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-        // Fetch user type from backend
+        // Fetch user info from backend
         axios.get("/api/users/me/")
           .then((res) => {
-            setUserType(res.data.user_type);
+            setUserInfo(res.data);
           })
           .catch(() => {
-            setUserType(null);
+            setUserInfo(null);
           });
       }
     } else {
-      setUserType(null);
+      setUserInfo(null);
     }
   }, [loggedIn]);
 
@@ -51,12 +51,12 @@ const App = () => {
       <LandingPageHeader 
         loggedIn={loggedIn} 
         setLoggedIn={setLoggedIn}
-        userType={userType}
+        userType={userInfo?.user_type}
       />
       
       <Routes>
         <Route path="/" element={
-          userType === 'SUPPLIER' ? <SupplierHome /> : <Home />
+          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} /> : <Home />
         } />
         <Route path="/auth" element={<AuthPage setLoggedIn={setLoggedIn} />} />
         <Route path="/about" element={<AboutPage />} />
