@@ -46,24 +46,23 @@ class Cart(models.Model):
     def get_total_price(self) -> float:
         return sum(item.item.cart_item_price for item in self.cart_items.all())
 
-    def checkout(self, delivery_address: Address):
+    def checkout(self):
         # Create the order first
         order = Order.objects.create(
             customer=self.customer,
-            order_date=timezone.now(),
             total_price=self.get_total_price(),
             status=OrderStatus.CONFIRMED
         )
 
         # Create the OrderAddress by copying fields from CustomerAddress
-        OrderAddress.objects.create(
-            order=order,
-            street=delivery_address.street,
-            city=delivery_address.city,
-            state=delivery_address.state,
-            country=delivery_address.country,
-            postal_code=delivery_address.postal_code
-        )
+        # OrderAddress.objects.create(
+        #     order=order,
+        #     street=delivery_address.street,
+        #     city=delivery_address.city,
+        #     state=delivery_address.state,
+        #     country=delivery_address.country,
+        #     postal_code=delivery_address.postal_code
+        # )
 
         # Move items from cart to order
         for cart_item in self.cart_items.all():

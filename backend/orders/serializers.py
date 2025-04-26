@@ -1,11 +1,6 @@
-from drf_spectacular.utils import extend_schema_serializer, extend_schema_field
 from rest_framework import serializers
-from .models import Order, OrderItem, Cart, CartItem, OrderAddress, Item
-
-class ItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Item
-        fields = ['id', 'produce_item', 'cart_item_weight', 'cart_item_price']
+from .models import Item, ProduceItem
+from .models import Order, OrderItem, Cart, CartItem, OrderAddress
 
 class OrderAddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,13 +9,12 @@ class OrderAddressSerializer(serializers.ModelSerializer):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
-
+  
     class Meta:
         model = OrderItem
         fields = ['id', 'item', 'price']
 
-    @extend_schema_field(serializers.FloatField)
-    def get_price(self, obj) -> float:
+    def get_price(self, obj):
         return obj.item.cart_item_price
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -29,17 +23,29 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id',
-                  'customer',
-                  'delivery_address',
-                  'order_date',
-                  'total_price',
-                  'status',
+        fields = ['id', 
+                  'customer', 
+                  'delivery_address', 
+                  'order_date', 
+                  'total_price', 
+                  'status', 
                   'order_items'
                   ]
 
+class ProduceItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProduceItem
+        fields = '__all__'
+
+class ItemSerializer(serializers.ModelSerializer):
+    produce_item = ProduceItemSerializer()
+
+    class Meta:
+        model = Item
+        fields = '__all__'
+        
 class CartItemSerializer(serializers.ModelSerializer):
-    item = ItemSerializer(read_only=True)
+    item = ItemSerializer()
 
     class Meta:
         model = CartItem
