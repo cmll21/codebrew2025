@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import "../styles/ShopProduce.css";
 import ProduceCardCarousel from "../components/ProduceCardCarousel";
@@ -31,16 +32,10 @@ const ShopProducePage = () => {
   const [categoryMap, setCategoryMap] = useState<Map<number, string>>(new Map());
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/produce/types/")
+    axios.get("/api/produce/types/")
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch items");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Fetched produce data:", data.results);
-        setProduceItems(data.results);
+        console.log("Fetched produce data:", response.data.results);
+        setProduceItems(response.data.results);
       })
       .catch((error) => {
         console.error("Error fetching items:", error);
@@ -49,12 +44,11 @@ const ShopProducePage = () => {
 
   // API Call to finding the categories by ID
   useEffect(() => {
-    fetch("http://localhost:8000/api/produce/categories/")
-      .then((response) => response.json())
-      .then((data) => {
-        const newCategories = data.results;
+    axios.get("/api/produce/categories/")
+      .then((response) => {
+        const newCategories = response.data.results;
         setCategories(newCategories);
-        
+        console.log("Fetched categories:", newCategories);
         // Build the map from the fresh data
         const newMap = new Map<number, string>();
         newCategories.forEach((category: Category) => {
