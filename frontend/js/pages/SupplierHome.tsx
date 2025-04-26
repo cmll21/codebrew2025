@@ -38,20 +38,6 @@ type SupplierHomeProps = {
   categories: Category[];
 };
 
-const StoreProfile = () => {
-  return (
-    <div className="store-profile">
-      <h2>Store Front Name</h2>
-      <p>Joined in 2025</p>
-      <div className="store-stats">
-        <p>Produce Saved: 1000000 kg</p>
-        <p>Water Saved: 10000 L</p>
-        <p>Fule Saved: 10000 L</p>
-      </div>
-    </div>
-  );
-};
-
 const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Category[] }) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
@@ -199,7 +185,6 @@ const SupplierHome = ({ userInfo, categories }: SupplierHomeProps) => {
 
   return (
     <div className="supplier-home">
-      <StoreProfile />
       <StoreFront userInfo={userInfo} categories={categories} key={shouldRefresh} />
       <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} categories={categories} />
     </div>
