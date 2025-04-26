@@ -243,7 +243,7 @@ function CheckoutPage() {
                 <CheckoutButton
                   amount={Number(cartTotal)}
                   cartName="Goat basket"
-                  cartId={1}
+                  cartId="1"
                 />
               </div>
             </div>
