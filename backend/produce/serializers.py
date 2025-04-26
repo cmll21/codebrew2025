@@ -28,6 +28,7 @@ class ProduceItemSerializer(serializers.ModelSerializer):
         model = ProduceItem
         fields = [
             'id',
+            'species',
             'produce_type', 'produce_type_id',
             'supplier_profile', 'supplier_profile_id',
             'weight',

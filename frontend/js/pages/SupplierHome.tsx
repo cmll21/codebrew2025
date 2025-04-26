@@ -18,6 +18,7 @@ type ProduceItem = {
     image: string;
     category: number;
   };
+  species: string;
   supplier_profile: {
     id: number;
     user: {
@@ -80,7 +81,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
         {products.map((product) => (
           <div key={product.id} className="product-details">
             <ProduceCard
-              name={product.produce_type.name}
+              name={`${product.species} ${product.produce_type.name}`}
               image={product.produce_type.image}
               cardColour="beige"
             />

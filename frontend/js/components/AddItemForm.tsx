@@ -14,6 +14,7 @@ type ProduceItem = {
     image: string;
     category: number;
   };
+  species: string;
   supplier_profile: {
     id: number;
     user: {
@@ -41,6 +42,7 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
     weight: 0,
     price: 0,
     quality: 'Value',
+    species: '',
     produce_type: {
       id: 0,
       name: '',
@@ -89,6 +91,7 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
       const produceItemResponse = await axios.post('/api/produce/items/', {
         produce_type_id: produceTypeResponse.data.id,
         supplier_profile_id: userInfo.id,
+        species: newItem.species,
         weight: newItem.weight,
         price: newItem.price,
         quality: newItem.quality?.toLowerCase() // backend expects lowercase
@@ -145,7 +148,20 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
                 name: e.target.value
               }
             })}
-            placeholder="Heirloom Tomato"
+            placeholder="Tomato"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Species</label>
+          <input
+            type="text"
+            value={newItem.species || ''}
+            onChange={(e) => setNewItem({
+              ...newItem,
+              species: e.target.value
+            })}
+            placeholder="Truss"
           />
         </div>
 
