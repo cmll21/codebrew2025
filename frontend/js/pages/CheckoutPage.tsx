@@ -204,6 +204,9 @@ function CheckoutPage() {
 
             <div className="payment-form-container">
               <label>First Name</label>
+              <input style={{ width: "100%" }} type="text" placeholder="Mary" />
+
+              <label>Last Name</label>
               <input
                 style={{ width: "100%" }}
                 type="text"
@@ -240,6 +243,7 @@ function CheckoutPage() {
                 <CheckoutButton
                   amount={Number(cartTotal)}
                   cartName="Goat basket"
+                  cartId={1}
                 />
               </div>
             </div>
