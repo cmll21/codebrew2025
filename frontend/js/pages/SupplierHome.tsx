@@ -69,7 +69,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
           Authorization: `Bearer ${accessToken}`
         }
       });
-      
+
       const supplierProducts = response.data.results.filter(
         (product: ProduceItem) => product.supplier_profile.id === userInfo?.id
       );
@@ -98,7 +98,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
 
     // Apply quality filters
     if (selectedQualities.length > 0) {
-      filteredProducts = filteredProducts.filter(product => 
+      filteredProducts = filteredProducts.filter(product =>
         selectedQualities.includes(product.quality)
       );
     }
@@ -122,7 +122,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
   };
 
   const toggleQuality = (quality: string) => {
-    setSelectedQualities(prev => 
+    setSelectedQualities(prev =>
       prev.includes(quality)
         ? prev.filter(q => q !== quality)
         : [...prev, quality]
@@ -169,14 +169,14 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
         </button>
         <input type="text" placeholder="Search" />
       </div>
-      
+
       <div className="products-grid">
         {products.map((product) => (
           <div key={product.id} className="product-details">
             <ProduceCard
               name={product.produce_type.name}
               image={product.produce_type.image}
-              cardColour="white"
+              cardColour="beige"
             />
             <div className="product-info">
               <p>Weight: {product.weight}kg</p>

@@ -188,12 +188,3 @@
     padding-bottom: 100px;
     padding-left: 100px;
 }
-
-
-/* Footer */
-
-.about-page-part3 {
-    height: 700px;
-    flex-shrink: 0;
-    align-self: stretch;
-  }
