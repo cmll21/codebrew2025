@@ -54,25 +54,27 @@ const ProducePage = ({ categories }: ProducePageProps) => {
 
   return (
     <div className="section-header">
-      <h1 className="section-title">{capitalizeEachWord(produceName)}</h1>
-      <div>
-        <FilterButtons
-          products={products}
-          onFilteredProducts={setFilteredProducts}
-        />
-      </div>
+      <div className="body-container">
+       <div className="produce-page-title">{capitalizeEachWord(produceName)}</div>
+        <div>
+          <FilterButtons
+            products={products}
+            onFilteredProducts={setFilteredProducts}
+          />
+        </div>
 
-      <div className="product-card-boxes">
-        <div className="grid-container">
-          {filteredProducts.map((product, index) => (
-            <div key={index} className="product-details">
-              <ProductCard
-                name={product.species}
-                image={product.produce_type.image}
-                cardColour="beige"
-              />
-            </div>
-          ))}
+        <div className="product-card-boxes">
+          <div className="grid-container">
+            {filteredProducts.map((product, index) => (
+              <div key={index} className="product-details">
+                <ProductCard
+                  name={product.species}
+                  image={product.produce_type.image}
+                  cardColour="beige"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

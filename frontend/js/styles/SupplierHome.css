@@ -17,11 +17,11 @@
   text-align: center;
 }
 
-.filter-buttons {
+.wrap-filter-buttons {
   display: flex;
-  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .filter-buttons button {

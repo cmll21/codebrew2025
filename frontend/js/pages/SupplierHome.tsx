@@ -95,11 +95,14 @@ const StoreFront = ({
   return (
     <div className="storefront-section">
       <h1 className="storefront-title">Your StoreFront</h1>
-      <FilterButtons
+      <div className="wrap-filter-buttons">
+      <FilterButtons 
         categories={categories}
         products={allProducts}
         onFilteredProducts={setProducts}
       />
+      </div>
+      
       <div className="products-grid">
         {products.map((product) => (
           <div key={product.id} className="product-details">
