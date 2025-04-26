@@ -5,7 +5,7 @@ echo "-----> Build hook"
 
 echo "-----> Build frontend"
 npm install
-npm run build
+SWC_BINARY_TARGET=wasm npm run build
 echo "-----> Build frontend done"
 
 echo "-----> Poetry install"
