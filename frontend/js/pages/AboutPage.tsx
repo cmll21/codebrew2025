@@ -5,6 +5,10 @@ import Vine from "../../assets/images/Vine.svg";
 import "../styles/About.css";
 import "../styles/AuthPage.css";
 
+import AboutMeImage1 from "../../assets/images/AboutMePageImage1.png";
+import AboutMeImage2 from "../../assets/images/AboutMePageImage2.png";
+import AboutMeImage3 from "../../assets/images/AboutMePageImage3.png";
+
 function AboutPage() {
   return (
     <>
@@ -43,7 +47,20 @@ function AboutPage() {
       </div>
       <div className="about-page-part2--three-column-layout">
         <div className="left-about-box">
-          <div className="about-page-dummy-img" />
+          <div
+            className="about-page-dummy-img"
+            style={{ borderRadius: "10px" }}
+          >
+            <img
+              src={AboutMeImage1}
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
 
           <div className="about-page-left-align-text">
             <div className="about-page-header-2-box">
@@ -60,7 +77,20 @@ function AboutPage() {
               impact, making our food system more sustainable.
             </p>
           </div>
-          <div className="about-page-dummy-img" />
+          <div
+            className="about-page-dummy-img"
+            style={{ borderRadius: "10px" }}
+          >
+            <img
+              src={AboutMeImage3}
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
         </div>
         <img src={Vine} alt="Vine" className="center-vine-image" />
 
@@ -74,8 +104,21 @@ function AboutPage() {
               not just the glossy stuff that makes it to the shelves.
             </p>
           </div>
-          
-          <div className="about-page-dummy-img2" />
+
+          <div
+            className="about-page-dummy-img2"
+            style={{ borderRadius: "10px" }}
+          >
+            <img
+              src={AboutMeImage2}
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
 
           <div className="about-page-right-align-text-box">
             <h2 className="about-page-header-left-align">
