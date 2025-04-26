@@ -25,6 +25,7 @@
     "@sentry/react": "~8.0.0",
     "@stripe/react-stripe-js": "^3.6.0",
     "@stripe/stripe-js": "^7.2.0",
+    "@swc/wasm": "^1.11.22",
     "axios": "~1.6.8",
     "bootstrap": "~5.3.3",
     "classnames": "~2.5.1",
