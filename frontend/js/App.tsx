@@ -26,6 +26,7 @@ OpenAPI.interceptors.request.use((request) => {
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState<any>(null);
+  const [categories, setCategories] = useState<any>(null);
 
   useEffect(() => {
     if (loggedIn) {
@@ -39,6 +40,14 @@ const App = () => {
           })
           .catch(() => {
             setUserInfo(null);
+          });
+        
+        axios.get("/api/produce/categories/")
+          .then((res) => {
+            setCategories(res.data);
+          })
+          .catch(() => {
+            setCategories(null);
           });
       }
     } else {
@@ -56,7 +65,7 @@ const App = () => {
       
       <Routes>
         <Route path="/" element={
-          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} /> : <Home />
+          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} categories={categories} /> : <Home />
         } />
         <Route path="/auth" element={<AuthPage setLoggedIn={setLoggedIn} />} />
         <Route path="/about" element={<AboutPage />} />

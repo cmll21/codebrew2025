@@ -1,5 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+type Category = {
+  id: number;
+  name: string;
+};
 
 type ProduceItem = {
   id: number;
@@ -45,15 +50,25 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
 
   const [newItem, setNewItem] = useState<Partial<ProduceItem>>(initialFormState);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const productCategories = [
-    'Vegetables',
-    'Fruits',
-    'Mushrooms',
-    'Herbs & Greens',
-    'Roots & Tubers',
-    'Grains & Legumes'
-  ];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const accessToken = localStorage.getItem('access_token');
+        const response = await axios.get('/api/produce/categories/', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+        setCategories(response.data.results);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const qualityLevels = ['Value', 'Select', 'Premium'];
 
@@ -73,7 +88,19 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
       const produceTypeFormData = new FormData();
       
       produceTypeFormData.append('name', newItem.produce_type?.name || '');
-      produceTypeFormData.append('category', '1'); // ← replace with a valid ProduceCategory ID
+
+      // Find the selected category and append its ID
+      const selectedCategory = categories.find(
+        category => category.name === newItem.produce_type?.category
+      );
+
+      // Append the selected category ID to the form data
+      if (selectedCategory) {
+        produceTypeFormData.append('category_id', selectedCategory.id.toString());
+      } else {
+        throw new Error('Please select a valid category');
+      }
+      // HARD CODED SPRING LOL
       produceTypeFormData.append('season', 'spring');
       if (imageFile) {
         produceTypeFormData.append('image', imageFile);
@@ -87,7 +114,7 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
         }
       });
 
-      console.log('ProduceType created:', produceTypeResponse.data);
+      //console.log('ProduceType created:', produceTypeResponse.data);
 
       // Then create the ProduceItem using the new ProduceType
       const produceItemResponse = await axios.post('/api/produce/items/', {
@@ -100,7 +127,7 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
         headers
       });
 
-      console.log('ProduceItem created:', produceItemResponse.data);
+      //console.log('ProduceItem created:', produceItemResponse.data);
 
       // Reset form after successful submission
       setNewItem(initialFormState);
@@ -169,9 +196,9 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
             className="form-select"
           >
             <option value="" disabled>Select a category</option>
-            {productCategories.map((category) => (
-              <option key={category} value={category}>
-                {category}
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
               </option>
             ))}
           </select>

@@ -58,3 +58,6 @@ tmp_email/
 # media
 media/*
 mediafiles/*
+*jpg
+*jpeg
+*webp

@@ -1,13 +1,27 @@
 from rest_framework import serializers
 from .models import ProduceType, ProduceItem, ProduceCategory
-from users.serializers import SupplierProfileSerializer, UserSerializer
-from users.models import SupplierProfile, User
+from users.serializers import UserSerializer
+from users.models import User
+
+
+class ProduceCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProduceCategory
+        fields = ['id', 'name']
+
 
 class ProduceTypeSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(queryset=ProduceCategory.objects.all())
+    category = ProduceCategorySerializer(read_only=True)
+    category_id = serializers.PrimaryKeyRelatedField(
+        queryset=ProduceCategory.objects.all(),
+        source='category',
+        write_only=True
+    )
+
     class Meta:
         model = ProduceType
-        fields = ['id', 'name', 'image', 'category', 'season']
+        fields = ['id', 'name', 'image', 'category', 'category_id', 'season']
+
 
 class ProduceItemSerializer(serializers.ModelSerializer):
     produce_type = ProduceTypeSerializer(read_only=True)
@@ -37,10 +51,3 @@ class ProduceItemSerializer(serializers.ModelSerializer):
             'quality',
             'item_image'
         ]
-
-class ProduceCategorySerializer(serializers.ModelSerializer):
-    types = ProduceTypeSerializer(many=True, read_only=True, source='producetype_set')
-
-    class Meta:
-        model = ProduceCategory
-        fields = ['id', 'name', 'types']

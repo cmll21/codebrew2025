@@ -49,18 +49,28 @@ const StoreProfile = () => {
 const StoreFront = ({ userInfo }: { userInfo: any }) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [selectedQualities, setSelectedQualities] = useState<string[]>([]);
   const [priceSort, setPriceSort] = useState<'asc' | 'desc' | null>(null);
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
 
-  const categories = [
-    'Vegetables',
-    'Fruits',
-    'Mushrooms',
-    'Herbs & Greens',
-    'Roots & Tubers',
-    'Grains & Legumes'
-  ];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const accessToken = localStorage.getItem('access_token');
+        const response = await axios.get('/api/produce/categories/', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+        setCategories(response.data.results);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const qualities = ['Value', 'Select', 'Premium'];
 
@@ -94,12 +104,9 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
 
     // Apply category filters
     if (selectedCategories.length > 0) {
-      console.log('Selected categories:', selectedCategories);
-      console.log('Products before category filter:', filteredProducts);
       filteredProducts = filteredProducts.filter(product => 
-        selectedCategories.includes(product.produce_type.category)
+        selectedCategories.includes(product.produce_type.category.id)
       );
-      console.log('Products after category filter:', filteredProducts);
     }
 
     // Apply quality filters
@@ -119,11 +126,11 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
     setProducts(filteredProducts);
   }, [selectedCategories, selectedQualities, priceSort, allProducts]);
 
-  const toggleCategory = (category: string) => {
+  const toggleCategory = (categoryId: number) => {
     setSelectedCategories(prev => 
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
+      prev.includes(categoryId)
+        ? prev.filter(id => id !== categoryId)
+        : [...prev, categoryId]
     );
   };
 
@@ -145,11 +152,11 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
       <div className="filter-buttons">
         {categories.map(category => (
           <button
-            key={category}
-            className={selectedCategories.includes(category) ? 'active' : ''}
-            onClick={() => toggleCategory(category)}
+            key={category.id}
+            className={selectedCategories.includes(category.id) ? 'active' : ''}
+            onClick={() => toggleCategory(category.id)}
           >
-            {category}
+            {category.name}
           </button>
         ))}
         {qualities.map(quality => (
