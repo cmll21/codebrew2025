@@ -20,12 +20,12 @@ class Item(models.Model):
     cart_item_price = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
     is_ordered = models.BooleanField(default=False)
 
-    def validate_item_weight(self):
+    def validate_item_weight(self) -> bool:
         if self.cart_item_weight > self.produce_item.weight:
             raise ValueError("Cart weight cannot exceed the available produce item weight.")
         return True
 
-    def calculate_price(self):
+    def calculate_price(self) -> float:
         return self.cart_item_weight * self.produce_item.price
 
     def save(self, *args, **kwargs):
@@ -43,7 +43,7 @@ class OrderItem(models.Model):
 class Cart(models.Model):
     customer = models.ForeignKey(CustomerProfile, on_delete=models.CASCADE)
 
-    def get_total_price(self):
+    def get_total_price(self) -> float:
         return sum(item.item.cart_item_price for item in self.cart_items.all())
 
     def checkout(self, delivery_address: Address):
