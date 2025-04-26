@@ -15,7 +15,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
         model = OrderItem
         fields = ['id', 'item', 'price']
 
-    def get_price(self, obj):
+    def get_price(self, obj) -> float:
         return obj.item.cart_item_price
 
 class OrderSerializer(serializers.ModelSerializer):
