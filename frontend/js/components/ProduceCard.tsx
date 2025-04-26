@@ -35,11 +35,14 @@ const ProduceCard = (props: ProduceCardProps) => {
         </h3>
         {props.onRemove && (
           <div className="produce-card-overlay">
-            <button className="remove-button" onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              props.onRemove?.();
-            }}>
+            <button
+              className="remove-button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                props.onRemove?.();
+              }}
+            >
               ×
             </button>
           </div>

@@ -3,6 +3,8 @@ import LightButton from "./LightButton";
 import "../styles/Card.css";
 import Carrot from "../../assets/images/Carrot.svg";
 import { toTitleCase } from "../utils";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export type ProductCardProps = {
   name: string;
@@ -11,6 +13,26 @@ export type ProductCardProps = {
 };
 
 const ProductCard = (props: ProductCardProps) => {
+  const [price, setPrice] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchPrice = async () => {
+      try {
+        const response = await axios.get("/api/produce/items/", {
+          params: { name: props.name },
+        });
+        const items = response.data.results;
+        if (items.length > 0) {
+          setPrice(items[0].price);
+        }
+      } catch (error) {
+        console.error("Failed to fetch price:", error);
+      }
+    };
+
+    fetchPrice();
+  }, [props.name]);
+
   return (
     <div
       style={{
@@ -24,11 +46,11 @@ const ProductCard = (props: ProductCardProps) => {
         <div className="productImage">
           <img src={props.image} className="produce-image" />
         </div>
-      <div className="product-card-text">{toTitleCase(props.name)}</div>
+        <div className="product-card-text">{toTitleCase(props.name)}</div>
       </div>
 
       <div style={{ position: "relative", marginBottom: "50px" }}>
-        <PriceDropdown />
+        <PriceDropdown price={price} />
       </div>
 
       <div className="marginTop">

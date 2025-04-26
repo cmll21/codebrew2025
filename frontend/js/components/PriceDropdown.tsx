@@ -3,7 +3,11 @@ import "../styles/Card.css";
 import DownArrow from "../../assets/images/arrow-down-light.svg";
 import Line from "../../assets/images/DropdownLine.svg";
 
-const PriceDropdown = () => {
+type PriceDropdownProps = {
+  price?: number;
+};
+
+const PriceDropdown = (props: PriceDropdownProps) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("Default");
   const items = ["50g", "100g", "150g", "200g"];
@@ -53,7 +57,9 @@ const PriceDropdown = () => {
           <img src={Line} />
         </div>
 
-        <div className="priceContainer priceFont">$ Price</div>
+        <div className="priceContainer priceFont">
+          {props.price !== null ? `$${props.price?.toFixed(2)}` : "$ --"}
+        </div>
       </div>
 
       <div
