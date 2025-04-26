@@ -13,6 +13,7 @@ type ProduceItem = {
     image: string;
     category: number;
   };
+  species: string;
   supplier_profile: {
     id: number;
     user: {

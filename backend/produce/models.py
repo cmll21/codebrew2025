@@ -25,6 +25,7 @@ class ProduceType(models.Model):
 class ProduceItem(models.Model):
     produce_type = models.ForeignKey(ProduceType, on_delete=models.CASCADE)
     #supplier_profile = models.ForeignKey(SupplierProfile, on_delete=models.CASCADE)
+    species = models.CharField(max_length=100, null=True, blank=True)
     supplier_profile = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     weight = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
     # price per kilogram
