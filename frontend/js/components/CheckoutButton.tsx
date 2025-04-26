@@ -12,11 +12,13 @@ const stripePromise = loadStripe(
 type CheckoutButtonProps = {
   amount: number;
   cartName: string;
+  cartId: string;
 };
 
 const CheckoutButton: React.FC<CheckoutButtonProps> = ({
   amount,
   cartName,
+  cartId,
 }) => {
   const handleClick = async () => {
     try {
@@ -27,6 +29,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({
           currency: "aud",
           // eslint-disable-next-line camelcase
           product_name: cartName,
+          cart: cartId,
         },
       );
       const stripe = await stripePromise;

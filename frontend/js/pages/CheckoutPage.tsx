@@ -61,7 +61,7 @@ function CheckoutPage() {
             <div className="center-align">
               <div className="checkout-button">
                 {/* TODO: Pass in cart total price into amount, and then "Name's cart" into name */}
-                <CheckoutButton amount={50} cartName="Goat basket" />
+                <CheckoutButton amount={50} cartName="Goat basket" cartId={1} />
               </div>
             </div>
           </div>
