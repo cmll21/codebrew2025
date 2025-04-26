@@ -75,7 +75,7 @@ const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeade
         ) : (
           <Link to="/auth">Log In/Sign Up</Link>
         )}
-        {userType !== 'SUPPLIER' && (
+        {userType !== 'SUPPLIER' && loggedIn && (
           <Link to="/checkout" className="cart-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
