@@ -4,13 +4,18 @@ import axios from 'axios';
 import ProduceCard from '../components/ProduceCard';
 import AddItemForm from '../components/AddItemForm';
 
+type Category = {
+  id: number;
+  name: string;
+};
+
 type ProduceItem = {
   id: number;
   produce_type: {
     id: number;
     name: string;
     image: string;
-    category: string;
+    category: number;
   };
   supplier_profile: {
     id: number;
@@ -30,6 +35,7 @@ type ProduceItem = {
 
 type SupplierHomeProps = {
   userInfo: any;
+  categories: Category[];
 };
 
 const StoreProfile = () => {
@@ -46,21 +52,12 @@ const StoreProfile = () => {
   );
 };
 
-const StoreFront = ({ userInfo }: { userInfo: any }) => {
+const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Category[] }) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [selectedQualities, setSelectedQualities] = useState<string[]>([]);
   const [priceSort, setPriceSort] = useState<'asc' | 'desc' | null>(null);
-
-  const categories = [
-    'Vegetables',
-    'Fruits',
-    'Mushrooms',
-    'Herbs & Greens',
-    'Roots & Tubers',
-    'Grains & Legumes'
-  ];
 
   const qualities = ['Value', 'Select', 'Premium'];
 
@@ -94,12 +91,9 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
 
     // Apply category filters
     if (selectedCategories.length > 0) {
-      console.log('Selected categories:', selectedCategories);
-      console.log('Products before category filter:', filteredProducts);
-      filteredProducts = filteredProducts.filter(product =>
+      filteredProducts = filteredProducts.filter(product => 
         selectedCategories.includes(product.produce_type.category)
       );
-      console.log('Products after category filter:', filteredProducts);
     }
 
     // Apply quality filters
@@ -119,11 +113,11 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
     setProducts(filteredProducts);
   }, [selectedCategories, selectedQualities, priceSort, allProducts]);
 
-  const toggleCategory = (category: string) => {
-    setSelectedCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
+  const toggleCategory = (categoryId: number) => {
+    setSelectedCategories(prev => 
+      prev.includes(categoryId)
+        ? prev.filter(id => id !== categoryId)
+        : [...prev, categoryId]
     );
   };
 
@@ -145,11 +139,11 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
       <div className="filter-buttons">
         {categories.map(category => (
           <button
-            key={category}
-            className={selectedCategories.includes(category) ? 'active' : ''}
-            onClick={() => toggleCategory(category)}
+            key={category.id}
+            className={selectedCategories.includes(category.id) ? 'active' : ''}
+            onClick={() => toggleCategory(category.id)}
           >
-            {category}
+            {category.name}
           </button>
         ))}
         {qualities.map(quality => (
@@ -196,7 +190,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
   );
 };
 
-const SupplierHome = ({ userInfo }: SupplierHomeProps) => {
+const SupplierHome = ({ userInfo, categories }: SupplierHomeProps) => {
   const [shouldRefresh, setShouldRefresh] = useState(0);
 
   const handleItemAdded = () => {
@@ -206,8 +200,8 @@ const SupplierHome = ({ userInfo }: SupplierHomeProps) => {
   return (
     <div className="supplier-home">
       <StoreProfile />
-      <StoreFront userInfo={userInfo} key={shouldRefresh} />
-      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} />
+      <StoreFront userInfo={userInfo} categories={categories} key={shouldRefresh} />
+      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} categories={categories} />
     </div>
   );
 };
