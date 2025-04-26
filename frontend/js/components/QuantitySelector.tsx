@@ -2,28 +2,27 @@ import React, { useState } from "react";
 import "../styles/QuantitySelector.css";
 
 type QuantitySelectorProps = {
-  initial?: number;
+  initial: number;
   step?: number;
   min?: number;
   max?: number;
+  onChange: (value: number) => void;
 };
 
 const QuantitySelector: React.FC<QuantitySelectorProps> = ({
-  initial = 100,
+  initial,
+  onChange,
   step = 10,
   min = 0,
   max = Infinity,
 }) => {
-  const [value, setValue] = useState<number>(initial);
-
-  const increment = () => setValue((prev) => Math.min(prev + step, max));
-  const decrement = () => setValue((prev) => Math.max(prev - step, min));
+  const increment = () => onChange(Math.min(initial + step, max));
+  const decrement = () => onChange(Math.max(initial - step, min));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // allow only integers
     const parsed = parseInt(e.target.value, 10);
     if (!isNaN(parsed)) {
-      setValue(Math.min(Math.max(parsed, min), max));
+      onChange(Math.min(Math.max(parsed, min), max));
     }
   };
 
@@ -37,12 +36,11 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
       >
         −
       </button>
-
       <div className="qty-input-wrapper">
         <input
           type="number"
           className="qty-input"
-          value={value}
+          value={initial}
           onChange={handleChange}
           min={min}
           max={max}
@@ -50,7 +48,6 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
         />
         <span className="qty-unit">g</span>
       </div>
-
       <button
         type="button"
         className="qty-button"
