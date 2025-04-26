@@ -5,29 +5,6 @@
   gap: 2rem;
 }
 
-.store-profile {
-  background-color: #C4946A;
-  padding: 1.5rem;
-  border-radius: 8px;
-  color: #3C3C3B;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.store-profile h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.store-stats {
-  margin: 1rem 0;
-}
-
-.store-stats p {
-  margin: 0.5rem 0;
-}
-
 .storefront-section {
   grid-column: 2;
   grid-row: 1 / span 2;
@@ -86,7 +63,7 @@
   padding: 1.5rem;
   border-radius: 8px;
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 1;
   max-height: 600px;
   overflow-y: auto;
 }

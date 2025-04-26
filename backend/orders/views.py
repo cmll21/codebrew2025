@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from orders.serializers import OrderSerializer, CartSerializer
+from orders.serializers import CartItemSerializer, OrderSerializer, CartSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from django.shortcuts import get_object_or_404
-from .models import Cart, Order
+from .models import Cart, CartItem, Order
 from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
@@ -49,6 +49,11 @@ class OrderViewSet(viewsets.ModelViewSet):
 class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
+
+class CartItemViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
     permission_classes = [IsAuthenticated]
 
 
