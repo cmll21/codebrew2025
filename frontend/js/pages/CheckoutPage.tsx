@@ -3,12 +3,62 @@ import "../styles/Checkout.css";
 import CheckoutItem from "../components/CheckoutItem";
 import Button from "../components/Button";
 import CheckoutButton from "../components/CheckoutButton";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const handleClick = () => {
-  console.log("clicked");
+type User = {
+  id: number;
+  first_name: string | null;
+  last_name: string | null;
+  email: string;
+  user_type: string;
+};
+
+type CartItem = {
+  id: number;
+  item: number;
+};
+
+type Cart = {
+  id: number;
+  customer: number;
+  items: CartItem[];
 };
 
 function CheckoutPage() {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [userCart, setUserCart] = useState<Cart[]>([]);
+
+  const accessToken = localStorage.getItem("access_token");
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+  axios
+    .get("/api/users/me/")
+    .then((res) => setCurrentUser(res.data))
+    .catch(() => setCurrentUser(null));
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/carts/")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch carts");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const carts: Cart[] = data.results;
+        // Filter for customer 4 only
+        const userCart = carts.filter(
+          (cart) => cart.customer === currentUser?.id,
+        );
+        setUserCart(userCart);
+      })
+      .catch((error) => {
+        console.error("Error fetching carts:", error);
+      });
+  }, []);
+
+  console.log(userCart);
+
   return (
     <div>
       <h3 className="checkout-text">

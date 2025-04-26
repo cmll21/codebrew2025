@@ -140,12 +140,11 @@ input {
 }
 
 .checkout-button {
-  width: 50px;
-  margin-left: 0;
-  padding-left: 0;
+  width: fit-content;
 }
 
 .center-align {
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 20px;
