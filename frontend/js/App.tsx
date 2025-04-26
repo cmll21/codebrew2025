@@ -35,6 +35,18 @@ const App = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
+    try {
+      axios.get("/api/produce/categories/")
+      .then((res) => {
+        setCategories(res.data.results);
+    })
+    .catch(() => {
+        setCategories([]);
+      });
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+
     if (loggedIn) {
       const accessToken = localStorage.getItem("access_token");
       if (accessToken) {
@@ -48,17 +60,9 @@ const App = () => {
             setUserInfo(null);
           });
         
-        axios.get("/api/produce/categories/")
-          .then((res) => {
-            setCategories(res.data.results);
-          })
-          .catch(() => {
-            setCategories([]);
-          });
       }
     } else {
       setUserInfo(null);
-      setCategories([]);
     }
   }, [loggedIn]);
 

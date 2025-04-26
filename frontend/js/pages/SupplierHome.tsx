@@ -3,6 +3,7 @@ import '../styles/SupplierHome.css';
 import axios from 'axios';
 import ProduceCard from '../components/ProduceCard';
 import AddItemForm from '../components/AddItemForm';
+import FilterButtons from '../components/FilterButtons';
 
 type Category = {
   id: number;
@@ -41,11 +42,6 @@ type SupplierHomeProps = {
 const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Category[] }) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-  const [selectedQualities, setSelectedQualities] = useState<string[]>([]);
-  const [priceSort, setPriceSort] = useState<'asc' | 'desc' | null>(null);
-
-  const qualities = ['Value', 'Select', 'Premium'];
 
   const fetchProducts = async () => {
     try {
@@ -55,7 +51,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
           Authorization: `Bearer ${accessToken}`
         }
       });
-
+      
       const supplierProducts = response.data.results.filter(
         (product: ProduceItem) => product.supplier_profile.id === userInfo?.id
       );
@@ -72,90 +68,14 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
     }
   }, [userInfo]);
 
-  useEffect(() => {
-    let filteredProducts = [...allProducts];
-
-    // Apply category filters
-    if (selectedCategories.length > 0) {
-      filteredProducts = filteredProducts.filter(product => 
-        selectedCategories.includes(product.produce_type.category)
-      );
-    }
-
-    // Apply quality filters
-    if (selectedQualities.length > 0) {
-      filteredProducts = filteredProducts.filter(product =>
-        selectedQualities.includes(product.quality)
-      );
-    }
-
-    // Apply price sorting
-    if (priceSort) {
-      filteredProducts.sort((a, b) => {
-        return priceSort === 'asc' ? a.price - b.price : b.price - a.price;
-      });
-    }
-
-    setProducts(filteredProducts);
-  }, [selectedCategories, selectedQualities, priceSort, allProducts]);
-
-  const toggleCategory = (categoryId: number) => {
-    setSelectedCategories(prev => 
-      prev.includes(categoryId)
-        ? prev.filter(id => id !== categoryId)
-        : [...prev, categoryId]
-    );
-  };
-
-  const toggleQuality = (quality: string) => {
-    setSelectedQualities(prev =>
-      prev.includes(quality)
-        ? prev.filter(q => q !== quality)
-        : [...prev, quality]
-    );
-  };
-
-  const handlePriceSort = (order: 'asc' | 'desc') => {
-    setPriceSort(prev => prev === order ? null : order);
-  };
-
   return (
     <div className="storefront-section">
       <h1 className="storefront-title">Your StoreFront</h1>
-      <div className="filter-buttons">
-        {categories.map(category => (
-          <button
-            key={category.id}
-            className={selectedCategories.includes(category.id) ? 'active' : ''}
-            onClick={() => toggleCategory(category.id)}
-          >
-            {category.name}
-          </button>
-        ))}
-        {qualities.map(quality => (
-          <button
-            key={quality}
-            className={selectedQualities.includes(quality.toLowerCase()) ? 'active' : ''}
-            onClick={() => toggleQuality(quality.toLowerCase())}
-          >
-            {quality}
-          </button>
-        ))}
-        <button
-          className={priceSort === 'asc' ? 'active' : ''}
-          onClick={() => handlePriceSort('asc')}
-        >
-          Ascending Price
-        </button>
-        <button
-          className={priceSort === 'desc' ? 'active' : ''}
-          onClick={() => handlePriceSort('desc')}
-        >
-          Descending Price
-        </button>
-        <input type="text" placeholder="Search" />
-      </div>
-
+      <FilterButtons
+        categories={categories}
+        products={allProducts}
+        onFilteredProducts={setProducts}
+      />
       <div className="products-grid">
         {products.map((product) => (
           <div key={product.id} className="product-details">
