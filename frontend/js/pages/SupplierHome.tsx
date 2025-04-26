@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import '../styles/SupplierHome.css';
-import axios from 'axios';
-import ProduceCard from '../components/ProduceCard';
-import AddItemForm from '../components/AddItemForm';
-import FilterButtons from '../components/FilterButtons';
+import { useEffect, useState } from "react";
+import "../styles/SupplierHome.css";
+import axios from "axios";
+import ProduceCard from "../components/ProduceCard";
+import AddItemForm from "../components/AddItemForm";
+import FilterButtons from "../components/FilterButtons";
 
 type Category = {
   id: number;
@@ -18,6 +18,7 @@ export type ProduceItem = {
     image: string;
     category: number;
   };
+  species: string;
   supplier_profile: {
     id: number;
     user: {
@@ -39,26 +40,32 @@ type SupplierHomeProps = {
   categories: Category[];
 };
 
-const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Category[] }) => {
+const StoreFront = ({
+  userInfo,
+  categories,
+}: {
+  userInfo: any;
+  categories: Category[];
+}) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
 
   const fetchProducts = async () => {
     try {
-      const accessToken = localStorage.getItem('access_token');
-      const response = await axios.get('/api/produce/items/', {
+      const accessToken = localStorage.getItem("access_token");
+      const response = await axios.get("/api/produce/items/", {
         headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
-      
+
       const supplierProducts = response.data.results.filter(
-        (product: ProduceItem) => product.supplier_profile.id === userInfo?.id
+        (product: ProduceItem) => product.supplier_profile.id === userInfo?.id,
       );
       setAllProducts(supplierProducts);
       setProducts(supplierProducts);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching products:", error);
     }
   };
 
@@ -100,13 +107,21 @@ const SupplierHome = ({ userInfo, categories }: SupplierHomeProps) => {
   const [shouldRefresh, setShouldRefresh] = useState(0);
 
   const handleItemAdded = () => {
-    setShouldRefresh(prev => prev + 1);
+    setShouldRefresh((prev) => prev + 1);
   };
 
   return (
     <div className="supplier-home">
-      <StoreFront userInfo={userInfo} categories={categories} key={shouldRefresh} />
-      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} categories={categories} />
+      <StoreFront
+        userInfo={userInfo}
+        categories={categories}
+        key={shouldRefresh}
+      />
+      <AddItemForm
+        userInfo={userInfo}
+        onItemAdded={handleItemAdded}
+        categories={categories}
+      />
     </div>
   );
 };

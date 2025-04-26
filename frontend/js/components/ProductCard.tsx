@@ -22,9 +22,9 @@ const ProductCard = (props: ProductCardProps) => {
     >
       <div style={{ marginBottom: "10px" }}>
         <div className="productImage">
-          <img src={Carrot} className="produce-image" />
+          <img src={props.image} className="produce-image" />
         </div>
-      <div className="product-card-text">{toTitleCase("props.name")}</div>
+      <div className="product-card-text">{toTitleCase(props.name)}</div>
       </div>
 
       <div style={{ position: "relative", marginBottom: "50px" }}>
