@@ -1,26 +1,50 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import "../styles/LandingPage.css";
 import InstructionCard from "../components/InstructionCard";
 import OutlineButton from "../components/OutlineButton";
 import ProduceCard from "../components/ProduceCard";
 import SeasonalProduceHeader from "../components/SeasonalProduceHeader";
+import ProduceCardCarousel from "../components/ProduceCardCarousel";
 
 import Instruction1Sticker from "../../assets/images/instruction1.png";
 import Instruction2Sticker from "../../assets/images/instruction2.png";
 import Instruction3Sticker from "../../assets/images/instruction3.png";
 import InstructionBackground from "../../assets/images/instruction-background.png";
 import { useNavigate } from "react-router-dom";
+
 import LandingPageGraphic from "../../assets/images/LandingPageGraphic.png";
 import Instruction1Graphic from "../../assets/images/Instruction1Graphic.png";
 import Instruction2Graphic from "../../assets/images/Instruction2Graphic.png";
 import Instruction3Graphic from "../../assets/images/Instruction3Graphic.png";
 import LandingPageImage from "../../assets/images/LandingPageImage.png";
 
+import { CURR_SEASON } from "./ShopProducePage";
+import { ProduceType } from "./ShopProducePage";
+
 const LandingPage = () => {
+  const [produceItems, setProduceItems] = useState<ProduceType[]>([]);
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/shop");
   };
+
+  // Ideally you'd get this from App.tsx
+  useEffect(() => {
+    const fetchProduceItems = async () => {
+      try {
+        const response = await axios.get("/api/produce/types/");
+        console.log("Fetched produce data:", response.data.results);
+        setProduceItems(response.data.results);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    fetchProduceItems();
+  }, []);
 
   return (
     <div>
@@ -47,12 +71,20 @@ const LandingPage = () => {
       </div>
       <div className="seasonal-produce-section">
         <SeasonalProduceHeader />
-        <div className="seasonal-produce-grid">
-          <ProduceCard name={"Test"} cardColour={"beige"} />
-          <ProduceCard name={"Test"} cardColour={"beige"} />
-          <ProduceCard name={"Test"} cardColour={"beige"} />
-          <ProduceCard name={"Test"} cardColour={"beige"} />
-          <ProduceCard name={"Test"} cardColour={"beige"} />
+        <div className="section">
+          <div className="produce-carousel-container">
+            <ProduceCardCarousel
+              produceList={produceItems
+                .filter((item) => {
+                  return item.season === CURR_SEASON;
+                })
+                .map((type) => ({
+                  name: type.name,
+                  image: type.image,
+                  cardColour: "#E2D7C3",
+                }))}
+            />
+          </div>
         </div>
       </div>
       <div className="landing-page-part1">
