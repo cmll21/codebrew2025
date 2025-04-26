@@ -11,42 +11,68 @@
 }
 
 .storefront-title {
-  color: #C4946A;
+  color: #c4946a;
   font-size: 2.5rem;
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.filter-buttons {
+.wrap-filter-buttons {
   display: flex;
-  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
-.filter-buttons button {
-  background-color: #F5F5F1;
-  border: none;
+.filter-buttons button{
+  background: var(--Background, #f4f1e6);
+  border-radius: 10px;
+  border: 2px solid var(--Card-Background, #e2d7c3);
   padding: 0.5rem 1rem;
-  border-radius: 20px;
   cursor: pointer;
-  color: #3C3C3B;
+  color: #3c3c3b;
   transition: all 0.2s ease;
+
+  color: var(--Light-Text, #6a6a67);
+  /* Link L */
+  font-family: "EB Garamond";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .filter-buttons button:hover {
-  background-color: #E5E5E1;
+  background-color: #e5e5e1;
 }
 
 .filter-buttons button.active {
-  background-color: #C4946A;
+  background-color: #c4946a;
   color: white;
+}
+
+.filter-button-search {
+  background: var(--Background, #f4f1e6);
+  border-radius: 10px !important;;
+  border: 2px solid var(--Card-Background, #e2d7c3) !important;;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #3c3c3b;
+  transition: all 0.2s ease;
+
+  color: var(--Light-Text, #6a6a67);
+  /* Link L */
+  font-family: "EB Garamond";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .filter-buttons input {
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  border: 1px solid #C4946A;
+  border: 1px solid #c4946a;
   flex-grow: 1;
   max-width: 200px;
 }
@@ -59,7 +85,7 @@
 }
 
 .add-item-form {
-  background-color: #C9D1B5;
+  background-color: #c9d1b5;
   padding: 1.5rem;
   border-radius: 8px;
   grid-column: 1;
@@ -74,7 +100,7 @@
 
 .add-item-form h3 {
   margin: 0 0 1rem 0;
-  color: #3C3C3B;
+  color: #3c3c3b;
 }
 
 .form-group {
@@ -85,17 +111,17 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #3C3C3B;
+  color: #3c3c3b;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #F5F5F1;
+  border: 1px solid #f5f5f1;
   border-radius: 4px;
   background-color: white;
-  color: #3C3C3B;
+  color: #3c3c3b;
   font-family: inherit;
   font-size: inherit;
   box-sizing: border-box;
@@ -115,7 +141,7 @@
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #82A36B;
+  border-color: #82a36b;
 }
 
 .form-group select option {
@@ -130,12 +156,12 @@
 }
 
 .category-buttons button {
-  background-color: #F5F5F1;
+  background-color: #f5f5f1;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   cursor: pointer;
-  color: #3C3C3B;
+  color: #3c3c3b;
 }
 
 .image-upload {
@@ -144,8 +170,8 @@
 }
 
 .image-upload button {
-  background-color: #3C3C3B;
-  color: #F5F5F1;
+  background-color: #3c3c3b;
+  color: #f5f5f1;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -175,4 +201,4 @@
   margin: 0.25rem 0;
   color: #333;
   font-size: 0.85rem;
-} 
+}
