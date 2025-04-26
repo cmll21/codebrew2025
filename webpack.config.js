@@ -46,7 +46,6 @@ module.exports = (env, argv) => {
                 },
               },
               env: {},
-              swcWasm: true,
             },
           },
         },
