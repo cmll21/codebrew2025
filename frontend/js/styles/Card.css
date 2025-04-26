@@ -160,3 +160,16 @@
   text-align: center;
   margin-top: 10px;
 }
+
+.product-card-text {
+  color: #000;
+
+/* L Label */
+font-family: "EB Garamond";
+font-size: 24px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+text-align: left;
+padding-top:10px;
+}

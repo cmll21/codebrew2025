@@ -4,8 +4,17 @@ import ProductImageWrapper from "./ProductImageWrapper";
 import PriceDropdown from "./PriceDropdown";
 import Button from "./Button";
 import LightButton from "./LightButton";
+import "../styles/Card.css";
+import Carrot from "../../assets/images/Carrot.svg";
+import { toTitleCase } from "../utils";
 
-const ProductCard = () => {
+export type ProductCardProps = {
+  name: string;
+  image?: string;
+  cardColour: string;
+};
+
+const ProductCard = (props: ProductCardProps) => {
   return (
     <div
       style={{
@@ -16,7 +25,10 @@ const ProductCard = () => {
       }}
     >
       <div style={{ marginBottom: "10px" }}>
-        <ProductImageWrapper />
+        <div className="productImage">
+          <img src={Carrot} className="produce-image" />
+        </div>
+      <div className="product-card-text">{toTitleCase("props.name")}</div>
       </div>
 
       <div style={{ position: "relative", marginBottom: "50px" }}>
