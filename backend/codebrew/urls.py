@@ -46,13 +46,13 @@ urlpatterns = [
     path("api/register/", RegisterView.as_view(), name="register"),
     path("api/", include(router.urls), name="api"),
     path("payments/", include("payments.urls"), name="payments"),
-    # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 
 # Serve static and media files in development
 # if settings.DEBUG:
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += [
-    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
-]
+# urlpatterns += [
+#     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
+# ]
