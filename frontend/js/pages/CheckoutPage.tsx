@@ -160,6 +160,10 @@ function CheckoutPage() {
     }
   };
 
+  if (userCart.length !== 0) {
+    console.log(userCart[0].id);
+  }
+
   return (
     <div>
       <h3 className="checkout-text">
@@ -215,14 +219,6 @@ function CheckoutPage() {
                 placeholder="Mary"
               />
 
-              <label>Last Name</label>
-              <input
-                style={{ width: "100%" }}
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-              />
-
               <label>Street Name</label>
               <input style={{ width: "100%" }} type="text" />
 
@@ -239,12 +235,15 @@ function CheckoutPage() {
             </div>
             <div className="center-align">
               <div className="checkout-button">
-                {/* TODO: Pass in cart total price into amount, and then "Name's cart" into name */}
-                <CheckoutButton
-                  amount={Number(cartTotal)}
-                  cartName="Goat basket"
-                  cartId={1}
-                />
+                {userCart.length !== 0 ? (
+                  <CheckoutButton
+                    amount={Number(cartTotal)}
+                    cartName="Goat basket"
+                    cartId={userCart[0].id.toString()}
+                  />
+                ) : (
+                  <CheckoutButton />
+                )}
               </div>
             </div>
           </div>
