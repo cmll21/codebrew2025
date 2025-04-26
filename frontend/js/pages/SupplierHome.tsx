@@ -72,7 +72,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
           Authorization: `Bearer ${accessToken}`
         }
       });
-      
+
       const supplierProducts = response.data.results.filter(
         (product: ProduceItem) => product.supplier_profile.id === userInfo?.id
       );
@@ -96,7 +96,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
     if (selectedCategories.length > 0) {
       console.log('Selected categories:', selectedCategories);
       console.log('Products before category filter:', filteredProducts);
-      filteredProducts = filteredProducts.filter(product => 
+      filteredProducts = filteredProducts.filter(product =>
         selectedCategories.includes(product.produce_type.category)
       );
       console.log('Products after category filter:', filteredProducts);
@@ -104,7 +104,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
 
     // Apply quality filters
     if (selectedQualities.length > 0) {
-      filteredProducts = filteredProducts.filter(product => 
+      filteredProducts = filteredProducts.filter(product =>
         selectedQualities.includes(product.quality)
       );
     }
@@ -120,7 +120,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
   }, [selectedCategories, selectedQualities, priceSort, allProducts]);
 
   const toggleCategory = (category: string) => {
-    setSelectedCategories(prev => 
+    setSelectedCategories(prev =>
       prev.includes(category)
         ? prev.filter(c => c !== category)
         : [...prev, category]
@@ -128,7 +128,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
   };
 
   const toggleQuality = (quality: string) => {
-    setSelectedQualities(prev => 
+    setSelectedQualities(prev =>
       prev.includes(quality)
         ? prev.filter(q => q !== quality)
         : [...prev, quality]
@@ -175,13 +175,14 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
         </button>
         <input type="text" placeholder="Search" />
       </div>
-      
+
       <div className="products-grid">
         {products.map((product) => (
           <div key={product.id} className="product-details">
             <ProduceCard
               name={product.produce_type.name}
               image={product.produce_type.image}
+              cardColour="beige"
             />
             <div className="product-info">
               <p>Weight: {product.weight}kg</p>
