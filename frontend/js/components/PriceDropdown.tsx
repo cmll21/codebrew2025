@@ -4,7 +4,7 @@ import DownArrow from "../../assets/images/arrow-down-light.svg";
 import Line from "../../assets/images/DropdownLine.svg";
 
 type PriceDropdownProps = {
-  price?: number;
+  price: number | undefined;
 };
 
 const PriceDropdown = (props: PriceDropdownProps) => {
@@ -15,6 +15,20 @@ const PriceDropdown = (props: PriceDropdownProps) => {
   const handleSelect = (item: string) => {
     setSelected(item);
     setOpen(false);
+  };
+
+  const getPrice = () => {
+    if (props.price === undefined) {
+      return "--";
+    }
+
+    const grams = parseInt(selected.replace("g", ""), 10); // <-- Force to integer base 10
+    if (isNaN(grams)) {
+      return "--";
+    }
+
+    const calculatedPrice = (props.price * grams) / 100; // price per 100g
+    return calculatedPrice.toFixed(2);
   };
 
   return (
@@ -57,9 +71,7 @@ const PriceDropdown = (props: PriceDropdownProps) => {
           <img src={Line} />
         </div>
 
-        <div className="priceContainer priceFont">
-          {props.price !== null ? `$${props.price?.toFixed(2)}` : "$ --"}
-        </div>
+        <div className="priceContainer priceFont">${getPrice()}</div>
       </div>
 
       <div
