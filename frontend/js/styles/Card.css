@@ -5,18 +5,70 @@
 .productImage {
   width: 265px;
   height: 271px;
-  background-color: #e2d7c3;
+  background-color: #F4F1E6;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
 }
 
 .dropdownContainer {
-  font-family: "CrimsonPro Bold";
+  /* font-family: "CrimsonPro Bold";
   background-color: #2d5948;
   padding: 5px 10px 7px 10px;
   border: none;
   border-radius: 10px;
   width: 245px;
   height: 39px;
-  margin-top: 20px;
+  margin-top: 20px; */
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2d5948;
+  border-radius: 10px;
+  padding: 0 0.5rem;
+}
+
+.downContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lineContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.priceContainer {
+  display: flex;
+  padding: 0.625rem;
+}
+
+.dropdownFont {
+  color: #f4f1e6;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #3c3c3b;
+  font-family: "EB Garamond Bold";
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.priceFont {
+  color: #f4f1e6;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #3c3c3b;
+  font-family: "EB Garamond Bold";
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .dropdownButtonContainer {
@@ -42,8 +94,9 @@
 
 .dropdownArrow {
   color: #f4f1e6;
-  width: 100%;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
 }
 
 .divider {
@@ -106,4 +159,17 @@
   font-size: 30px;
   text-align: center;
   margin-top: 10px;
+}
+
+.product-card-text {
+  color: #000;
+
+/* L Label */
+font-family: "EB Garamond";
+font-size: 24px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+text-align: left;
+padding-top:10px;
 }

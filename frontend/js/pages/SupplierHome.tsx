@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import '../styles/SupplierHome.css';
-import axios from 'axios';
-import ProduceCard from '../components/ProduceCard';
-import AddItemForm from '../components/AddItemForm';
-import FilterButtons from '../components/FilterButtons';
+import { useEffect, useState } from "react";
+import "../styles/SupplierHome.css";
+import axios from "axios";
+import ProduceCard from "../components/ProduceCard";
+import AddItemForm from "../components/AddItemForm";
+import FilterButtons from "../components/FilterButtons";
 
 type Category = {
   id: number;
   name: string;
 };
 
-type ProduceItem = {
+export type ProduceItem = {
   id: number;
   produce_type: {
     id: number;
@@ -40,26 +40,49 @@ type SupplierHomeProps = {
   categories: Category[];
 };
 
-const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Category[] }) => {
+const StoreFront = ({
+  userInfo,
+  categories,
+}: {
+  userInfo: any;
+  categories: Category[];
+}) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
 
   const fetchProducts = async () => {
     try {
+      const accessToken = localStorage.getItem("access_token");
+      const response = await axios.get("/api/produce/items/", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const supplierProducts = response.data.results.filter(
+        (product: ProduceItem) => product.supplier_profile.id === userInfo?.id,
+      );
+      setAllProducts(supplierProducts);
+      setProducts(supplierProducts);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const handleRemoveProduct = async (productId: number) => {
+    try {
       const accessToken = localStorage.getItem('access_token');
-      const response = await axios.get('/api/produce/items/', {
+      await axios.delete(`/api/produce/items/${productId}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       });
       
-      const supplierProducts = response.data.results.filter(
-        (product: ProduceItem) => product.supplier_profile.id === userInfo?.id
-      );
-      setAllProducts(supplierProducts);
-      setProducts(supplierProducts);
+      // Update the products list by removing the deleted product
+      setProducts(products.filter(product => product.id !== productId));
+      setAllProducts(allProducts.filter(product => product.id !== productId));
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error('Error removing product:', error);
     }
   };
 
@@ -84,6 +107,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
               name={`${product.species} ${product.produce_type.name}`}
               image={product.produce_type.image}
               cardColour="beige"
+              onRemove={() => handleRemoveProduct(product.id)}
             />
             <div className="product-info">
               <p>Weight: {product.weight}kg</p>
@@ -101,13 +125,21 @@ const SupplierHome = ({ userInfo, categories }: SupplierHomeProps) => {
   const [shouldRefresh, setShouldRefresh] = useState(0);
 
   const handleItemAdded = () => {
-    setShouldRefresh(prev => prev + 1);
+    setShouldRefresh((prev) => prev + 1);
   };
 
   return (
     <div className="supplier-home">
-      <StoreFront userInfo={userInfo} categories={categories} key={shouldRefresh} />
-      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} categories={categories} />
+      <StoreFront
+        userInfo={userInfo}
+        categories={categories}
+        key={shouldRefresh}
+      />
+      <AddItemForm
+        userInfo={userInfo}
+        onItemAdded={handleItemAdded}
+        categories={categories}
+      />
     </div>
   );
 };

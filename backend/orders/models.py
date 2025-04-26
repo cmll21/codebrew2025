@@ -2,7 +2,7 @@ from datetime import timezone
 from django.core.validators import MinValueValidator
 from django.db import models
 from common.models import Address
-from users.models import CustomerProfile
+from users.models import CustomerProfile, User
 from produce.models import ProduceItem
 
 class OrderStatus(models.TextChoices):
@@ -41,7 +41,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='order_items')
 
 class Cart(models.Model):
-    customer = models.ForeignKey(CustomerProfile, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_total_price(self) -> float:
         return sum(item.item.cart_item_price for item in self.cart_items.all())
@@ -80,8 +80,7 @@ class Cart(models.Model):
         return order
 
 class Order(models.Model):
-    customer = models.ForeignKey(CustomerProfile, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
     total_price = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
     status = models.CharField(max_length=20, choices=OrderStatus.choices)
-

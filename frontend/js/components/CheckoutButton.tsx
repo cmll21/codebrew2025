@@ -10,9 +10,9 @@ const stripePromise = loadStripe(
 ); // your public key
 
 type CheckoutButtonProps = {
-  amount: number;
-  cartName: string;
-  cartId: string;
+  amount?: number;
+  cartName?: string;
+  cartId?: string;
 };
 
 const CheckoutButton: React.FC<CheckoutButtonProps> = ({

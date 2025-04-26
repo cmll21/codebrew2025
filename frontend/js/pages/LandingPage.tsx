@@ -8,10 +8,13 @@ import Instruction1Sticker from "../../assets/images/instruction1.png";
 import Instruction2Sticker from "../../assets/images/instruction2.png";
 import Instruction3Sticker from "../../assets/images/instruction3.png";
 import InstructionBackground from "../../assets/images/instruction-background.png";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    console.log("clicked!");
+    navigate("/shop");
   };
 
   return (

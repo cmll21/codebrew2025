@@ -3,7 +3,7 @@ import "../styles/Checkout.css";
 import CheckoutItem from "../components/CheckoutItem";
 import Button from "../components/Button";
 import CheckoutButton from "../components/CheckoutButton";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
 type User = {
@@ -137,9 +137,9 @@ function CheckoutPage() {
     });
   };
 
-  const cartTotal = itemTotals
-    .reduce((acc, item) => acc + item.price, 0)
-    .toFixed(2);
+  const cartTotal = useMemo(() => {
+    return itemTotals.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+  }, [itemTotals]);
 
   const handleRemove = async (cartItemId: number) => {
     try {
@@ -159,6 +159,10 @@ function CheckoutPage() {
       console.error("Failed to remove cart item:", error);
     }
   };
+
+  if (userCart.length !== 0) {
+    console.log(userCart[0].id);
+  }
 
   return (
     <div>
@@ -185,7 +189,7 @@ function CheckoutPage() {
                       weight={cartItem.item.produce_item.weight}
                       itemImage={cartItem.item.produce_item.item_image || ""}
                       onPriceChange={(price) =>
-                        updateItemTotal(cartItem.item.produce_item.id, price)
+                        updateItemTotal(cartItem.id, price)
                       }
                       onRemove={() => handleRemove(cartItem.id)}
                     />
@@ -215,14 +219,6 @@ function CheckoutPage() {
                 placeholder="Mary"
               />
 
-              <label>Last Name</label>
-              <input
-                style={{ width: "100%" }}
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-              />
-
               <label>Street Name</label>
               <input style={{ width: "100%" }} type="text" />
 
@@ -239,12 +235,15 @@ function CheckoutPage() {
             </div>
             <div className="center-align">
               <div className="checkout-button">
-                {/* TODO: Pass in cart total price into amount, and then "Name's cart" into name */}
-                <CheckoutButton
-                  amount={Number(cartTotal)}
-                  cartName="Goat basket"
-                  cartId="1"
-                />
+                {userCart.length !== 0 ? (
+                  <CheckoutButton
+                    amount={Number(cartTotal)}
+                    cartName="Goat basket"
+                    cartId={userCart[0].id.toString()}
+                  />
+                ) : (
+                  <CheckoutButton />
+                )}
               </div>
             </div>
           </div>
