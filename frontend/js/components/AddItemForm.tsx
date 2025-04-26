@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+type Category = {
+  id: number;
+  name: string;
+};
+
 type ProduceItem = {
   id: number;
   produce_type: {
     id: number;
     name: string;
     image: string;
-    category: string;
+    category: number;
   };
   supplier_profile: {
     id: number;
@@ -28,9 +33,10 @@ type ProduceItem = {
 type AddItemFormProps = {
   userInfo: any;
   onItemAdded: () => void;
+  categories: Category[];
 };
 
-const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
+const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) => {
   const initialFormState = {
     weight: 0,
     price: 0,
@@ -39,21 +45,12 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
       id: 0,
       name: '',
       image: '',
-      category: ''
+      category: 0
     }
   };
 
   const [newItem, setNewItem] = useState<Partial<ProduceItem>>(initialFormState);
   const [imageFile, setImageFile] = useState<File | null>(null);
-
-  const productCategories = [
-    'Vegetables',
-    'Fruits',
-    'Mushrooms',
-    'Herbs & Greens',
-    'Roots & Tubers',
-    'Grains & Legumes'
-  ];
 
   const qualityLevels = ['Value', 'Select', 'Premium'];
 
@@ -73,7 +70,8 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
       const produceTypeFormData = new FormData();
       
       produceTypeFormData.append('name', newItem.produce_type?.name || '');
-      produceTypeFormData.append('category', '1'); // ← replace with a valid ProduceCategory ID
+      produceTypeFormData.append('category', newItem.produce_type?.category?.toString() || '');
+      // HARD CODED SPRING LOL
       produceTypeFormData.append('season', 'spring');
       if (imageFile) {
         produceTypeFormData.append('image', imageFile);
@@ -87,8 +85,6 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
         }
       });
 
-      console.log('ProduceType created:', produceTypeResponse.data);
-
       // Then create the ProduceItem using the new ProduceType
       const produceItemResponse = await axios.post('/api/produce/items/', {
         produce_type_id: produceTypeResponse.data.id,
@@ -99,8 +95,6 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
       }, {
         headers
       });
-
-      console.log('ProduceItem created:', produceItemResponse.data);
 
       // Reset form after successful submission
       setNewItem(initialFormState);
@@ -163,15 +157,15 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
               ...newItem,
               produce_type: {
                 ...newItem.produce_type!,
-                category: e.target.value
+                category: parseInt(e.target.value)
               }
             })}
             className="form-select"
           >
             <option value="" disabled>Select a category</option>
-            {productCategories.map((category) => (
-              <option key={category} value={category}>
-                {category}
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
               </option>
             ))}
           </select>

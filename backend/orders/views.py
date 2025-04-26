@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from orders.serializers import OrderSerializer, CartSerializer
+from orders.serializers import CartItemSerializer, OrderSerializer, CartSerializer
+from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from django.shortcuts import get_object_or_404
-from .models import Cart, Order
+from .models import Cart, CartItem, Order
 from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import viewsets, status
@@ -71,17 +72,5 @@ class CartViewSet(viewsets.ModelViewSet):
         #         status=status.HTTP_400_BAD_REQUEST
         #     )
 
-        try:
-            order = cart.checkout(address)
-        except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_400_BAD_REQUEST
-            )
 
-        # serialize and return the new Order
-        return Response(
-            OrderSerializer(order).data,
-            status=status.HTTP_201_CREATED
-        )
 

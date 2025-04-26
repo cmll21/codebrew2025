@@ -66,6 +66,13 @@
   align-items: center;
   width: 160px;
   height: 160px;
+  overflow: hidden;
+}
+
+.item-image-actual {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .item-text {
@@ -140,13 +147,25 @@ input {
 }
 
 .checkout-button {
-  width: 50px;
-  margin-left: 0;
-  padding-left: 0;
+  width: fit-content;
 }
 
 .center-align {
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.total-price {
+  color: #3c3c3b;
+  font-family: "EB Garamond";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.remove-item-logo:hover {
+  cursor: pointer;
 }

@@ -16,6 +16,11 @@ import SupplierHome from "./pages/SupplierHome";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+type Category = {
+  id: number;
+  name: string;
+};
+
 OpenAPI.interceptors.request.use((request) => {
   const { csrftoken } = cookie.parse(document.cookie);
   if (request.headers && csrftoken) {
@@ -27,8 +32,21 @@ OpenAPI.interceptors.request.use((request) => {
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState<any>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
+    try {
+      axios.get("/api/produce/categories/")
+      .then((res) => {
+        setCategories(res.data.results);
+    })
+    .catch(() => {
+        setCategories([]);
+      });
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+
     if (loggedIn) {
       const accessToken = localStorage.getItem("access_token");
       if (accessToken) {
@@ -41,6 +59,7 @@ const App = () => {
           .catch(() => {
             setUserInfo(null);
           });
+        
       }
     } else {
       setUserInfo(null);
@@ -57,7 +76,7 @@ const App = () => {
       
       <Routes>
         <Route path="/" element={
-          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} /> : <Home />
+          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} categories={categories} /> : <Home />
         } />
         <Route path="/auth" element={<AuthPage setLoggedIn={setLoggedIn} />} />
         <Route path="/about" element={<AboutPage />} />
