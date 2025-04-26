@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export type ProduceCardProps = {
   name: string;
   image?: string;
-  cardColour: string;
+  cardColour?: string;
 };
 
 const ProduceCard = (props: ProduceCardProps) => {
