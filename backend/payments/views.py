@@ -24,6 +24,7 @@ def create_checkout_session(request):
         return HttpResponseBadRequest("Invalid payload")
 
     try:
+        base = request.build_absolute_uri
         session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             mode="payment",
@@ -35,8 +36,8 @@ def create_checkout_session(request):
                 },
                 "quantity": 1,
             }],
-            success_url=f"{settings.HOST}/payments/success/",
-            cancel_url =f"{settings.HOST}/payments/cancel/",
+            success_url=base("/payments/success/"),
+            cancel_url = base("/payments/cancel/"),
         )
         return JsonResponse({"sessionId": session.id})
     except stripe.error.StripeError as e:
