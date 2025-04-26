@@ -27,7 +27,7 @@ const ProducePage = ({ categories }: ProducePageProps) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProduceItem[]>([]);
   const { produceName } = useParams();
-  
+
   // Fetch all products
   const fetchProducts = async () => {
     try {
@@ -112,27 +112,30 @@ const ProducePage = ({ categories }: ProducePageProps) => {
   return (
     <div className="section-header">
       <div className="body-container">
-       <div className="produce-page-title">{capitalizeEachWord(produceName)}</div>
+        <div className="produce-page-title">
+          {capitalizeEachWord(produceName)}
+        </div>
         <div>
           <FilterButtons
             products={products}
             onFilteredProducts={setFilteredProducts}
           />
         </div>
-        
-      <div className="product-card-boxes">
-        <div className="grid-container">
-          {products.map((product, index) => (
-            <div key={index} className="product-details">
-              <ProductCard
-                id={product.id}
-                name={product.species}
-                image={product.produce_type.image}
-                cardColour="beige"
-                cartId={cartId}
-              />
-            </div>
-          ))}
+
+        <div className="product-card-boxes">
+          <div className="grid-container">
+            {products.map((product, index) => (
+              <div key={index} className="product-details">
+                <ProductCard
+                  id={product.id}
+                  name={product.species}
+                  image={product.produce_type.image}
+                  cardColour="beige"
+                  cartId={cartId}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
