@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/ProductCard.css";
+import "../styles/Card.css";
 import DownArrow from "../../assets/images/arrow-down-light.svg";
 
 const PriceDropdown = () => {

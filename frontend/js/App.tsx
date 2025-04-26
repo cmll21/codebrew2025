@@ -13,6 +13,7 @@ import AboutPage from "./pages/AboutPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopProducePage from "./pages/ShopProducePage";
 import SupplierHome from "./pages/SupplierHome";
+import ProducePage from "./pages/ProducePage";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -78,6 +79,7 @@ const App = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/shop" element={<ShopProducePage />} />
+        <Route path="/produce/:produceName" element = {<ProducePage/>} />
       </Routes>
 
     <Footer/>
@@ -86,3 +88,5 @@ const App = () => {
 };
 
 export default App;
+
+
