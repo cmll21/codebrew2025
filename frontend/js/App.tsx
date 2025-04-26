@@ -11,8 +11,9 @@ import AuthPage from "./pages/AuthPage";
 import AboutPage from "./pages/AboutPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopProducePage from "./pages/ShopProducePage";
-import ProducePage from "./pages/ProducePage";
-import { useState } from "react";
+import SupplierHome from "./pages/SupplierHome";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 OpenAPI.interceptors.request.use((request) => {
   const { csrftoken } = cookie.parse(document.cookie);
@@ -21,18 +22,42 @@ OpenAPI.interceptors.request.use((request) => {
   }
   return request;
 });
-  
+
 const App = () => {
-  // State to store the access token
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState<any>(null);
+
+  useEffect(() => {
+    if (loggedIn) {
+      const accessToken = localStorage.getItem("access_token");
+      if (accessToken) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+        // Fetch user info from backend
+        axios.get("/api/users/me/")
+          .then((res) => {
+            setUserInfo(res.data);
+          })
+          .catch(() => {
+            setUserInfo(null);
+          });
+      }
+    } else {
+      setUserInfo(null);
+    }
+  }, [loggedIn]);
 
   return (
     <Sentry.ErrorBoundary fallback={<p>An error has occurred.</p>}>
-      {/* Pass accessToken to LandingPageHeader */}
-      <LandingPageHeader loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+      <LandingPageHeader 
+        loggedIn={loggedIn} 
+        setLoggedIn={setLoggedIn}
+        userType={userInfo?.user_type}
+      />
       
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} /> : <Home />
+        } />
         <Route path="/auth" element={<AuthPage setLoggedIn={setLoggedIn} />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

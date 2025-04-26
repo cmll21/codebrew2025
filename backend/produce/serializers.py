@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import ProduceType, ProduceItem, ProduceCategory
-from users.serializers import SupplierProfileSerializer
-from users.models import SupplierProfile
+from users.serializers import SupplierProfileSerializer, UserSerializer
+from users.models import SupplierProfile, User
 
 class ProduceTypeSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=ProduceCategory.objects.all())
@@ -11,7 +11,7 @@ class ProduceTypeSerializer(serializers.ModelSerializer):
 
 class ProduceItemSerializer(serializers.ModelSerializer):
     produce_type = ProduceTypeSerializer(read_only=True)
-    supplier_profile = SupplierProfileSerializer(read_only=True)
+    supplier_profile = UserSerializer(read_only=True)
 
     produce_type_id = serializers.PrimaryKeyRelatedField(
         queryset=ProduceType.objects.all(),
@@ -19,7 +19,7 @@ class ProduceItemSerializer(serializers.ModelSerializer):
         write_only=True
     )
     supplier_profile_id = serializers.PrimaryKeyRelatedField(
-        queryset=SupplierProfile.objects.all(),
+        queryset=User.objects.all(),
         source='supplier_profile',
         write_only=True
     )
