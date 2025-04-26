@@ -6,14 +6,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 
-const CURR_SEASON = "winter";
+export const CURR_SEASON = "winter";
 const VEGETABLES = "vegetables";
 const FRUITS = "fruits";
 const LEAFY_GREENS = "leafy_greens";
 const MUSHROOMS = "mushrooms";
 const ROOTS = "roots";
 
-type ProduceType = {
+export type ProduceType = {
   id: number;
   name: string;
   image: string;
