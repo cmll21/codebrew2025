@@ -38,11 +38,11 @@ const LandingPage = () => {
       <div className="seasonal-produce-section">
         <SeasonalProduceHeader />
         <div className="seasonal-produce-grid">
-          <ProduceCard name={"Test"} />
-          <ProduceCard name={"Test"} />
-          <ProduceCard name={"Test"} />
-          <ProduceCard name={"Test"} />
-          <ProduceCard name={"Test"} />
+          <ProduceCard name={"Test"} cardColour={"beige"}/>
+          <ProduceCard name={"Test"} cardColour={"beige"}/>
+          <ProduceCard name={"Test"} cardColour={"beige"}/>
+          <ProduceCard name={"Test"} cardColour={"beige"}/>
+          <ProduceCard name={"Test"} cardColour={"beige"}/>
         </div>
       </div>
       <div className="landing-page-part1">

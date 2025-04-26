@@ -13,7 +13,7 @@
     "test:watch": "npm test -- --watch",
     "test:update": "npm test -- --u",
     "dev": "webpack serve --mode=development --hot",
-    "build": "NODE_ENV=production tsc && webpack --progress --bail --mode=production",
+    "build": "npm rebuild @swc/core && NODE_ENV=production tsc && webpack --progress --bail --mode=production",
     "lint": "eslint frontend --fix",
     "tsc": "tsc -p ./tsconfig.json --noEmit",
     "coverage": "jest --coverage",
