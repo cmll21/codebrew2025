@@ -6,10 +6,14 @@ import "../styles/LandingPageHeader.css";
 interface LandingPageHeaderProps {
   loggedIn: boolean;
   setLoggedIn: (loggedIn: boolean) => void;
-  userType: 'CONSUMER' | 'SUPPLIER' | null;
+  userType: "CONSUMER" | "SUPPLIER" | null;
 }
 
-const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeaderProps) => {
+const LandingPageHeader = ({
+  loggedIn,
+  setLoggedIn,
+  userType,
+}: LandingPageHeaderProps) => {
   const [userInfo, setUserInfo] = useState<{
     first_name: string;
     last_name: string;
@@ -47,22 +51,24 @@ const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeade
     <header className="header-container">
       <div className="nav-left">
         <Link to="/about">About Us</Link>
-        {userType !== 'SUPPLIER' && <Link to="/shop">Shop Produce</Link>}
+        {userType !== "SUPPLIER" && <Link to="/shop">Shop Produce</Link>}
       </div>
 
       <h1 className="landing-page-title">
-        <Link to="/">Farmers' Market</Link>
+        <Link to="/">ReHarvest</Link>
       </h1>
 
       <div className="nav-right">
         {loggedIn ? (
-          <div 
+          <div
             className="profile-dropdown-container"
             onMouseEnter={() => setShowDropdown(true)}
             onMouseLeave={() => setShowDropdown(false)}
           >
             <button className="profile-button">
-              {userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : "Loading..."}
+              {userInfo
+                ? `${userInfo.first_name} ${userInfo.last_name}`
+                : "Loading..."}
             </button>
             {showDropdown && (
               <div className="profile-dropdown">
@@ -75,7 +81,7 @@ const LandingPageHeader = ({ loggedIn, setLoggedIn, userType }: LandingPageHeade
         ) : (
           <Link to="/auth">Log In/Sign Up</Link>
         )}
-        {userType !== 'SUPPLIER' && loggedIn && (
+        {userType !== "SUPPLIER" && loggedIn && (
           <Link to="/checkout" className="cart-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
