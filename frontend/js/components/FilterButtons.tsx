@@ -31,7 +31,7 @@ type ProduceItem = {
 };
 
 type FilterButtonsProps = {
-  categories: Category[];
+  categories?: Category[];
   products: ProduceItem[];
   onFilteredProducts: (filteredProducts: ProduceItem[]) => void;
 };
@@ -96,7 +96,7 @@ const FilterButtons = ({
 
   return (
     <div className="filter-buttons">
-      {categories.map(category => (
+      {categories?.map(category => (
         <button
           key={category.id}
           className={selectedCategories.includes(category.id) ? 'active' : ''}
