@@ -58,9 +58,7 @@ const ShopProducePage = () => {
         // Build the map from the fresh data
         const newMap = new Map<number, string>();
         newCategories.forEach((category: Category) => {
-          console.log("category:", category);
           newMap.set(category.id, category.name);
-          console.log("dsfasda:", newMap.get(category.id));
         });
         setCategoryMap(newMap);
       })
@@ -206,14 +204,3 @@ const ShopProducePage = () => {
 
 export default ShopProducePage;
 
-{
-  /* <div className="produce-grid">
-  <Link key={"carrot"} to={"/produce/carrot"}>
-    <ProduceCard name={"Carrot"} />
-  </Link>
-  <ProduceCard name={"Tomato"} />
-  <ProduceCard name={"Potato"} />
-  <ProduceCard name={"Eggplant"} />
-  <ProduceCard name={"Lettuce"} />
-</div>; */
-}
