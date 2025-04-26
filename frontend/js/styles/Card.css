@@ -5,7 +5,8 @@
 .productImage {
   width: 265px;
   height: 271px;
-  background-color: #F4F1E6;
+  background-color: #f4f1e6;
+  border-radius: 10px;
 }
 
 .buttonContainer {
@@ -37,6 +38,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.downContainer:hover {
+  cursor: pointer;
 }
 
 .lineContainer {
@@ -164,12 +169,12 @@
 .product-card-text {
   color: #000;
 
-/* L Label */
-font-family: "EB Garamond";
-font-size: 24px;
-font-style: normal;
-font-weight: 800;
-line-height: normal;
-text-align: left;
-padding-top:10px;
+  /* L Label */
+  font-family: "EB Garamond";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  text-align: left;
+  padding-top: 10px;
 }
