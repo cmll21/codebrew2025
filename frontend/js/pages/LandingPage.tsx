@@ -9,6 +9,7 @@ import Instruction2Sticker from "../../assets/images/instruction2.png";
 import Instruction3Sticker from "../../assets/images/instruction3.png";
 import InstructionBackground from "../../assets/images/instruction-background.png";
 import { useNavigate } from "react-router-dom";
+import LandingPageGraphic from "../../assets/images/LandingPageGraphic.png";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -23,7 +24,9 @@ const LandingPage = () => {
         <h1 className="landing-page-heading">
           Funky, Fresh and Proudly Aussie.
         </h1>
-        <div className="landing-page-part1-image"></div>
+        <div className="landing-page-part1-image">
+          <img src={LandingPageGraphic} />
+        </div>
         <div className="part1-text-container">
           <p className="landing-page-body-text">
             Join us in saving{" "}
@@ -41,11 +44,11 @@ const LandingPage = () => {
       <div className="seasonal-produce-section">
         <SeasonalProduceHeader />
         <div className="seasonal-produce-grid">
-          <ProduceCard name={"Test"} cardColour={"beige"}/>
-          <ProduceCard name={"Test"} cardColour={"beige"}/>
-          <ProduceCard name={"Test"} cardColour={"beige"}/>
-          <ProduceCard name={"Test"} cardColour={"beige"}/>
-          <ProduceCard name={"Test"} cardColour={"beige"}/>
+          <ProduceCard name={"Test"} cardColour={"beige"} />
+          <ProduceCard name={"Test"} cardColour={"beige"} />
+          <ProduceCard name={"Test"} cardColour={"beige"} />
+          <ProduceCard name={"Test"} cardColour={"beige"} />
+          <ProduceCard name={"Test"} cardColour={"beige"} />
         </div>
       </div>
       <div className="landing-page-part1">
