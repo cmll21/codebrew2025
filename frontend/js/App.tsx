@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import cookie from "cookie";
 import LandingPageHeader from "./components/LandingPageHeader";
+import Footer from "./components/Footer";
 
 import { OpenAPI } from "./api";
 import Home from "./pages/Home";
@@ -14,6 +15,11 @@ import ShopProducePage from "./pages/ShopProducePage";
 import SupplierHome from "./pages/SupplierHome";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+type Category = {
+  id: number;
+  name: string;
+};
 
 OpenAPI.interceptors.request.use((request) => {
   const { csrftoken } = cookie.parse(document.cookie);
@@ -26,6 +32,7 @@ OpenAPI.interceptors.request.use((request) => {
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState<any>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -40,9 +47,18 @@ const App = () => {
           .catch(() => {
             setUserInfo(null);
           });
+        
+        axios.get("/api/produce/categories/")
+          .then((res) => {
+            setCategories(res.data.results);
+          })
+          .catch(() => {
+            setCategories([]);
+          });
       }
     } else {
       setUserInfo(null);
+      setCategories([]);
     }
   }, [loggedIn]);
 
@@ -56,13 +72,15 @@ const App = () => {
       
       <Routes>
         <Route path="/" element={
-          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} /> : <Home />
+          userInfo?.user_type === 'SUPPLIER' ? <SupplierHome userInfo={userInfo} categories={categories} /> : <Home />
         } />
         <Route path="/auth" element={<AuthPage setLoggedIn={setLoggedIn} />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/shop" element={<ShopProducePage />} />
       </Routes>
+
+    <Footer/>
     </Sentry.ErrorBoundary>
   );
 };

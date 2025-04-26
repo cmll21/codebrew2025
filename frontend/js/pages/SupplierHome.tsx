@@ -4,13 +4,18 @@ import axios from 'axios';
 import ProduceCard from '../components/ProduceCard';
 import AddItemForm from '../components/AddItemForm';
 
+type Category = {
+  id: number;
+  name: string;
+};
+
 type ProduceItem = {
   id: number;
   produce_type: {
     id: number;
     name: string;
     image: string;
-    category: string;
+    category: number;
   };
   supplier_profile: {
     id: number;
@@ -30,37 +35,15 @@ type ProduceItem = {
 
 type SupplierHomeProps = {
   userInfo: any;
+  categories: Category[];
 };
 
-const StoreProfile = () => {
-  return (
-    <div className="store-profile">
-      <h2>Store Front Name</h2>
-      <p>Joined in 2025</p>
-      <div className="store-stats">
-        <p>Produce Saved: 1000000 kg</p>
-        <p>Water Saved: 10000 L</p>
-        <p>Fule Saved: 10000 L</p>
-      </div>
-    </div>
-  );
-};
-
-const StoreFront = ({ userInfo }: { userInfo: any }) => {
+const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Category[] }) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [selectedQualities, setSelectedQualities] = useState<string[]>([]);
   const [priceSort, setPriceSort] = useState<'asc' | 'desc' | null>(null);
-
-  const categories = [
-    'Vegetables',
-    'Fruits',
-    'Mushrooms',
-    'Herbs & Greens',
-    'Roots & Tubers',
-    'Grains & Legumes'
-  ];
 
   const qualities = ['Value', 'Select', 'Premium'];
 
@@ -72,7 +55,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
           Authorization: `Bearer ${accessToken}`
         }
       });
-      
+
       const supplierProducts = response.data.results.filter(
         (product: ProduceItem) => product.supplier_profile.id === userInfo?.id
       );
@@ -94,17 +77,14 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
 
     // Apply category filters
     if (selectedCategories.length > 0) {
-      console.log('Selected categories:', selectedCategories);
-      console.log('Products before category filter:', filteredProducts);
       filteredProducts = filteredProducts.filter(product => 
         selectedCategories.includes(product.produce_type.category)
       );
-      console.log('Products after category filter:', filteredProducts);
     }
 
     // Apply quality filters
     if (selectedQualities.length > 0) {
-      filteredProducts = filteredProducts.filter(product => 
+      filteredProducts = filteredProducts.filter(product =>
         selectedQualities.includes(product.quality)
       );
     }
@@ -119,16 +99,16 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
     setProducts(filteredProducts);
   }, [selectedCategories, selectedQualities, priceSort, allProducts]);
 
-  const toggleCategory = (category: string) => {
+  const toggleCategory = (categoryId: number) => {
     setSelectedCategories(prev => 
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
+      prev.includes(categoryId)
+        ? prev.filter(id => id !== categoryId)
+        : [...prev, categoryId]
     );
   };
 
   const toggleQuality = (quality: string) => {
-    setSelectedQualities(prev => 
+    setSelectedQualities(prev =>
       prev.includes(quality)
         ? prev.filter(q => q !== quality)
         : [...prev, quality]
@@ -145,11 +125,11 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
       <div className="filter-buttons">
         {categories.map(category => (
           <button
-            key={category}
-            className={selectedCategories.includes(category) ? 'active' : ''}
-            onClick={() => toggleCategory(category)}
+            key={category.id}
+            className={selectedCategories.includes(category.id) ? 'active' : ''}
+            onClick={() => toggleCategory(category.id)}
           >
-            {category}
+            {category.name}
           </button>
         ))}
         {qualities.map(quality => (
@@ -175,13 +155,14 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
         </button>
         <input type="text" placeholder="Search" />
       </div>
-      
+
       <div className="products-grid">
         {products.map((product) => (
           <div key={product.id} className="product-details">
             <ProduceCard
               name={product.produce_type.name}
               image={product.produce_type.image}
+              cardColour="beige"
             />
             <div className="product-info">
               <p>Weight: {product.weight}kg</p>
@@ -195,7 +176,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
   );
 };
 
-const SupplierHome = ({ userInfo }: SupplierHomeProps) => {
+const SupplierHome = ({ userInfo, categories }: SupplierHomeProps) => {
   const [shouldRefresh, setShouldRefresh] = useState(0);
 
   const handleItemAdded = () => {
@@ -204,9 +185,8 @@ const SupplierHome = ({ userInfo }: SupplierHomeProps) => {
 
   return (
     <div className="supplier-home">
-      <StoreProfile />
-      <StoreFront userInfo={userInfo} key={shouldRefresh} />
-      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} />
+      <StoreFront userInfo={userInfo} categories={categories} key={shouldRefresh} />
+      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} categories={categories} />
     </div>
   );
 };
