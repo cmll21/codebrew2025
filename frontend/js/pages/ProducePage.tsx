@@ -18,20 +18,7 @@ type ProducePageProps = {
 const ProducePage = ({ categories }: ProducePageProps) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const { produceName } = useParams();
-  // const products = [
-  //   "tomato1",
-  //   "tomato2",
-  //   "tomato3",
-  //   "tomato4",
-  //   "tomato5",
-  //   "tomato1",
-  //   "tomato1",
-  //   "tomato2",
-  //   "tomato3",
-  //   "tomato4",
-  //   "tomato5",
-  //   "tomato1",
-  // ];
+
   // Fetch all products
   const fetchProducts = async () => {
     try {
