@@ -126,7 +126,7 @@ const FilterButtons = ({
       >
         Descending Price
       </button>
-      <input type="text" placeholder="Search" />
+      <input className= "filter-button-search" type="text" placeholder="🔍 Search" />
     </div>
   );
 };
