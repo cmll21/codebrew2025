@@ -72,12 +72,8 @@ function CheckoutPage() {
 
     const fetchUserCart = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/carts/"); // Not the right link
-        if (!res.ok) {
-          throw new Error("Failed to fetch carts");
-        }
-        const data = await res.json();
-        const carts: Cart[] = data.results;
+        const res = await axios.get("api/carts/");
+        const carts: Cart[] = res.data.results;
 
         const filteredCarts = carts.filter(
           (cart) => cart.customer === currentUser.id,
@@ -94,14 +90,10 @@ function CheckoutPage() {
   useEffect(() => {
     const fetchProduceTypes = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:8000/api/produce/types/",
+        const response = await axios.get(
+          "/api/produce/types/",
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch produce types");
-        }
-        const data = await response.json();
-        setProduceTypes(data.results); // assuming the API returns { results: [...] }
+        setProduceTypes(response.data.results);
       } catch (error) {
         console.error("Error fetching produce types:", error);
       }
