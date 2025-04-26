@@ -1,0 +1,24 @@
+.section-title {
+    text-align: center;
+    color: var(--Tomato-Red, #9E1612);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* exactly 5 items per row */
+    gap: 2rem; /* spacing between cards */
+    justify-content: center; /* center the entire grid */
+    padding: 2rem;
+    max-width: 1200px; /* optional: control how wide it stretches */
+    margin: 0 auto; /* center the grid on the page horizontally */
+  }
+  
+  .product-card {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .product-card-boxes {
+    background-color: #E2D7C3;
+  }

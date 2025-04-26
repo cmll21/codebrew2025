@@ -82,9 +82,6 @@ const ShopProducePage = () => {
           <ProduceCardCarousel
             produceList={produceItems
               .filter(item => {
-                if (item.category !== null) {
-                  console.log(`The type of ${item.name} is ${item.category} and ${categoryMap.get(item.category)}`);
-                }
                 return item.season == CURR_SEASON;
               })
               .map((type) => ({
