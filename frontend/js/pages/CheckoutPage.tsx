@@ -90,9 +90,7 @@ function CheckoutPage() {
   useEffect(() => {
     const fetchProduceTypes = async () => {
       try {
-        const response = await axios.get(
-          "/api/produce/types/",
-        );
+        const response = await axios.get("/api/produce/types/");
         setProduceTypes(response.data.results);
       } catch (error) {
         console.error("Error fetching produce types:", error);
@@ -135,7 +133,7 @@ function CheckoutPage() {
 
   const handleRemove = async (cartItemId: number) => {
     try {
-      await axios.delete(`http://localhost:8000/api/cart-items/${cartItemId}/`);
+      await axios.delete(`/api/cart-items/${cartItemId}/`);
 
       // After successful deletion on server, update the UI
       setUserCart((prevCarts) =>
