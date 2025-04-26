@@ -12,7 +12,7 @@ type ProduceItem = {
     id: number;
     name: string;
     image: string;
-    category: string;
+    category: number;
   };
   supplier_profile: {
     id: number;
@@ -45,7 +45,7 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
       id: 0,
       name: '',
       image: '',
-      category: ''
+      category: 0
     }
   };
 
@@ -70,18 +70,7 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
       const produceTypeFormData = new FormData();
       
       produceTypeFormData.append('name', newItem.produce_type?.name || '');
-
-      // Find the selected category and append its ID
-      const selectedCategory = categories.find(
-        category => category.name === newItem.produce_type?.category
-      );
-
-      // Append the selected category ID to the form data
-      if (selectedCategory) {
-        produceTypeFormData.append('category_id', selectedCategory.id.toString());
-      } else {
-        throw new Error('Please select a valid category');
-      }
+      produceTypeFormData.append('category', newItem.produce_type?.category?.toString() || '');
       // HARD CODED SPRING LOL
       produceTypeFormData.append('season', 'spring');
       if (imageFile) {
@@ -96,8 +85,6 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
         }
       });
 
-      //console.log('ProduceType created:', produceTypeResponse.data);
-
       // Then create the ProduceItem using the new ProduceType
       const produceItemResponse = await axios.post('/api/produce/items/', {
         produce_type_id: produceTypeResponse.data.id,
@@ -108,8 +95,6 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
       }, {
         headers
       });
-
-      //console.log('ProduceItem created:', produceItemResponse.data);
 
       // Reset form after successful submission
       setNewItem(initialFormState);
@@ -172,14 +157,14 @@ const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) =>
               ...newItem,
               produce_type: {
                 ...newItem.produce_type!,
-                category: e.target.value
+                category: parseInt(e.target.value)
               }
             })}
             className="form-select"
           >
             <option value="" disabled>Select a category</option>
             {categories.map((category) => (
-              <option key={category.id} value={category.name}>
+              <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}

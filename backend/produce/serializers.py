@@ -3,15 +3,8 @@ from .models import ProduceType, ProduceItem, ProduceCategory
 from users.serializers import UserSerializer
 from users.models import User
 
-
-class ProduceCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProduceCategory
-        fields = ['id', 'name']
-
-
 class ProduceTypeSerializer(serializers.ModelSerializer):
-    category = ProduceCategorySerializer(read_only=True)
+    category = serializers.PrimaryKeyRelatedField(queryset=ProduceCategory.objects.all())
     category_id = serializers.PrimaryKeyRelatedField(
         queryset=ProduceCategory.objects.all(),
         source='category',

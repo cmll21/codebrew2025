@@ -15,7 +15,7 @@ type ProduceItem = {
     id: number;
     name: string;
     image: string;
-    category: Category;
+    category: number;
   };
   supplier_profile: {
     id: number;
@@ -92,7 +92,7 @@ const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Categ
     // Apply category filters
     if (selectedCategories.length > 0) {
       filteredProducts = filteredProducts.filter(product => 
-        selectedCategories.includes(product.produce_type.category.id)
+        selectedCategories.includes(product.produce_type.category)
       );
     }
 
