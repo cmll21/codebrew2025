@@ -71,6 +71,11 @@ class CartViewSet(viewsets.ModelViewSet):
         #         {"error": "Delivery address is required"},
         #         status=status.HTTP_400_BAD_REQUEST
         #     )
+        
+class CartItemViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
+    permission_classes = [IsAuthenticated]
 
 
 
