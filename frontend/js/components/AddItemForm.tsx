@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 type Category = {
@@ -33,9 +33,10 @@ type ProduceItem = {
 type AddItemFormProps = {
   userInfo: any;
   onItemAdded: () => void;
+  categories: Category[];
 };
 
-const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
+const AddItemForm = ({ userInfo, onItemAdded, categories }: AddItemFormProps) => {
   const initialFormState = {
     weight: 0,
     price: 0,
@@ -50,25 +51,6 @@ const AddItemForm = ({ userInfo, onItemAdded }: AddItemFormProps) => {
 
   const [newItem, setNewItem] = useState<Partial<ProduceItem>>(initialFormState);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const accessToken = localStorage.getItem('access_token');
-        const response = await axios.get('/api/produce/categories/', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        });
-        setCategories(response.data.results);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
 
   const qualityLevels = ['Value', 'Select', 'Premium'];
 

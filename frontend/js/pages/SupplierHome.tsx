@@ -4,13 +4,18 @@ import axios from 'axios';
 import ProduceCard from '../components/ProduceCard';
 import AddItemForm from '../components/AddItemForm';
 
+type Category = {
+  id: number;
+  name: string;
+};
+
 type ProduceItem = {
   id: number;
   produce_type: {
     id: number;
     name: string;
     image: string;
-    category: string;
+    category: Category;
   };
   supplier_profile: {
     id: number;
@@ -30,6 +35,7 @@ type ProduceItem = {
 
 type SupplierHomeProps = {
   userInfo: any;
+  categories: Category[];
 };
 
 const StoreProfile = () => {
@@ -46,31 +52,12 @@ const StoreProfile = () => {
   );
 };
 
-const StoreFront = ({ userInfo }: { userInfo: any }) => {
+const StoreFront = ({ userInfo, categories }: { userInfo: any, categories: Category[] }) => {
   const [products, setProducts] = useState<ProduceItem[]>([]);
   const [allProducts, setAllProducts] = useState<ProduceItem[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [selectedQualities, setSelectedQualities] = useState<string[]>([]);
   const [priceSort, setPriceSort] = useState<'asc' | 'desc' | null>(null);
-  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const accessToken = localStorage.getItem('access_token');
-        const response = await axios.get('/api/produce/categories/', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        });
-        setCategories(response.data.results);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
 
   const qualities = ['Value', 'Select', 'Premium'];
 
@@ -189,6 +176,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
             <ProduceCard
               name={product.produce_type.name}
               image={product.produce_type.image}
+              cardColour="white"
             />
             <div className="product-info">
               <p>Weight: {product.weight}kg</p>
@@ -202,7 +190,7 @@ const StoreFront = ({ userInfo }: { userInfo: any }) => {
   );
 };
 
-const SupplierHome = ({ userInfo }: SupplierHomeProps) => {
+const SupplierHome = ({ userInfo, categories }: SupplierHomeProps) => {
   const [shouldRefresh, setShouldRefresh] = useState(0);
 
   const handleItemAdded = () => {
@@ -212,8 +200,8 @@ const SupplierHome = ({ userInfo }: SupplierHomeProps) => {
   return (
     <div className="supplier-home">
       <StoreProfile />
-      <StoreFront userInfo={userInfo} key={shouldRefresh} />
-      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} />
+      <StoreFront userInfo={userInfo} categories={categories} key={shouldRefresh} />
+      <AddItemForm userInfo={userInfo} onItemAdded={handleItemAdded} categories={categories} />
     </div>
   );
 };
